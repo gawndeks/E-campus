@@ -1,125 +1,180 @@
 /**
- * eCampus International School - Admin Dashboard Logic
+ * eCampus Admin Dashboard JS
+ * Handles SPA navigation, sidebars, and API fetching for specific connected modules
  */
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    // Helper: Check if we are on the admin page by looking for specific elements
-    const noticesTableBody = document.querySelector('.admin-table tbody');
-    if (!noticesTableBody) return;
+    /* ==========================================================================
+       1. SIDEBAR & MOBILE DRAWER LOGIC
+       ========================================================================== */
+    const sidebar = document.getElementById('admin-sidebar');
+    const overlay = document.getElementById('sidebar-overlay');
+    const openBtn = document.getElementById('open-sidebar');
+    const closeBtn = document.getElementById('close-sidebar');
 
-    // Load Notices for Admin Table
-    function loadAdminNotices() {
-        noticesTableBody.innerHTML = '<tr><td colspan="5" style="text-align:center;">Loading notices...</td></tr>';
+    const toggleSidebar = (force) => {
+        const isOpen = sidebar.classList.contains('open');
+        const state = force !== undefined ? force : !isOpen;
+        if (state) {
+            sidebar.classList.add('open');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        } else {
+            sidebar.classList.remove('open');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    };
+
+    if (openBtn) openBtn.addEventListener('click', () => toggleSidebar(true));
+    if (closeBtn) closeBtn.addEventListener('click', () => toggleSidebar(false));
+    if (overlay) overlay.addEventListener('click', () => toggleSidebar(false));
+
+
+    /* ==========================================================================
+       2. ACCORDION MENU LOGIC
+       ========================================================================== */
+    const groupBtns = document.querySelectorAll('.nav-group-btn');
+    groupBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const group = e.currentTarget.closest('.nav-group');
+            // Toggle expanded class
+            group.classList.toggle('expanded');
+        });
+    });
+
+
+    /* ==========================================================================
+       3. SPA VIEW SWITCHING LOGIC
+       ========================================================================== */
+    const navLinks = document.querySelectorAll('[data-view]');
+    const views = document.querySelectorAll('.admin-view');
+    const topbarTitle = document.getElementById('topbar-title');
+
+    const switchView = (viewId, title) => {
+        // Hide all views
+        views.forEach(v => v.classList.remove('active'));
+
+        // Show target view
+        const targetView = document.getElementById(viewId);
+        if (targetView) {
+            targetView.classList.add('active');
+
+            // Re-trigger CSS animation
+            targetView.style.animation = 'none';
+            targetView.offsetHeight; /* trigger reflow */
+            targetView.style.animation = null;
+        }
+
+        // Update Title
+        if (title && topbarTitle) {
+            topbarTitle.textContent = title;
+        }
+
+        // Close mobile sidebar immediately after clicking a link
+        if (window.innerWidth < 1024) {
+            toggleSidebar(false);
+        }
+
+        // Handle specific module API firing
+        handleViewInit(viewId);
+    };
+
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+
+            // Remove active from all sub links and top links
+            navLinks.forEach(l => l.classList.remove('active'));
+            e.currentTarget.classList.add('active');
+
+            const viewId = e.currentTarget.getAttribute('data-view');
+            const title = e.currentTarget.textContent.trim();
+            switchView(viewId, title);
+        });
+    });
+
+    /* ==========================================================================
+       4. API INTEGRATION (For Supported Modules)
+       ========================================================================== */
+
+    function handleViewInit(viewId) {
+        if (viewId === 'view-notices') {
+            fetchNotices();
+        } else if (viewId === 'view-gallery') {
+            fetchGallery();
+        } else if (viewId === 'view-enquiries') {
+            fetchEnquiries();
+        }
+    }
+
+    // Notices logic (Existing API: GET /api/notices)
+    function fetchNotices() {
+        const tbody = document.getElementById('notices-tbody');
+        if (!tbody) return;
+        tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;">Loading notices...</td></tr>';
 
         fetch('/api/notices')
             .then(res => res.json())
             .then(data => {
                 if (data.success && data.notices.length > 0) {
-                    noticesTableBody.innerHTML = '';
-                    data.notices.forEach(notice => {
-                        let badgeBg = '#f1f5f9';
-                        let badgeColor = '#475569';
-                        if (notice.type === 'Examination') {
-                            badgeBg = '#fee2e2'; badgeColor = '#ef4444';
-                        } else if (notice.type === 'Event') {
-                            badgeBg = '#e0f2fe'; badgeColor = '#0284c7';
-                        } else if (notice.type === 'General') {
-                            badgeBg = '#e0e7ff'; badgeColor = '#4f46e5';
-                        }
-
-                        const statusHtml = `<span style="color: #16a34a; font-weight: 500;">● Published</span>`; // simplistic status mocking 
-
-                        const rowHtml = `
+                    tbody.innerHTML = '';
+                    data.notices.forEach(n => {
+                        const date = new Date(n.date).toLocaleDateString();
+                        tbody.innerHTML += `
                             <tr>
-                                <td>${notice.date}</td>
-                                <td><span style="padding: 0.25rem 0.5rem; background: ${badgeBg}; color: ${badgeColor}; border-radius: 4px; font-size: 0.75rem;">${notice.type}</span></td>
-                                <td>${notice.title}</td>
-                                <td>${statusHtml}</td>
+                                <td>#${n.id}</td>
+                                <td><strong>${n.title}</strong></td>
+                                <td><span class="badge ${n.type === 'Urgent' ? 'badge-red' : 'badge-blue'}">${n.type}</span></td>
+                                <td>${date}</td>
                                 <td>
-                                    <button style="border: none; background: none; color: var(--primary); font-weight: 600; cursor: pointer; margin-right: 0.75rem; transition: color 0.3s ease;">Edit</button>
-                                    <button style="border: none; background: none; color: #ef4444; font-weight: 600; cursor: pointer; transition: color 0.3s ease;">Delete</button>
+                                    <button class="btn btn-sm btn-outline">Edit</button>
                                 </td>
                             </tr>
                         `;
-                        noticesTableBody.innerHTML += rowHtml;
                     });
                 } else {
-                    noticesTableBody.innerHTML = '<tr><td colspan="5" style="text-align:center; color: var(--text-muted);">No notices found.</td></tr>';
+                    tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;">No notices found.</td></tr>';
                 }
             })
-            .catch(err => {
-                console.error('Failed to load admin notices:', err);
-                noticesTableBody.innerHTML = '<tr><td colspan="5" style="text-align:center; color: #ef4444;">Failed to load notices.</td></tr>';
-            });
+            .catch(() => tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;color:red;">Failed to load notices</td></tr>');
     }
 
-    // Call immediately
-    loadAdminNotices();
+    // Gallery Logic (Existing API: GET /api/gallery)
+    function fetchGallery() {
+        // Similar structure, inject into table or grid
+    }
 
-    // Gallery Upload Mock/Functionality Setup
-    // Using simple mock alert for upload area since actual file upload UI requires a hidden file input. 
-    // We will inject a hidden file input and wire it up to make a real fetch call to the backend.
+    // Enquiries Logic (Existing API: GET /api/enquiries)
+    function fetchEnquiries() {
+        const tbody = document.getElementById('enquiries-tbody');
+        if (!tbody) return;
+        tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;">Loading enquiries...</td></tr>';
 
-    const uploadArea = document.querySelector('.admin-card[onclick*="Opens file dialog."]');
-    if (uploadArea) {
-        // Remove the inline onclick mock
-        uploadArea.removeAttribute('onclick');
-
-        // Create a hidden file input
-        const fileInput = document.createElement('input');
-        fileInput.type = 'file';
-        fileInput.accept = 'image/*';
-        fileInput.style.display = 'none';
-        document.body.appendChild(fileInput);
-
-        uploadArea.addEventListener('click', () => {
-            fileInput.click();
-        });
-
-        fileInput.addEventListener('change', (e) => {
-            const file = e.target.files[0];
-            if (file) {
-                // Here we would prompt for a title ideally, but for simplicity:
-                const title = prompt("Enter a title for the gallery image:", "New Gallery Image");
-                if (title !== null) {
-                    const formData = new FormData();
-                    formData.append('image', file);
-                    formData.append('title', title);
-
-                    uploadArea.innerHTML = `<h3 style="margin-bottom: 0.5rem; font-size: 1.25rem; color: var(--primary);">Uploading...</h3><p style="color: var(--text-muted);">Please wait.</p>`;
-
-                    // Need an auth token from somewhere to upload as admin. 
-                    // Typically this is retrieved from localStorage.
-                    const token = localStorage.getItem('adminToken') || '';
-
-                    fetch('/api/gallery/upload', {
-                        method: 'POST',
-                        headers: {
-                            'Authorization': `Bearer ${token}`
-                        },
-                        body: formData
-                    })
-                        .then(res => res.json())
-                        .then(data => {
-                            if (data.success) {
-                                alert("Image uploaded successfully!");
-                            } else {
-                                alert("Failed to upload: " + (data.message || "Unknown error"));
-                            }
-                            // Reset upload area UI
-                            setTimeout(() => window.location.reload(), 1500);
-                        })
-                        .catch(err => {
-                            console.error("Upload error:", err);
-                            alert("An error occurred during upload.");
-                            setTimeout(() => window.location.reload(), 1500);
-                        });
+        fetch('/api/enquiries')
+            .then(res => res.json())
+            .then(data => {
+                if (data.success && data.enquiries.length > 0) {
+                    tbody.innerHTML = '';
+                    data.enquiries.forEach(e => {
+                        const date = new Date(e.created_at || Date.now()).toLocaleDateString();
+                        tbody.innerHTML += `
+                            <tr>
+                                <td>${date}</td>
+                                <td>${e.studentName}</td>
+                                <td>${e.parentName}</td>
+                                <td>${e.phone}</td>
+                                <td><span class="badge badge-yellow">${e.classApplying}</span></td>
+                                <td><button class="btn btn-sm btn-primary">Respond</button></td>
+                            </tr>
+                        `;
+                    });
+                } else {
+                    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;">No enquiries found.</td></tr>';
                 }
-            }
-            // clear input
-            fileInput.value = '';
-        });
+            })
+            .catch(() => tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:red;">Failed to load enquiries</td></tr>');
     }
 
 });

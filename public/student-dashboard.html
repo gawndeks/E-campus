@@ -26,13 +26,13 @@
             <span class="sidebar-text">eCampus</span>
         </div>
         <nav class="sidebar-nav">
-            <a href="#overview" class="desktop-sidebar-link active">
+            <a href="#" class="desktop-sidebar-link active" data-view="view-overview">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
                 </svg>
                 <span class="sidebar-text">Overview</span>
             </a>
-            <a href="academics.html" class="desktop-sidebar-link">
+            <a href="#" class="desktop-sidebar-link" data-view="view-attendance">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
                     <polyline points="14 2 14 8 20 8" />
@@ -42,13 +42,13 @@
                 </svg>
                 <span class="sidebar-text">Attendance</span>
             </a>
-            <a href="academics.html" class="desktop-sidebar-link">
+            <a href="#" class="desktop-sidebar-link" data-view="view-assignments">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
                 </svg>
                 <span class="sidebar-text">Assignments</span>
             </a>
-            <a href="results.html" class="desktop-sidebar-link">
+            <a href="#" class="desktop-sidebar-link" data-view="view-results">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <circle cx="12" cy="12" r="10" />
                     <path d="M12 8v4" />
@@ -56,14 +56,14 @@
                 </svg>
                 <span class="sidebar-text">Exams & Results</span>
             </a>
-            <a href="admissions.html" class="desktop-sidebar-link">
+            <a href="#" class="desktop-sidebar-link" data-view="view-fees">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <line x1="12" y1="1" x2="12" y2="23" />
                     <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
                 </svg>
                 <span class="sidebar-text">Fees Status</span>
             </a>
-            <a href="academics.html" class="desktop-sidebar-link">
+            <a href="#" class="desktop-sidebar-link" data-view="view-materials">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
                     <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
@@ -114,7 +114,8 @@
 
         <!-- Mobile Quick Shortcuts (Visible only on mobile/small tablets) -->
         <div class="quick-shortcuts mobile-only stagger-enter delay-300">
-            <a href="academics.html" class="shortcut-pill">
+            <a href="#" class="shortcut-pill"
+                onclick="document.querySelector('[data-view=\'view-attendance\']').click()">
                 <span class="pill-icon" style="background:#dcfce7; color:#16a34a;">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
@@ -123,7 +124,8 @@
                 </span>
                 Attendance
             </a>
-            <a href="academics.html" class="shortcut-pill">
+            <a href="#" class="shortcut-pill"
+                onclick="document.querySelector('[data-view=\'view-assignments\']').click()">
                 <span class="pill-icon" style="background:#fee2e2; color:#ef4444;">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
@@ -135,7 +137,7 @@
                 </span>
                 Tasks
             </a>
-            <a href="notices.html" class="shortcut-pill">
+            <a href="#" class="shortcut-pill" onclick="document.querySelector('[data-view=\'view-notices\']').click()">
                 <span class="pill-icon" style="background:#e0f2fe; color:#0284c7;">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
@@ -145,206 +147,587 @@
             </a>
         </div>
 
-        <!-- Dashboard Grid System -->
-        <div class="dashboard-grid">
+        <!-- Student Views Container (SPA) -->
+        <div id="student-view-container">
+            <!-- ================= VIEW: DASHBOARD OVERVIEW ================= -->
+            <div class="student-view active" id="view-overview">
+                <div class="dashboard-grid">
 
-            <!-- Welcome / Profile Summary Card -->
-            <div class="dash-card profile-card stagger-enter delay-400">
-                <div class="profile-card-content">
-                    <div>
-                        <h2>Hello, John! 👋</h2>
-                        <p>Grade 10 - A • Roll: 10A-001</p>
+                    <!-- Welcome / Profile Summary Card -->
+                    <div class="dash-card profile-card stagger-enter delay-400">
+                        <div class="profile-card-content">
+                            <div>
+                                <h2>Hello, John! 👋</h2>
+                                <p>Grade 10 - A • Roll: 10A-001</p>
+                            </div>
+                            <span class="semester-badge">Semester 1</span>
+                        </div>
                     </div>
-                    <span class="semester-badge">Semester 1</span>
-                </div>
-            </div>
 
-            <!-- Attendance Summary -->
-            <div class="dash-card stat-widget stagger-enter delay-500">
-                <div class="widget-header">
-                    <div class="widget-icon primary-bg">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
-                            <polyline points="22 4 12 14.01 9 11.01" />
-                        </svg>
-                    </div>
-                    <h3>Attendance</h3>
-                </div>
-                <div class="widget-body">
-                    <div class="attendance-progress" style="cursor: pointer;"
-                        onclick="window.location.href='academics.html'">
-                        <span class="progress-val">92%</span>
-                        <div class="progress-bar-bg">
-                            <div class="progress-bar-fill" style="width: 92%; background-color: var(--success);"></div>
+                    <!-- Attendance Summary -->
+                    <div class="dash-card stat-widget stagger-enter delay-500">
+                        <div class="widget-header">
+                            <div class="widget-icon primary-bg">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                                    <polyline points="22 4 12 14.01 9 11.01" />
+                                </svg>
+                            </div>
+                            <h3>Attendance</h3>
                         </div>
-                        <span class="progress-text">18 Days Present / 20 Total</span>
+                        <div class="widget-body">
+                            <div class="attendance-progress" style="cursor: pointer;"
+                                onclick="document.querySelector('[data-view=\'view-attendance\']').click()">
+                                <span class="progress-val">92%</span>
+                                <div class="progress-bar-bg">
+                                    <div class="progress-bar-fill"
+                                        style="width: 92%; background-color: var(--success);"></div>
+                                </div>
+                                <span class="progress-text">18 Days Present / 20 Total</span>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
 
-            <!-- Fees Status -->
-            <div class="dash-card stat-widget stagger-enter delay-500">
-                <div class="widget-header">
-                    <div class="widget-icon warning-bg">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <line x1="12" y1="1" x2="12" y2="23" />
-                            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
-                        </svg>
+                    <!-- Fees Status -->
+                    <div class="dash-card stat-widget stagger-enter delay-500">
+                        <div class="widget-header">
+                            <div class="widget-icon warning-bg">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <line x1="12" y1="1" x2="12" y2="23" />
+                                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                                </svg>
+                            </div>
+                            <h3>Fees Status</h3>
+                        </div>
+                        <div class="widget-body">
+                            <div class="fee-display" style="cursor: pointer;"
+                                onclick="document.querySelector('[data-view=\'view-fees\']').click()">
+                                <span class="fee-amount warning-text">$150.00</span>
+                                <span class="fee-label">Due by 15th Oct</span>
+                            </div>
+                            <button class="btn-action-small warning-outline"
+                                onclick="document.querySelector('[data-view=\'view-fees\']').click()">Pay Now</button>
+                        </div>
                     </div>
-                    <h3>Fees Status</h3>
-                </div>
-                <div class="widget-body">
-                    <div class="fee-display" style="cursor: pointer;" onclick="window.location.href='admissions.html'">
-                        <span class="fee-amount warning-text">$150.00</span>
-                        <span class="fee-label">Due by 15th Oct</span>
-                    </div>
-                    <button class="btn-action-small warning-outline"
-                        onclick="window.location.href='admissions.html'">Pay Now</button>
-                </div>
-            </div>
 
-            <!-- Today's Classes / Timetable (Horizontal scroll on mobile) -->
-            <div class="dash-card timetable-widget stagger-enter delay-600">
-                <div class="widget-header">
-                    <h3>Today's Classes</h3>
-                    <a href="calendar.html" class="view-all-link">Full Timetable</a>
-                </div>
-                <div class="timetable-scroll">
-                    <!-- Class 1 -->
-                    <div class="class-card math-theme" style="cursor: pointer;"
-                        onclick="window.location.href='calendar.html'">
-                        <span class="time-slot">09:00 AM - 10:00 AM</span>
-                        <h4 class="class-title">Mathematics</h4>
-                        <div class="teacher-info">
-                            <div class="teacher-avatar"></div>
-                            <span>Ms. Smith</span>
+                    <!-- Today's Classes / Timetable (Horizontal scroll on mobile) -->
+                    <div class="dash-card timetable-widget stagger-enter delay-600">
+                        <div class="widget-header">
+                            <h3>Today's Classes</h3>
+                            <a href="calendar.html" class="view-all-link">Full Timetable</a>
+                        </div>
+                        <div class="timetable-scroll">
+                            <!-- Class 1 -->
+                            <div class="class-card math-theme" style="cursor: pointer;"
+                                onclick="window.location.href='calendar.html'">
+                                <span class="time-slot">09:00 AM - 10:00 AM</span>
+                                <h4 class="class-title">Mathematics</h4>
+                                <div class="teacher-info">
+                                    <div class="teacher-avatar"></div>
+                                    <span>Ms. Smith</span>
+                                </div>
+                            </div>
+                            <!-- Class 2 -->
+                            <div class="class-card science-theme" style="cursor: pointer;"
+                                onclick="window.location.href='calendar.html'">
+                                <span class="time-slot">10:15 AM - 11:15 AM</span>
+                                <h4 class="class-title">Science Lab</h4>
+                                <div class="teacher-info">
+                                    <div class="teacher-avatar"></div>
+                                    <span>Mr. Brown</span>
+                                </div>
+                            </div>
+                            <!-- Class 3 -->
+                            <div class="class-card english-theme" style="cursor: pointer;"
+                                onclick="window.location.href='calendar.html'">
+                                <span class="time-slot">11:30 AM - 12:30 PM</span>
+                                <h4 class="class-title">English Lit</h4>
+                                <div class="teacher-info">
+                                    <div class="teacher-avatar"></div>
+                                    <span>Mrs. Davis</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <!-- Class 2 -->
-                    <div class="class-card science-theme" style="cursor: pointer;"
-                        onclick="window.location.href='calendar.html'">
-                        <span class="time-slot">10:15 AM - 11:15 AM</span>
-                        <h4 class="class-title">Science Lab</h4>
-                        <div class="teacher-info">
-                            <div class="teacher-avatar"></div>
-                            <span>Mr. Brown</span>
-                        </div>
-                    </div>
-                    <!-- Class 3 -->
-                    <div class="class-card english-theme" style="cursor: pointer;"
-                        onclick="window.location.href='calendar.html'">
-                        <span class="time-slot">11:30 AM - 12:30 PM</span>
-                        <h4 class="class-title">English Lit</h4>
-                        <div class="teacher-info">
-                            <div class="teacher-avatar"></div>
-                            <span>Mrs. Davis</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Assignments (Pending/Submitted) -->
-            <div class="dash-card assignments-widget stagger-enter delay-700">
-                <div class="widget-header">
-                    <h3>Assignments</h3>
-                    <a href="academics.html" class="view-all-link">View All</a>
-                </div>
-                <div class="list-container">
-                    <!-- Pending Item -->
-                    <div class="list-item" style="cursor: pointer;" onclick="window.location.href='academics.html'">
-                        <div class="item-content">
-                            <h4>Algebra Worksheet</h4>
-                            <p>Mathematics • Due: Tomorrow</p>
+                    <!-- Assignments (Pending/Submitted) -->
+                    <div class="dash-card assignments-widget stagger-enter delay-700">
+                        <div class="widget-header">
+                            <h3>Assignments</h3>
+                            <a href="#" class="view-all-link"
+                                onclick="document.querySelector('[data-view=\'view-assignments\']').click()">View
+                                All</a>
                         </div>
-                        <span class="status-badge danger-badge">PENDING</span>
-                    </div>
-                    <!-- Submitted Item -->
-                    <div class="list-item" style="cursor: pointer;" onclick="window.location.href='academics.html'">
-                        <div class="item-content">
-                            <h4>Photosynthesis Essay</h4>
-                            <p>Science • Due: Oct 10</p>
+                        <div class="list-container">
+                            <!-- Pending Item -->
+                            <div class="list-item" style="cursor: pointer;"
+                                onclick="document.querySelector('[data-view=\'view-assignments\']').click()">
+                                <div class="item-content">
+                                    <h4>Algebra Worksheet</h4>
+                                    <p>Mathematics • Due: Tomorrow</p>
+                                </div>
+                                <span class="status-badge danger-badge">PENDING</span>
+                            </div>
+                            <!-- Submitted Item -->
+                            <div class="list-item" style="cursor: pointer;"
+                                onclick="document.querySelector('[data-view=\'view-assignments\']').click()">
+                                <div class="item-content">
+                                    <h4>Photosynthesis Essay</h4>
+                                    <p>Science • Due: Oct 10</p>
+                                </div>
+                                <span class="status-badge success-badge">SUBMITTED</span>
+                            </div>
                         </div>
-                        <span class="status-badge success-badge">SUBMITTED</span>
                     </div>
-                </div>
-            </div>
 
-            <!-- Notices Widget -->
-            <div class="dash-card notices-widget stagger-enter delay-800">
-                <div class="widget-header">
-                    <h3>Recent Notices</h3>
-                    <a href="notices.html" class="view-all-link">View All</a>
-                </div>
-                <div class="list-container">
-                    <div class="list-item notice-item border-left-danger" style="cursor: pointer;"
-                        onclick="window.location.href='notices.html'">
-                        <div class="item-content">
-                            <span class="date-text">Oct 12, 2026</span>
-                            <h4>Math Assignment Deadline</h4>
-                            <p>Please submit Chapter 4 exercises by tomorrow morning.</p>
+                    <!-- Notices Widget -->
+                    <div class="dash-card notices-widget stagger-enter delay-800">
+                        <div class="widget-header">
+                            <h3>Recent Notices</h3>
+                            <a href="#" class="view-all-link"
+                                onclick="document.querySelector('[data-view=\'view-notices\']').click()">View All</a>
+                        </div>
+                        <div class="list-container">
+                            <div class="list-item notice-item border-left-danger" style="cursor: pointer;"
+                                onclick="document.querySelector('[data-view=\'view-notices\']').click()">
+                                <div class="item-content">
+                                    <span class="date-text">Oct 12, 2026</span>
+                                    <h4>Math Assignment Deadline</h4>
+                                    <p>Please submit Chapter 4 exercises by tomorrow morning.</p>
+                                </div>
+                            </div>
+                            <div class="list-item notice-item border-left-info" style="cursor: pointer;"
+                                onclick="document.querySelector('[data-view=\'view-notices\']').click()">
+                                <div class="item-content">
+                                    <span class="date-text">Oct 10, 2026</span>
+                                    <h4>Science Lab Reminder</h4>
+                                    <p>Remember to bring your lab coats for the practicals.</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="list-item notice-item border-left-info" style="cursor: pointer;"
-                        onclick="window.location.href='notices.html'">
-                        <div class="item-content">
-                            <span class="date-text">Oct 10, 2026</span>
-                            <h4>Science Lab Reminder</h4>
-                            <p>Remember to bring your lab coats for the practicals.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Exams & Results Widget -->
-            <div class="dash-card exams-widget stagger-enter delay-900">
-                <div class="widget-header">
-                    <h3>Exams & Results</h3>
-                </div>
-                <div class="widget-body">
-                    <div class="next-exam-box" style="cursor: pointer;" onclick="window.location.href='results.html'">
-                        <div class="exam-date">
-                            <span class="month">OCT</span>
-                            <span class="day">15</span>
+                    <!-- Exams & Results Widget -->
+                    <div class="dash-card exams-widget stagger-enter delay-900">
+                        <div class="widget-header">
+                            <h3>Exams & Results</h3>
                         </div>
-                        <div class="exam-details">
-                            <h4>Math Midterm</h4>
-                            <p>Room 402 • 10:00 AM</p>
+                        <div class="widget-body">
+                            <div class="next-exam-box" style="cursor: pointer;"
+                                onclick="document.querySelector('[data-view=\'view-results\']').click()">
+                                <div class="exam-date">
+                                    <span class="month">OCT</span>
+                                    <span class="day">15</span>
+                                </div>
+                                <div class="exam-details">
+                                    <h4>Math Midterm</h4>
+                                    <p>Room 402 • 10:00 AM</p>
+                                </div>
+                            </div>
+                            <div class="recent-result-box" style="cursor: pointer;"
+                                onclick="document.querySelector('[data-view=\'view-results\']').click()">
+                                <div
+                                    style="display: flex; justify-content: space-between; align-items:center; margin-bottom:0.5rem;">
+                                    <span class="result-title">Science Quiz 3</span>
+                                    <span class="result-grade grade-a">A</span>
+                                </div>
+                                <a href="#" class="view-all-link"
+                                    onclick="document.querySelector('[data-view=\'view-results\']').click()">View Full
+                                    Report Card</a>
+                            </div>
                         </div>
                     </div>
-                    <div class="recent-result-box" style="cursor: pointer;"
-                        onclick="window.location.href='results.html'">
+
+                    <!-- Study Material Shortcut -->
+                    <div class="dash-card material-widget stagger-enter delay-1000">
+                        <div class="material-content" style="cursor: pointer;"
+                            onclick="document.querySelector('[data-view=\'view-materials\']').click()">
+                            <div class="icon-circle">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h3>Study Materials</h3>
+                                <p>Access notes, past papers & books.</p>
+                            </div>
+                        </div>
+                        <button class="btn-action-outline"
+                            onclick="document.querySelector('[data-view=\'view-materials\']').click()">Browse
+                            Library</button>
+                    </div>
+
+                </div> <!-- End Dashboard Grid -->
+
+                <!-- ================= VIEW: ATTENDANCE ================= -->
+                <div class="student-view" id="view-attendance">
+                    <div class="dash-card stagger-enter delay-200" style="padding: 1.5rem;">
                         <div
-                            style="display: flex; justify-content: space-between; align-items:center; margin-bottom:0.5rem;">
-                            <span class="result-title">Science Quiz 3</span>
-                            <span class="result-grade grade-a">A</span>
+                            style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem;">
+                            <h3 style="margin:0;">My Attendance Record</h3>
+                            <select class="form-control" style="width:auto; padding:0.25rem 0.5rem; font-size:0.85rem;">
+                                <option>October 2026</option>
+                                <option>September 2026</option>
+                            </select>
                         </div>
-                        <a href="results.html" class="view-all-link">View Full Report Card</a>
+
+                        <div class="dashboard-grid dashboard-grid-3" style="margin-bottom: 2rem;">
+                            <div
+                                style="background:#f8fafc; padding:1rem; border-radius:var(--radius-md); border:1px solid var(--border-light); text-align:center;">
+                                <p style="color:var(--text-muted); font-size:0.85rem; margin-bottom:0.25rem;">Total Days
+                                </p>
+                                <h2 style="margin:0; color:var(--primary);">20</h2>
+                            </div>
+                            <div
+                                style="background:#dcfce7; padding:1rem; border-radius:var(--radius-md); border:1px solid #bbf7d0; text-align:center;">
+                                <p style="color:#166534; font-size:0.85rem; margin-bottom:0.25rem;">Present</p>
+                                <h2 style="margin:0; color:#15803d;">18</h2>
+                            </div>
+                            <div
+                                style="background:#fee2e2; padding:1rem; border-radius:var(--radius-md); border:1px solid #fecaca; text-align:center;">
+                                <p style="color:#991b1b; font-size:0.85rem; margin-bottom:0.25rem;">Absent</p>
+                                <h2 style="margin:0; color:#b91c1c;">2</h2>
+                            </div>
+                        </div>
+
+                        <h4 style="margin-bottom:1rem;">Monthly Breakdown</h4>
+                        <div style="overflow-x:auto;">
+                            <table style="width:100%; border-collapse:collapse; min-width:600px;">
+                                <thead>
+                                    <tr style="border-bottom:2px solid var(--border-light); text-align:left;">
+                                        <th style="padding:0.75rem; color:var(--text-muted); font-weight:600;">Date</th>
+                                        <th style="padding:0.75rem; color:var(--text-muted); font-weight:600;">Status
+                                        </th>
+                                        <th style="padding:0.75rem; color:var(--text-muted); font-weight:600;">Remarks
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="border-bottom:1px solid var(--border-light);">
+                                        <td style="padding:0.75rem;">Oct 12, 2026</td>
+                                        <td style="padding:0.75rem;"><span
+                                                class="status-badge success-badge">Present</span></td>
+                                        <td style="padding:0.75rem; color:var(--text-muted);">-</td>
+                                    </tr>
+                                    <tr style="border-bottom:1px solid var(--border-light);">
+                                        <td style="padding:0.75rem;">Oct 11, 2026</td>
+                                        <td style="padding:0.75rem;"><span
+                                                class="status-badge danger-badge">Absent</span></td>
+                                        <td style="padding:0.75rem; color:var(--text-muted);">Medical Leave</td>
+                                    </tr>
+                                    <tr style="border-bottom:1px solid var(--border-light);">
+                                        <td style="padding:0.75rem;">Oct 10, 2026</td>
+                                        <td style="padding:0.75rem;"><span
+                                                class="status-badge success-badge">Present</span></td>
+                                        <td style="padding:0.75rem; color:var(--text-muted);">-</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Study Material Shortcut -->
-            <div class="dash-card material-widget stagger-enter delay-1000">
-                <div class="material-content" style="cursor: pointer;" onclick="window.location.href='academics.html'">
-                    <div class="icon-circle">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
-                            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
-                        </svg>
-                    </div>
-                    <div>
-                        <h3>Study Materials</h3>
-                        <p>Access notes, past papers & books.</p>
+                <!-- ================= VIEW: ASSIGNMENTS ================= -->
+                <div class="student-view" id="view-assignments">
+                    <div class="dash-card stagger-enter delay-200" style="padding: 1.5rem;">
+                        <div
+                            style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border-light); padding-bottom:1rem; margin-bottom:1rem;">
+                            <h3 style="margin:0;">My Assignments</h3>
+                            <div style="display:flex; gap:0.5rem;">
+                                <button class="btn btn-sm btn-primary">Pending</button>
+                                <button class="btn btn-sm btn-outline">Submitted</button>
+                            </div>
+                        </div>
+
+                        <div class="dashboard-grid dashboard-grid-2">
+                            <!-- Pending Assignment Card 1 -->
+                            <div
+                                style="border:1px solid var(--border-light); border-left:4px solid var(--danger); border-radius:var(--radius-md); padding:1rem; background:white;">
+                                <div style="display:flex; justify-content:space-between; margin-bottom:0.5rem;">
+                                    <span class="badge badge-red" style="font-size:0.75rem;">Due Tomorrow</span>
+                                    <span style="font-size:0.8rem; color:var(--text-muted);">Math • Oct 13</span>
+                                </div>
+                                <h4 style="margin:0 0 0.5rem;">Algebra Expressions Part 2</h4>
+                                <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:1rem;">Complete
+                                    exercises 1 through 15 on page 42. Show all your work.</p>
+                                <div
+                                    style="border-top:1px solid var(--border-light); padding-top:1rem; display:flex; justify-content:space-between; align-items:center;">
+                                    <span style="font-size:0.8rem; font-weight:600;">Max Marks: 50</span>
+                                    <button class="btn btn-sm btn-outline"
+                                        style="color:var(--primary); border-color:var(--primary);">Submit Work</button>
+                                </div>
+                            </div>
+
+                            <!-- Pending Assignment Card 2 -->
+                            <div
+                                style="border:1px solid var(--border-light); border-left:4px solid var(--warning); border-radius:var(--radius-md); padding:1rem; background:white;">
+                                <div style="display:flex; justify-content:space-between; margin-bottom:0.5rem;">
+                                    <span class="badge badge-yellow" style="font-size:0.75rem;">Due in 3 Days</span>
+                                    <span style="font-size:0.8rem; color:var(--text-muted);">English • Oct 16</span>
+                                </div>
+                                <h4 style="margin:0 0 0.5rem;">Book Review: 1984</h4>
+                                <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:1rem;">Write a
+                                    500-word review on the themes of surveillance in the novel.</p>
+                                <div
+                                    style="border-top:1px solid var(--border-light); padding-top:1rem; display:flex; justify-content:space-between; align-items:center;">
+                                    <span style="font-size:0.8rem; font-weight:600;">Max Marks: 100</span>
+                                    <button class="btn btn-sm btn-outline"
+                                        style="color:var(--primary); border-color:var(--primary);">Submit Work</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <button class="btn-action-outline" onclick="window.location.href='academics.html'">Browse
-                    Library</button>
-            </div>
 
-        </div> <!-- End Dashboard Grid -->
+                <!-- ================= VIEW: EXAMS & RESULTS ================= -->
+                <div class="student-view" id="view-results">
+                    <div class="dash-card stagger-enter delay-200" style="padding: 1.5rem;">
+                        <div
+                            style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border-light); padding-bottom:1rem; margin-bottom:1rem;">
+                            <h3 style="margin:0;">Exams & Results</h3>
+                            <div style="display:flex; gap:0.5rem;">
+                                <button class="btn btn-sm btn-primary">Report Cards</button>
+                                <button class="btn btn-sm btn-outline">Schedule</button>
+                            </div>
+                        </div>
+
+                        <h4 style="margin-bottom:1rem;">Recent Performances</h4>
+                        <div class="table-responsive">
+                            <table style="width:100%; border-collapse:collapse; min-width:600px;">
+                                <thead>
+                                    <tr style="border-bottom:2px solid var(--border-light); text-align:left;">
+                                        <th style="padding:0.75rem; color:var(--text-muted); font-weight:600;">Exam /
+                                            Test Name</th>
+                                        <th style="padding:0.75rem; color:var(--text-muted); font-weight:600;">Subject
+                                        </th>
+                                        <th style="padding:0.75rem; color:var(--text-muted); font-weight:600;">Marks
+                                        </th>
+                                        <th style="padding:0.75rem; color:var(--text-muted); font-weight:600;">Grade
+                                        </th>
+                                        <th style="padding:0.75rem; color:var(--text-muted); font-weight:600;">Action
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="border-bottom:1px solid var(--border-light);">
+                                        <td style="padding:0.75rem;"><strong>Mid-Term 2023</strong></td>
+                                        <td style="padding:0.75rem;">Mathematics</td>
+                                        <td style="padding:0.75rem;">88 / 100</td>
+                                        <td style="padding:0.75rem;"><span class="badge badge-green">A</span></td>
+                                        <td style="padding:0.75rem;"><button
+                                                class="btn btn-sm btn-outline">Details</button></td>
+                                    </tr>
+                                    <tr style="border-bottom:1px solid var(--border-light);">
+                                        <td style="padding:0.75rem;"><strong>Unit Test 2</strong></td>
+                                        <td style="padding:0.75rem;">Science</td>
+                                        <td style="padding:0.75rem;">42 / 50</td>
+                                        <td style="padding:0.75rem;"><span class="badge badge-green">A-</span></td>
+                                        <td style="padding:0.75rem;"><button
+                                                class="btn btn-sm btn-outline">Details</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ================= VIEW: FEES STATUS ================= -->
+                <div class="student-view" id="view-fees">
+                    <div class="dash-card stagger-enter delay-200" style="padding: 1.5rem;">
+                        <div
+                            style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border-light); padding-bottom:1rem; margin-bottom:1rem;">
+                            <h3 style="margin:0;">Fees & Payments</h3>
+                            <button class="btn btn-sm btn-primary">View Invoice</button>
+                        </div>
+
+                        <div
+                            style="background:#fffbeb; border:1px solid #fde68a; border-radius:var(--radius-md); padding:1.5rem; display:flex; justify-content:space-between; align-items:center; margin-bottom: 2rem;">
+                            <div>
+                                <p style="color:#b45309; font-weight:600; font-size:0.85rem; margin-bottom:0.25rem;">
+                                    Amount Due (Term 2)</p>
+                                <h2 style="margin:0; color:#92400e;">$150.00</h2>
+                                <p style="color:#b45309; font-size:0.8rem; margin-top:0.25rem;">Due Date: 15th October
+                                    2026</p>
+                            </div>
+                            <button class="btn btn-primary"
+                                style="background:#d97706; border-color:#d97706; color:white; padding: 0.75rem 2rem;">Pay
+                                Now</button>
+                        </div>
+
+                        <h4 style="margin-bottom:1rem;">Payment History</h4>
+                        <div class="table-responsive">
+                            <table style="width:100%; border-collapse:collapse; min-width:600px;">
+                                <thead>
+                                    <tr style="border-bottom:2px solid var(--border-light); text-align:left;">
+                                        <th style="padding:0.75rem; color:var(--text-muted); font-weight:600;">
+                                            Transaction ID</th>
+                                        <th style="padding:0.75rem; color:var(--text-muted); font-weight:600;">Date</th>
+                                        <th style="padding:0.75rem; color:var(--text-muted); font-weight:600;">Amount
+                                        </th>
+                                        <th style="padding:0.75rem; color:var(--text-muted); font-weight:600;">Payment
+                                            Method</th>
+                                        <th style="padding:0.75rem; color:var(--text-muted); font-weight:600;">Status
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="border-bottom:1px solid var(--border-light);">
+                                        <td style="padding:0.75rem; font-family:monospace;">#TRX-98231</td>
+                                        <td style="padding:0.75rem;">Sep 01, 2026</td>
+                                        <td style="padding:0.75rem;">$150.00</td>
+                                        <td style="padding:0.75rem;">Credit Card ending in 4242</td>
+                                        <td style="padding:0.75rem;"><span class="badge badge-green">Paid</span></td>
+                                    </tr>
+                                    <tr style="border-bottom:1px solid var(--border-light);">
+                                        <td style="padding:0.75rem; font-family:monospace;">#TRX-82390</td>
+                                        <td style="padding:0.75rem;">Jun 01, 2026</td>
+                                        <td style="padding:0.75rem;">$300.00</td>
+                                        <td style="padding:0.75rem;">Bank Transfer</td>
+                                        <td style="padding:0.75rem;"><span class="badge badge-green">Paid</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ================= VIEW: STUDY MATERIAL ================= -->
+                <div class="student-view" id="view-materials">
+                    <div class="dash-card stagger-enter delay-200" style="padding: 1.5rem;">
+                        <div
+                            style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border-light); padding-bottom:1rem; margin-bottom:1rem;">
+                            <h3 style="margin:0;">Library & Study Material</h3>
+                            <div class="search-box">
+                                <input type="text" class="form-control" placeholder="Search resources..."
+                                    style="padding:0.4rem 0.8rem; border-radius:var(--radius-md);">
+                            </div>
+                        </div>
+
+                        <div class="dashboard-grid dashboard-grid-3">
+                            <!-- Resource Card 1 -->
+                            <div
+                                style="border:1px solid var(--border-light); border-radius:var(--radius-md); padding:1.25rem; background:white; text-align:center; transition:transform 0.2s;">
+                                <div
+                                    style="width:48px; height:48px; background:#e0e7ff; color:var(--primary); border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 1rem;">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                        <polyline points="14 2 14 8 20 8"></polyline>
+                                    </svg>
+                                </div>
+                                <h4 style="margin:0 0 0.5rem; font-size:1rem;">Math Formula Sheet</h4>
+                                <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:1rem;">PDF • 2.4 MB •
+                                    Mr. Davis</p>
+                                <button class="btn btn-sm btn-outline" style="width:100%;">Download</button>
+                            </div>
+
+                            <!-- Resource Card 2 -->
+                            <div
+                                style="border:1px solid var(--border-light); border-radius:var(--radius-md); padding:1.25rem; background:white; text-align:center; transition:transform 0.2s;">
+                                <div
+                                    style="width:48px; height:48px; background:#dcfce7; color:#16a34a; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 1rem;">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                        <polyline points="21 15 16 10 5 21"></polyline>
+                                    </svg>
+                                </div>
+                                <h4 style="margin:0 0 0.5rem; font-size:1rem;">Biology Diagrams</h4>
+                                <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:1rem;">ZIP • 15.1 MB
+                                    • Mrs. Smith</p>
+                                <button class="btn btn-sm btn-outline" style="width:100%;">Download</button>
+                            </div>
+
+                            <!-- Resource Card 3 -->
+                            <div
+                                style="border:1px solid var(--border-light); border-radius:var(--radius-md); padding:1.25rem; background:white; text-align:center; transition:transform 0.2s;">
+                                <div
+                                    style="width:48px; height:48px; background:#fce7f3; color:#db2777; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 1rem;">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <polygon points="23 7 16 12 23 17 23 7"></polygon>
+                                        <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+                                    </svg>
+                                </div>
+                                <h4 style="margin:0 0 0.5rem; font-size:1rem;">Historical Eras Lecture</h4>
+                                <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:1rem;">MP4 • 124 MB •
+                                    Mr. Brown</p>
+                                <button class="btn btn-sm btn-outline" style="width:100%;">Watch Online</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ================= VIEW: NOTICES ================= -->
+                <div class="student-view" id="view-notices">
+                    <div class="dash-card stagger-enter delay-200" style="padding: 1.5rem;">
+                        <div
+                            style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border-light); padding-bottom:1rem; margin-bottom:1rem;">
+                            <h3 style="margin:0;">Notice Board</h3>
+                        </div>
+
+                        <div class="notices-list" style="display:flex; flex-direction:column; gap:1rem;">
+                            <!-- Notice 1 -->
+                            <div
+                                style="border-left:4px solid var(--danger); padding:1rem; background:#fef2f2; border-radius:var(--radius-sm);">
+                                <div style="display:flex; justify-content:space-between; margin-bottom:0.5rem;">
+                                    <span style="font-size:0.8rem; font-weight:600; color:var(--danger);">URGENT</span>
+                                    <span style="font-size:0.8rem; color:var(--text-muted);">Oct 12, 2026</span>
+                                </div>
+                                <h4 style="margin:0 0 0.5rem; color:#991b1b;">Math Assignment Deadline Extension</h4>
+                                <p style="font-size:0.9rem; color:#7f1d1d; margin:0;">The deadline for the Chapter 4
+                                    algebra exercises has been extended to Friday, Oct 15th due to the recent power
+                                    outage. Please ensure submission by 10 AM.</p>
+                            </div>
+
+                            <!-- Notice 2 -->
+                            <div
+                                style="border-left:4px solid var(--info); padding:1rem; background:#f0f9ff; border-radius:var(--radius-sm);">
+                                <div style="display:flex; justify-content:space-between; margin-bottom:0.5rem;">
+                                    <span style="font-size:0.8rem; font-weight:600; color:var(--info);">GENERAL</span>
+                                    <span style="font-size:0.8rem; color:var(--text-muted);">Oct 10, 2026</span>
+                                </div>
+                                <h4 style="margin:0 0 0.5rem; color:#0369a1;">Science Lab Reminders for Term 2</h4>
+                                <p style="font-size:0.9rem; color:#0c4a6e; margin:0;">Remember to bring your lab coats
+                                    and safety goggles for all practical sessions starting next week. Entry to the lab
+                                    will not be permitted without safety gear.</p>
+                            </div>
+
+                            <!-- Notice 3 -->
+                            <div
+                                style="border-left:4px solid var(--primary); padding:1rem; background:#eff6ff; border-radius:var(--radius-sm);">
+                                <div style="display:flex; justify-content:space-between; margin-bottom:0.5rem;">
+                                    <span style="font-size:0.8rem; font-weight:600; color:var(--primary);">EVENT</span>
+                                    <span style="font-size:0.8rem; color:var(--text-muted);">Oct 05, 2026</span>
+                                </div>
+                                <h4 style="margin:0 0 0.5rem; color:#1d4ed8;">Annual Sports Day Registration</h4>
+                                <p style="font-size:0.9rem; color:#1e3a8a; margin:0;">Registrations for the Annual
+                                    Sports Day track and field events are now open. Interested students should contact
+                                    Mr. Thompson before the end of the month.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Next views will go here -->
+                <div class="student-view" id="view-placeholder" style="display:none; padding:1rem;">
+                    <!-- Temporary placeholder until components are built -->
+                    <div class="dash-card" style="padding: 2rem; text-align: center;">
+                        <div style="font-size:3rem; margin-bottom:1rem;">🚧</div>
+                        <h3>Module Under Construction</h3>
+                        <p style="color:var(--text-muted);">This application module is currently being finalized.</p>
+                        <button class="btn-action-small" style="margin-top:1.5rem;"
+                            onclick="document.querySelector('[data-view=\'view-overview\']').click()">Return to
+                            Dashboard</button>
+                    </div>
+                </div>
+
+            </div> <!-- End Student Views Container -->
 
     </main>
 
@@ -393,6 +776,7 @@
     </nav>
 
     <script src="assets/js/main.js"></script>
+    <script src="assets/js/student-dashboard.js"></script>
     <script>
         // Simple script to trigger stagger animations smoothly on load
         document.addEventListener('DOMContentLoaded', () => {

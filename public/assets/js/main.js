@@ -1,63 +1,114 @@
 /**
  * eCampus International School - Main JavaScript
- * Handles global interactions like sticky header, mobile nav
+ * Handles the updated Slide Drawer Menu, Dropdowns, and Sticky Header
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Sticky Header Functionality
-    const header = document.querySelector('.site-header');
+
+    /* ==========================================================================
+       1. STICKY HEADER (SHRINK ON SCROLL)
+       ========================================================================== */
+    const header = document.getElementById('global-header');
 
     if (header) {
         const handleScroll = () => {
-            if (window.scrollY > 10) {
-                header.classList.add('scrolled');
+            if (window.scrollY > 20) {
+                header.classList.add('scrolled-header');
             } else {
-                header.classList.add('scrolled'); // Force for demo aesthetics or logic? Actually let's just use it
-                if (window.scrollY < 10) {
-                    header.classList.remove('scrolled');
-                }
+                header.classList.remove('scrolled-header');
             }
         };
 
-        // Initial check
-        handleScroll();
-
-        // Listen to scroll
-        window.addEventListener('scroll', handleScroll);
+        handleScroll(); // Check on load
+        window.addEventListener('scroll', handleScroll, { passive: true });
     }
 
-    // 2. Mobile Menu Toggle
-    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-    const navLinks = document.querySelector('.nav-links');
+    /* ==========================================================================
+       2. MOBILE SLIDE DRAWER MENU
+       ========================================================================== */
+    const mobileMenuBtn = document.getElementById('mobile-menu-toggle');
+    const drawerCloseBtn = document.getElementById('drawer-close');
+    const mainNav = document.getElementById('main-nav');
+    const overlay = document.getElementById('mobile-overlay');
 
-    if (mobileMenuBtn && navLinks) {
-        mobileMenuBtn.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
+    const toggleDrawer = (forceState) => {
+        if (!mainNav || !overlay) return;
 
-            // Toggle icon between hamburger and close
-            const isExpanded = navLinks.classList.contains('active');
-            mobileMenuBtn.innerHTML = isExpanded
-                ? '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>'
-                : '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>';
+        const isCurrentlyActive = mainNav.classList.contains('active');
+        const newState = forceState !== undefined ? forceState : !isCurrentlyActive;
 
-            // Prevent body scroll when menu is open
-            document.body.style.overflow = isExpanded ? 'hidden' : '';
+        if (newState) {
+            mainNav.classList.add('active');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Stop background scrolling
+        } else {
+            mainNav.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    };
+
+    if (mobileMenuBtn) {
+        mobileMenuBtn.addEventListener('click', () => toggleDrawer(true));
+    }
+
+    if (drawerCloseBtn) {
+        drawerCloseBtn.addEventListener('click', () => toggleDrawer(false));
+    }
+
+    if (overlay) {
+        overlay.addEventListener('click', () => toggleDrawer(false));
+    }
+
+    /* ==========================================================================
+       3. MOBILE DROPDOWN ACCORDION (Resources)
+       ========================================================================== */
+    const resourcesDropdown = document.getElementById('resources-dropdown');
+    const resourcesToggle = document.getElementById('resources-toggle');
+
+    if (resourcesDropdown && resourcesToggle) {
+        resourcesToggle.addEventListener('click', (e) => {
+            // Only trigger accordion behavior on mobile explicitly
+            if (window.innerWidth <= 1024) {
+                e.preventDefault(); // Stop native link click if any
+                resourcesDropdown.classList.toggle('drawer-expanded');
+
+                // Update aria expanded
+                const isExpanded = resourcesDropdown.classList.contains('drawer-expanded');
+                resourcesToggle.setAttribute('aria-expanded', isExpanded);
+            }
         });
     }
 
-    // 3. Highlight Active Navigation Link based on current URL
+    /* ==========================================================================
+       4. HIGHLIGHT ACTIVE NAV ITEM
+       ========================================================================== */
     const currentPath = window.location.pathname.split('/').pop() || 'index.html';
-    const navItems = document.querySelectorAll('.nav-link');
+    const navItems = document.querySelectorAll('.nav-link, .dropdown-item');
 
     navItems.forEach(link => {
         const linkHref = link.getAttribute('href');
+        if (!linkHref) return;
+
+        // Exact match
         if (linkHref === currentPath) {
-            link.classList.add('active');
-        } else {
-            // Also handle index.html logic
-            if ((currentPath === '' || currentPath === '/') && linkHref === 'index.html') {
-                link.classList.add('active');
+            link.style.color = 'var(--primary)';
+            link.style.fontWeight = '700';
+
+            // If the active link is inside the dropdown, also highlight the parent "Resources" button
+            const parentDropdown = link.closest('.dropdown');
+            if (parentDropdown) {
+                const parentToggle = parentDropdown.querySelector('.dropdown-toggle');
+                if (parentToggle) {
+                    parentToggle.style.color = 'var(--primary)';
+                    parentToggle.style.fontWeight = '700';
+                }
             }
+        }
+        // Handle root
+        else if ((currentPath === '' || currentPath === '/') && linkHref === 'index.html') {
+            link.style.color = 'var(--primary)';
+            link.style.fontWeight = '700';
         }
     });
 });

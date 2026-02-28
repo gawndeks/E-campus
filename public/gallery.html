@@ -156,12 +156,13 @@
                 <a href="facilities.html" class="nav-link">Facilities</a>
                 <a href="gallery.html" class="nav-link">Gallery</a>
                 <a href="contact.html" class="nav-link">Contact</a>
-                
+
                 <div class="dropdown">
                     <button class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false">
                         More
-                        <svg class="dropdown-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-left: 2px;">
-                            <path d="M6 9l6 6 6-6"/>
+                        <svg class="dropdown-icon" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" style="margin-left: 2px;">
+                            <path d="M6 9l6 6 6-6" />
                         </svg>
                     </button>
                     <div class="dropdown-menu">
@@ -195,8 +196,30 @@
 
     <section class="section">
         <div class="container">
+            <!-- Add Image Frontend UI -->
+            <div class="card-modern reveal reveal-up"
+                style="margin-bottom: 3rem; padding: 2rem; border-top: 4px solid var(--accent);">
+                <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--primary-dark);">Add New Image (Demo)
+                </h3>
+                <p style="color: var(--text-muted); margin-bottom: 1.5rem; font-size: 0.95rem;">Upload an image
+                    instantly to the gallery grid using frontend Javascript.</p>
+                <form id="add-image-form" style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: flex-end;">
+                    <div class="form-group" style="flex: 1; min-width: 250px; margin-bottom: 0;">
+                        <label for="img-url" class="form-label">Image URL</label>
+                        <input type="url" id="img-url" class="form-control"
+                            placeholder="https://source.unsplash.com/random/800x600" required>
+                    </div>
+                    <div class="form-group" style="flex: 1; min-width: 250px; margin-bottom: 0;">
+                        <label for="img-caption" class="form-label">Caption</label>
+                        <input type="text" id="img-caption" class="form-control"
+                            placeholder="e.g. Students in the library" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary"
+                        style="min-width: 150px; margin-bottom: 0; min-height: 48px;">Add Image</button>
+                </form>
+            </div>
 
-            <div class="gallery-grid animate-fade-in-up delay-200">
+            <div class="gallery-grid animate-fade-in-up delay-200" id="main-gallery-grid">
                 <!-- Gallery Item 1 -->
                 <div class="gallery-item" data-caption="Annual Science Fair Exhibition"
                     data-src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&q=80&w=800">

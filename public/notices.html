@@ -15,50 +15,226 @@
         rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/animations.css">
+
+    <style>
+        /* Specific Notice Page Styles */
+        .notices-grid {
+            display: grid;
+            gap: 2rem;
+            grid-template-columns: 1fr;
+        }
+
+        @media (min-width: 768px) {
+            .notices-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .notices-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .notice-card {
+            background: var(--bg-color-surface);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-card);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid var(--border-light);
+            transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+            position: relative;
+            overflow: hidden;
+        }
+
+        @media (hover: hover) {
+            .notice-card:hover {
+                transform: translateY(-5px);
+                box-shadow: var(--shadow-lg);
+            }
+        }
+
+        /* Top colored accent line */
+        .notice-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+        }
+
+        .category-exam::before {
+            background: var(--danger, #ef4444);
+        }
+
+        .category-event::before {
+            background: var(--info, #0284c7);
+        }
+
+        .category-general::before {
+            background: var(--primary);
+        }
+
+        .notice-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .notice-badge {
+            padding: 0.35rem 0.85rem;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .badge-exam {
+            background: #fee2e2;
+            color: #ef4444;
+        }
+
+        .badge-event {
+            background: #e0f2fe;
+            color: #0284c7;
+        }
+
+        .badge-general {
+            background: #e0e7ff;
+            color: #4338ca;
+        }
+
+        .notice-date {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .notice-title {
+            font-size: 1.25rem;
+            color: var(--text-main);
+            margin-bottom: 1rem;
+            line-height: 1.4;
+        }
+
+        .notice-message {
+            color: var(--text-muted);
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+
+        .stagger-enter {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .stagger-enter.fade-in-up-smooth {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
 </head>
 
 <body>
 
-    <header class="site-header classic-header">
+    <header class="site-header" id="global-header">
         <div class="container nav-container">
+            <!-- Logo Section -->
             <a href="index.html" class="logo-link">
                 <div class="logo-icon">eC</div>
                 <div class="logo-text">eCampus</div>
+                <div class="page-title-mobile-only">School Portal</div>
             </a>
 
-            <button class="mobile-menu-btn" aria-label="Toggle Navigation">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-            </button>
-
-            <nav class="nav-links">
-                <a href="index.html" class="nav-link">Home</a>
-                <a href="about.html" class="nav-link">About</a>
-                <a href="academics.html" class="nav-link">Academics</a>
-                <a href="admissions.html" class="nav-link">Admissions</a>
-                <a href="facilities.html" class="nav-link">Facilities</a>
-                <a href="gallery.html" class="nav-link">Gallery</a>
-                <a href="contact.html" class="nav-link">Contact</a>
-                
-                <div class="dropdown">
-                    <button class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false">
-                        More
-                        <svg class="dropdown-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-left: 2px;">
-                            <path d="M6 9l6 6 6-6"/>
-                        </svg>
-                    </button>
-                    <div class="dropdown-menu">
-                        <a href="alumni.html" class="dropdown-item">Alumni</a>
-                        <a href="careers.html" class="dropdown-item">Careers</a>
-                        <a href="faq.html" class="dropdown-item">FAQ</a>
-                        <a href="calendar.html" class="dropdown-item">Calendar</a>
+            <!-- Mobile Actions (Right aligned on mobile) -->
+            <div class="mobile-header-actions">
+                <div class="user-profile-mini">
+                    <div class="user-avatar"
+                        style="background-image: url('https://ui-avatars.com/api/?name=User&background=eff6ff&color=1e3a8a'); border-width: 1px;">
                     </div>
                 </div>
+                <button class="mobile-menu-btn" aria-label="Toggle Navigation" id="mobile-menu-toggle">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="4" y1="12" x2="20" y2="12"></line>
+                        <line x1="4" y1="6" x2="20" y2="6"></line>
+                        <line x1="4" y1="18" x2="20" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
 
-                <a href="login.html" class="btn btn-primary"
-                    style="margin-left: 1rem; border-radius: 20px; padding: 0.5rem 1.5rem;">Login</a>
+            <!-- Mobile Menu Overlay -->
+            <div class="mobile-menu-overlay" id="mobile-overlay"></div>
+
+            <!-- Navigation Links -->
+            <nav class="nav-links" id="main-nav">
+                <!-- Mobile Drawer Close Button -->
+                <div class="drawer-header">
+                    <div class="logo-link">
+                        <div class="logo-icon">eC</div>
+                        <div class="logo-text">eCampus</div>
+                    </div>
+                    <button class="drawer-close-btn" id="drawer-close">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Primary Nav Items -->
+                <div class="nav-group">
+                    <div class="dropdown" id="resources-dropdown">
+                        <button class="nav-link dropdown-toggle" aria-expanded="false" id="resources-toggle">
+                            Resources
+                            <svg class="dropdown-icon" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </button>
+                        <div class="dropdown-menu" id="resources-menu">
+                            <a href="notices.html" class="dropdown-item">Notice Board</a>
+                            <a href="calendar.html" class="dropdown-item">School Calendar</a>
+                            <a href="gallery.html" class="dropdown-item">Gallery</a>
+                            <a href="about.html" class="dropdown-item">About Us</a>
+                        </div>
+                    </div>
+
+                    <a href="notices.html" class="nav-link desktop-hide-item">Notice Board</a>
+                    <a href="calendar.html" class="nav-link desktop-hide-item">School Calendar</a>
+                    <a href="careers.html" class="nav-link">Careers</a>
+                    <a href="faq.html" class="nav-link">FAQ</a>
+                </div>
+
+                <!-- Call to Actions -->
+                <div class="nav-actions">
+                    <a href="admin.html" class="btn btn-outline-secondary">Admin Portal</a>
+                    <a href="login.html" class="btn btn-primary-action nav-login-btn">Student Login</a>
+                </div>
             </nav>
+
+            <div class="desktop-header-profile">
+                <button class="notification-btn" aria-label="Notifications"
+                    onclick="window.location.href='notices.html'">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+                    </svg>
+                    <span class="notification-badge" style="top:0; right:0;"></span>
+                </button>
+                <div class="user-profile-mini">
+                    <div class="user-avatar"
+                        style="background-image: url('https://ui-avatars.com/api/?name=User&background=eff6ff&color=1e3a8a');">
+                    </div>
+                </div>
+            </div>
+
         </div>
     </header>
 
@@ -81,7 +257,7 @@
         <div class="container">
 
             <div class="reveal reveal-up"
-                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;">
+                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 3rem; flex-wrap: wrap; gap: 1rem;">
                 <h2 style="font-size: 2rem; color: var(--text-main); font-family: var(--font-heading);">All Circulars
                 </h2>
                 <!-- Filter Dropdown Simulation -->
@@ -94,60 +270,92 @@
                 </select>
             </div>
 
-            <div class="card-modern reveal reveal-up delay-100" style="padding: 0;">
-                <!-- Container for JS injected notices -->
-                <div id="notices-container" style="min-height: 200px; display: flex; flex-direction: column;">
-                    <div style="text-align: center; padding: 4rem;">
-                        <svg class="animate-spin" style="animation: spin 1s linear infinite; margin: 0 auto 1rem;"
-                            width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--primary)"
-                            stroke-width="2">
-                            <path d="M21 12a9 9 0 1 1-6.219-8.56" />
-                        </svg>
-                        <p style="color: var(--text-muted);">Loading notices from database...</p>
+            <!-- New Modern Grid Layout -->
+            <div class="notices-grid">
+
+                <!-- Card 1 -->
+                <div class="notice-card category-exam stagger-enter" style="transition-delay: 100ms;">
+                    <div class="notice-header">
+                        <span class="notice-badge badge-exam">Examination</span>
+                        <span class="notice-date">Oct 15, 2026</span>
                     </div>
+                    <h3 class="notice-title">Terminal Exam Schedule for Grades 6-10</h3>
+                    <p class="notice-message">The terminal examination schedule for the upcoming semester has been
+                        finalized. Please review the detailed timetable attached to this circular. All students must
+                        ensure they arrive 15 minutes prior to the start time.</p>
                 </div>
+
+                <!-- Card 2 -->
+                <div class="notice-card category-event stagger-enter" style="transition-delay: 200ms;">
+                    <div class="notice-header">
+                        <span class="notice-badge badge-event">Event</span>
+                        <span class="notice-date">Oct 10, 2026</span>
+                    </div>
+                    <h3 class="notice-title">Annual Sports Meet 2026 Registrations</h3>
+                    <p class="notice-message">Registrations are now open for the Annual Sports Meet. Students interested
+                        in track, field, and indoor sports must submit their forms to the physical education department
+                        by Friday.</p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="notice-card category-general stagger-enter" style="transition-delay: 300ms;">
+                    <div class="notice-header">
+                        <span class="notice-badge badge-general">General</span>
+                        <span class="notice-date">Oct 02, 2026</span>
+                    </div>
+                    <h3 class="notice-title">Holiday Notice: National Day</h3>
+                    <p class="notice-message">The school will remain closed on Monday, October 12th in observance of
+                        National Day. Regular classes will resume on Tuesday as per the standard schedule.</p>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="notice-card category-general stagger-enter" style="transition-delay: 400ms;">
+                    <div class="notice-header">
+                        <span class="notice-badge badge-general">General</span>
+                        <span class="notice-date">Sep 28, 2026</span>
+                    </div>
+                    <h3 class="notice-title">Winter Uniform Policy Update</h3>
+                    <p class="notice-message">Starting November 1st, all students are required to switch to the official
+                        winter uniform. Blazers and mandatory ties are available at the campus store.</p>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="notice-card category-event stagger-enter" style="transition-delay: 500ms;">
+                    <div class="notice-header">
+                        <span class="notice-badge badge-event">Event</span>
+                        <span class="notice-date">Sep 20, 2026</span>
+                    </div>
+                    <h3 class="notice-title">Science Fair Exhibition</h3>
+                    <p class="notice-message">Parents and guardians are cordially invited to the Annual Science Fair
+                        taking place in the main auditorium. Come witness the innovative projects built by our senior
+                        students.</p>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="notice-card category-exam stagger-enter" style="transition-delay: 600ms;">
+                    <div class="notice-header">
+                        <span class="notice-badge badge-exam">Examination</span>
+                        <span class="notice-date">Sep 15, 2026</span>
+                    </div>
+                    <h3 class="notice-title">Mock Tests for Senior Year</h3>
+                    <p class="notice-message">Mandatory mock examinations for Grade 12 students will commence next week
+                        to prepare for board evaluations. Attendance is strictly compulsory.</p>
+                </div>
+
             </div>
 
             <!-- Pagination Mock -->
-            <div style="display: flex; justify-content: center; gap: 0.5rem; margin-top: 3rem;">
-                <button class="btn btn-primary" style="padding: 0.5rem 1rem;" disabled>Prev</button>
-                <button class="btn btn-primary" style="padding: 0.5rem 1rem;">1</button>
-                <button class="btn btn-outline" style="padding: 0.5rem 1rem;">2</button>
+            <div style="display: flex; justify-content: center; gap: 0.5rem; margin-top: 4rem;">
+                <button class="btn btn-outline" style="padding: 0.5rem 1rem;" disabled>Prev</button>
+                <button class="btn btn-primary"
+                    style="padding: 0.5rem 1rem; width:40px; justify-content:center;">1</button>
+                <button class="btn btn-outline"
+                    style="padding: 0.5rem 1rem; width:40px; justify-content:center;">2</button>
                 <button class="btn btn-outline" style="padding: 0.5rem 1rem;">Next</button>
             </div>
 
-            <style>
-                @keyframes spin {
-                    100% {
-                        transform: rotate(360deg);
-                    }
-                }
-            </style>
         </div>
     </section>
-
-    <!-- Notice Modal -->
-    <div id="notice-modal" class="modal-overlay">
-        <div class="modal-content">
-            <button class="modal-close" aria-label="Close modal"
-                onclick="document.getElementById('notice-modal').classList.remove('active')">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M18 6L6 18M6 6l12 12" />
-                </svg>
-            </button>
-            <div style="margin-bottom: 1.5rem;">
-                <span id="modal-badge"
-                    style="display: inline-block; padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.75rem; font-weight: 700; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.5px;">Notice</span>
-                <h3 id="modal-title"
-                    style="font-size: 1.5rem; color: var(--text-main); margin-bottom: 0.5rem; font-family: var(--font-heading);">
-                    Notice Title</h3>
-                <p id="modal-date" style="color: var(--text-muted); font-size: 0.875rem;">Date</p>
-            </div>
-            <div id="modal-content" style="color: var(--text-body); line-height: 1.7; white-space: pre-wrap;">
-                Content goes here...
-            </div>
-        </div>
-    </div>
 
     <!-- Global Footer -->
     <footer class="site-footer">
@@ -259,7 +467,16 @@
 
     <script src="assets/js/main.js"></script>
     <script src="assets/js/animations.js"></script>
-    <script src="assets/js/data.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const staggeredElements = document.querySelectorAll('.stagger-enter');
+            staggeredElements.forEach(el => {
+                setTimeout(() => {
+                    el.classList.add('fade-in-up-smooth');
+                }, 50);
+            });
+        });
+    </script>
 </body>
 
 </html>

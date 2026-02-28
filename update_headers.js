@@ -3,8 +3,7 @@ const path = require('path');
 
 const publicDir = path.join(__dirname, 'public');
 
-// The new header HTML
-const newHeaderHTML = `    <header class="site-header" id="global-header">
+const newHeader = `<header class="site-header" id="global-header">
         <div class="container nav-container">
             <!-- Logo Section -->
             <a href="index.html" class="logo-link">
@@ -76,7 +75,6 @@ const newHeaderHTML = `    <header class="site-header" id="global-header">
                 </div>
             </nav>
 
-            <!-- Desktop user profile icons -->
              <div class="desktop-header-profile">
                 <button class="notification-btn" aria-label="Notifications" onclick="window.location.href='notices.html'">
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -93,42 +91,22 @@ const newHeaderHTML = `    <header class="site-header" id="global-header">
         </div>
     </header>`;
 
-const excludeFiles = ['admin.html', 'student-dashboard.html', 'teacher-dashboard.html'];
+const excludeFiles = ['admin.html', 'dashboard-student.html', 'dashboard-teacher.html'];
 
-function updateHeaderInFile(filePath) {
-    const ext = path.extname(filePath);
-    if (ext !== '.html') return;
+fs.readdirSync(publicDir).forEach(file => {
+    if (file.endsWith('.html') && !excludeFiles.includes(file)) {
+        const filePath = path.join(publicDir, file);
+        let content = fs.readFileSync(filePath, 'utf8');
 
-    const baseName = path.basename(filePath);
-    if (excludeFiles.includes(baseName)) return;
+        // Match from <header class="site-header"... to </header>
+        const headerRegex = /<header class="site-header[^>]*>[\s\S]*?<\/header>/i;
 
-    let content = fs.readFileSync(filePath, 'utf8');
-
-    // Make sure we only replace if there's a site-header
-    if (!content.includes('<header class="site-header')) {
-        return;
-    }
-
-    const regex = /<header\s+class="site-header(?:[^"]*)">[\s\S]*?<\/header>/i;
-    content = content.replace(regex, newHeaderHTML);
-
-    fs.writeFileSync(filePath, content, 'utf8');
-    console.log('Updated header in: ' + baseName);
-}
-
-function processDirectory(dirPath) {
-    const files = fs.readdirSync(dirPath);
-    for (const file of files) {
-        const fullPath = path.join(dirPath, file);
-        if (fs.statSync(fullPath).isDirectory()) {
-            if (file === 'assets') continue; // skip assets folder
-            if (file === 'components') continue;
-            processDirectory(fullPath);
+        if (headerRegex.test(content)) {
+            content = content.replace(headerRegex, newHeader);
+            fs.writeFileSync(filePath, content, 'utf8');
+            console.log("Updated header in: " + file);
         } else {
-            updateHeaderInFile(fullPath);
+            console.log("No header found in: " + file);
         }
     }
-}
-
-processDirectory(publicDir);
-console.log("Done updating headers to the new layout.");
+});

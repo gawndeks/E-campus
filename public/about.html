@@ -15,102 +15,259 @@
         rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/animations.css">
+
+    <style>
+        .hero-about {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+            padding: 8rem 0 4rem;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-pattern {
+            position: absolute;
+            inset: 0;
+            opacity: 0.1;
+            background-image: radial-gradient(#fff 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            color: white;
+            margin-bottom: 1rem;
+            font-family: var(--font-heading);
+            font-weight: 800;
+        }
+
+        .hero-subtitle {
+            font-size: 1.15rem;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .about-image-wrapper {
+            position: relative;
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-xl);
+            overflow: hidden;
+        }
+
+        .about-image-decorator {
+            position: absolute;
+            inset: -1.5rem 1.5rem 1.5rem -1.5rem;
+            background-color: var(--primary-light);
+            border-radius: var(--radius-xl);
+            z-index: -1;
+        }
+
+        .feature-cards-grid {
+            display: grid;
+            gap: 2rem;
+            grid-template-columns: 1fr;
+            margin-bottom: 5rem;
+        }
+
+        @media (min-width: 1024px) {
+            .feature-cards-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .feature-card {
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+        }
+
+        @media (hover: hover) {
+            .feature-card:hover {
+                transform: translateY(-8px);
+                box-shadow: var(--shadow-lg);
+            }
+        }
+
+        .feature-icon-wrapper {
+            width: 64px;
+            height: 64px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .icon-mission {
+            background: rgba(44, 110, 181, 0.1);
+            color: var(--primary);
+        }
+
+        .icon-vision {
+            background: rgba(250, 204, 21, 0.1);
+            color: var(--accent-hover);
+        }
+
+        .icon-why {
+            background: rgba(16, 185, 129, 0.1);
+            color: #10b981;
+        }
+
+        /* Emerald */
+    </style>
 </head>
 
 <body>
 
-    <!-- Header (Same as index) -->
-    <header class="site-header classic-header">
+    <header class="site-header" id="global-header">
         <div class="container nav-container">
+            <!-- Logo Section -->
             <a href="index.html" class="logo-link">
                 <div class="logo-icon">eC</div>
                 <div class="logo-text">eCampus</div>
+                <div class="page-title-mobile-only">School Portal</div>
             </a>
 
-            <button class="mobile-menu-btn" aria-label="Toggle Navigation">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-            </button>
-
-            <nav class="nav-links">
-                <a href="index.html" class="nav-link">Home</a>
-                <a href="about.html" class="nav-link">About</a>
-                <a href="academics.html" class="nav-link">Academics</a>
-                <a href="admissions.html" class="nav-link">Admissions</a>
-                <a href="facilities.html" class="nav-link">Facilities</a>
-                <a href="gallery.html" class="nav-link">Gallery</a>
-                <a href="contact.html" class="nav-link">Contact</a>
-                
-                <div class="dropdown">
-                    <button class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false">
-                        More
-                        <svg class="dropdown-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-left: 2px;">
-                            <path d="M6 9l6 6 6-6"/>
-                        </svg>
-                    </button>
-                    <div class="dropdown-menu">
-                        <a href="alumni.html" class="dropdown-item">Alumni</a>
-                        <a href="careers.html" class="dropdown-item">Careers</a>
-                        <a href="faq.html" class="dropdown-item">FAQ</a>
-                        <a href="calendar.html" class="dropdown-item">Calendar</a>
+            <!-- Mobile Actions (Right aligned on mobile) -->
+            <div class="mobile-header-actions">
+                <div class="user-profile-mini">
+                    <div class="user-avatar"
+                        style="background-image: url('https://ui-avatars.com/api/?name=User&background=eff6ff&color=1e3a8a'); border-width: 1px;">
                     </div>
                 </div>
+                <button class="mobile-menu-btn" aria-label="Toggle Navigation" id="mobile-menu-toggle">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="4" y1="12" x2="20" y2="12"></line>
+                        <line x1="4" y1="6" x2="20" y2="6"></line>
+                        <line x1="4" y1="18" x2="20" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
 
-                <a href="login.html" class="btn btn-primary"
-                    style="margin-left: 1rem; border-radius: 20px; padding: 0.5rem 1.5rem;">Login</a>
+            <!-- Mobile Menu Overlay -->
+            <div class="mobile-menu-overlay" id="mobile-overlay"></div>
+
+            <!-- Navigation Links -->
+            <nav class="nav-links" id="main-nav">
+                <!-- Mobile Drawer Close Button -->
+                <div class="drawer-header">
+                    <div class="logo-link">
+                        <div class="logo-icon">eC</div>
+                        <div class="logo-text">eCampus</div>
+                    </div>
+                    <button class="drawer-close-btn" id="drawer-close">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Primary Nav Items -->
+                <div class="nav-group">
+                    <div class="dropdown" id="resources-dropdown">
+                        <button class="nav-link dropdown-toggle" aria-expanded="false" id="resources-toggle">
+                            Resources
+                            <svg class="dropdown-icon" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </button>
+                        <div class="dropdown-menu" id="resources-menu">
+                            <a href="notices.html" class="dropdown-item">Notice Board</a>
+                            <a href="calendar.html" class="dropdown-item">School Calendar</a>
+                            <a href="gallery.html" class="dropdown-item">Gallery</a>
+                            <a href="about.html" class="dropdown-item">About Us</a>
+                        </div>
+                    </div>
+
+                    <a href="notices.html" class="nav-link desktop-hide-item">Notice Board</a>
+                    <a href="calendar.html" class="nav-link desktop-hide-item">School Calendar</a>
+                    <a href="careers.html" class="nav-link">Careers</a>
+                    <a href="faq.html" class="nav-link">FAQ</a>
+                </div>
+
+                <!-- Call to Actions -->
+                <div class="nav-actions">
+                    <a href="admin.html" class="btn btn-outline-secondary">Admin Portal</a>
+                    <a href="login.html" class="btn btn-primary-action nav-login-btn">Student Login</a>
+                </div>
             </nav>
+
+            <div class="desktop-header-profile">
+                <button class="notification-btn" aria-label="Notifications"
+                    onclick="window.location.href='notices.html'">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+                    </svg>
+                    <span class="notification-badge" style="top:0; right:0;"></span>
+                </button>
+                <div class="user-profile-mini">
+                    <div class="user-avatar"
+                        style="background-image: url('https://ui-avatars.com/api/?name=User&background=eff6ff&color=1e3a8a');">
+                    </div>
+                </div>
+            </div>
+
         </div>
     </header>
 
-    <!-- Page Banner -->
-    <div
-        style="background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%); padding: 8rem 0 4rem; color: white; text-align: center; position: relative; overflow: hidden;">
-        <div
-            style="position: absolute; inset: 0; opacity: 0.1; background-image: radial-gradient(#fff 1px, transparent 1px); background-size: 30px 30px;">
-        </div>
+    <!-- Page Banner / Hero -->
+    <div class="hero-about">
+        <div class="hero-pattern"></div>
         <div class="container reveal reveal-scale">
-            <h1
-                style="font-size: clamp(2.5rem, 5vw, 4rem); color: white; margin-bottom: 1rem; font-family: var(--font-heading); font-weight: 800;">
-                About Us</h1>
-            <p style="font-size: 1.15rem; color: rgba(255,255,255,0.9); max-width: 600px; margin: 0 auto;">Discover our
-                history, our
-                philosophy, and our commitment to educational excellence.</p>
+            <h1 class="hero-title">About eCampus</h1>
+            <p class="hero-subtitle">Discover our history, our philosophy, and our commitment to educational excellence.
+            </p>
         </div>
     </div>
 
     <!-- Main Content -->
     <section class="section">
         <div class="container">
-            <div class="grid-mobile-1 grid-tablet-2" style="align-items: center; margin-bottom: 5rem; gap: 3rem;">
+
+            <!-- School Description & Main Image -->
+            <div class="grid-mobile-1 grid-tablet-2" style="align-items: center; margin-bottom: 6rem; gap: 4rem;">
                 <div class="reveal reveal-left">
-                    <h2 style="font-size: 3rem; margin-bottom: 1.5rem; line-height: 1.1; color: var(--primary-dark);">
-                        Our Story</h2>
-                    <p style="margin-bottom: 1.25rem; color: var(--text-muted); font-size: 1.1rem; line-height: 1.8;">
-                        Founded in 2006, eCampus
-                        International School began with a simple vision: to create an educational environment where
-                        students are not just taught, but inspired.</p>
-                    <p style="margin-bottom: 1.5rem; color: var(--text-muted); font-size: 1.1rem; line-height: 1.8;">
-                        Over the past two decades, we have
-                        evolved from a small community school into a premier institution recognized for our innovative
-                        teaching methodologies, cultural diversity, and outstanding academic outcomes.</p>
+                    <h2 style="font-size: 2.75rem; margin-bottom: 1.5rem; line-height: 1.15; color: var(--text-main);">
+                        Nurturing Leaders of Tomorrow
+                    </h2>
+                    <p style="margin-bottom: 1.5rem; color: var(--text-muted); font-size: 1.1rem; line-height: 1.7;">
+                        Founded in 2006, eCampus International School began with a simple vision: to create a modern
+                        educational environment where students are not just taught, but deeply inspired. We believe
+                        every child is born with remarkable potential.
+                    </p>
+                    <p style="color: var(--text-muted); font-size: 1.1rem; line-height: 1.7;">
+                        Over the past two decades, we have evolved from a small community academy into a premier
+                        institution recognized for our innovative teaching methodologies, cultural diversity, and
+                        outstanding academic outcomes that rival the best on the globe.
+                    </p>
                 </div>
-                <div class="reveal reveal-right" style="position: relative;">
-                    <div
-                        style="position: absolute; inset: -1.5rem 1.5rem 1.5rem -1.5rem; background-color: var(--primary-light); border-radius: var(--radius-xl); z-index: -1;">
+
+                <div class="reveal reveal-right"
+                    style="position: relative; padding-right: 1.5rem; padding-bottom: 1.5rem;">
+                    <div class="about-image-decorator"></div>
+                    <div class="about-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&q=80&w=1200"
+                            alt="Students studying at eCampus" loading="lazy"
+                            style="width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block;">
                     </div>
-                    <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&q=80&w=800"
-                        alt="Students studying" loading="lazy"
-                        style="width: 100%; border-radius: var(--radius-xl); box-shadow: var(--shadow-xl); aspect-ratio: 4/3; object-fit: cover;">
                 </div>
             </div>
 
-            <!-- Mission & Vision -->
-            <div class="grid-mobile-1 grid-tablet-2" style="gap: 2.5rem; margin-bottom: 5rem;">
-                <div class="card-modern reveal delay-100"
-                    style="padding: 3.5rem; border-top: 4px solid var(--primary);">
-                    <div
-                        style="width: 64px; height: 64px; background: rgba(44,110,181,0.1); color: var(--primary); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 2rem;">
+            <!-- 3 Feature Cards (Mission, Vision, Why) -->
+            <div class="feature-cards-grid">
+
+                <!-- Our Mission -->
+                <div class="card-modern feature-card reveal reveal-up delay-100"
+                    style="border-top: 4px solid var(--primary);">
+                    <div class="feature-icon-wrapper icon-mission">
                         <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2">
                             <circle cx="12" cy="12" r="10" />
@@ -118,27 +275,49 @@
                             <circle cx="12" cy="12" r="2" />
                         </svg>
                     </div>
-                    <h3 style="font-size: 1.75rem; margin-bottom: 1rem;">Our Mission</h3>
-                    <p style="color: var(--text-muted); line-height: 1.7;">To provide a rigorous, forward-thinking
-                        curriculum that
-                        empowers students to become critical thinkers, compassionate leaders, and lifelong learners in a
-                        global society.</p>
+                    <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--text-main);">Our Mission</h3>
+                    <p style="color: var(--text-muted); line-height: 1.6;">
+                        To provide a rigorous, forward-thinking curriculum that empowers students to become critical
+                        thinkers, compassionate leaders, and lifelong learners in an ever-changing global society.
+                    </p>
                 </div>
-                <div class="card-modern reveal delay-200" style="padding: 3.5rem; border-top: 4px solid var(--accent);">
-                    <div
-                        style="width: 64px; height: 64px; background: rgba(250,204,21,0.1); color: var(--accent-hover); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 2rem;">
+
+                <!-- Our Vision -->
+                <div class="card-modern feature-card reveal reveal-up delay-200"
+                    style="border-top: 4px solid var(--accent);">
+                    <div class="feature-icon-wrapper icon-vision">
                         <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2">
                             <path d="M2 12h4l3-9 5 18 3-9h5" />
                         </svg>
                     </div>
-                    <h3 style="font-size: 1.75rem; margin-bottom: 1rem;">Our Vision</h3>
-                    <p style="color: var(--text-muted); line-height: 1.7;">To be recognized globally as a model of
-                        educational
-                        excellence, fostering an inclusive ecosystem where every student's unique potential is
-                        recognized and nurtured.</p>
+                    <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--text-main);">Our Vision</h3>
+                    <p style="color: var(--text-muted); line-height: 1.6;">
+                        To be recognized globally as a resilient model of educational excellence, fostering an inclusive
+                        ecosystem where every student's unique potential is recognized and fully nurtured.
+                    </p>
                 </div>
+
+                <!-- Why eCampus -->
+                <div class="card-modern feature-card reveal reveal-up delay-300" style="border-top: 4px solid #10b981;">
+                    <div class="feature-icon-wrapper icon-why">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <polygon
+                                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                            </polygon>
+                        </svg>
+                    </div>
+                    <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--text-main);">Why eCampus?</h3>
+                    <p style="color: var(--text-muted); line-height: 1.6;">
+                        We blend traditional academics with modern technological literacy. Our dedicated staff, safe
+                        campus, and holistic learning approach prepare students not just for college, but for life.
+                    </p>
+                </div>
+
             </div>
+
+        </div>
     </section>
 
     <!-- Global Footer -->
@@ -251,6 +430,7 @@
 
     <script src="assets/js/main.js"></script>
     <script src="assets/js/animations.js"></script>
+
 </body>
 
 </html>
