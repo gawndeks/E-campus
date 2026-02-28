@@ -32,7 +32,7 @@
                 </svg>
                 <span class="sidebar-text">Dashboard</span>
             </a>
-            <a href="#students" class="desktop-sidebar-link">
+            <a href="student-life.html" class="desktop-sidebar-link">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
                     <circle cx="9" cy="7" r="4" />
@@ -41,7 +41,7 @@
                 </svg>
                 <span class="sidebar-text">My Students</span>
             </a>
-            <a href="#attendance" class="desktop-sidebar-link">
+            <a href="academics.html" class="desktop-sidebar-link">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
                     <line x1="16" y1="2" x2="16" y2="6" />
@@ -56,7 +56,7 @@
                 </svg>
                 <span class="sidebar-text">Mark Attendance</span>
             </a>
-            <a href="#assignments" class="desktop-sidebar-link">
+            <a href="academics.html" class="desktop-sidebar-link">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
                     <polyline points="14 2 14 8 20 8" />
@@ -66,7 +66,7 @@
                 </svg>
                 <span class="sidebar-text">Assignments</span>
             </a>
-            <a href="#study-material" class="desktop-sidebar-link">
+            <a href="academics.html" class="desktop-sidebar-link">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
                     <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
@@ -93,14 +93,14 @@
             <h1 class="header-title">Teacher Portal</h1>
         </div>
         <div class="header-right">
-            <button class="notification-btn" aria-label="Notifications">
+            <button class="notification-btn" aria-label="Notifications" onclick="window.location.href='notices.html'">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
                     <path d="M13.73 21a2 2 0 0 1-3.46 0" />
                 </svg>
                 <span class="notification-badge"></span>
             </button>
-            <div class="user-profile-mini">
+            <div class="user-profile-mini" style="cursor: pointer;" onclick="window.location.href='admin.html'">
                 <div class="user-info desktop-hide-text">
                     <span class="user-name">Ms. Smith</span>
                     <span class="user-role">Mathematics</span>
@@ -117,7 +117,7 @@
 
         <!-- Mobile Quick Shortcuts (Visible only on mobile/small tablets) -->
         <div class="quick-shortcuts mobile-only stagger-enter delay-300">
-            <a href="#attendance" class="shortcut-pill">
+            <a href="academics.html" class="shortcut-pill">
                 <span class="pill-icon" style="background:#dcfce7; color:#16a34a;">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
@@ -127,7 +127,7 @@
                 </span>
                 Attendance
             </a>
-            <a href="#assignments" class="shortcut-pill">
+            <a href="academics.html" class="shortcut-pill">
                 <span class="pill-icon" style="background:#fef3c7; color:#f59e0b;">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
@@ -137,7 +137,7 @@
                 </span>
                 Grade H/W
             </a>
-            <a href="#doubts" class="shortcut-pill">
+            <a href="contact.html" class="shortcut-pill">
                 <span class="pill-icon" style="background:#e0f2fe; color:#0284c7;">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path
@@ -177,7 +177,8 @@
                     <h3>To Grade</h3>
                 </div>
                 <div class="widget-body">
-                    <div class="attendance-progress">
+                    <div class="attendance-progress" style="cursor: pointer;"
+                        onclick="window.location.href='academics.html'">
                         <span class="progress-val">14 <span
                                 style="font-size: 1rem; color:var(--text-muted); font-weight: 500;">pending</span></span>
                         <div class="progress-bar-bg">
@@ -208,8 +209,8 @@
                         <span class="fee-label">Total Active Students</span>
                     </div>
                     <button class="btn-action-small"
-                        style="background:var(--dash-bg); color:var(--primary); font-weight: 600;">View
-                        Directory</button>
+                        style="background:var(--dash-bg); color:var(--primary); font-weight: 600;"
+                        onclick="window.location.href='student-life.html'">View Directory</button>
                 </div>
             </div>
 
@@ -217,11 +218,12 @@
             <div class="dash-card timetable-widget stagger-enter delay-700">
                 <div class="widget-header">
                     <h3>Today's Schedule</h3>
-                    <a href="#" class="view-all-link">Full Week</a>
+                    <a href="calendar.html" class="view-all-link">Full Week</a>
                 </div>
                 <div class="timetable-scroll">
                     <!-- Class 1 -->
-                    <div class="class-card math-theme">
+                    <div class="class-card math-theme" style="cursor: pointer;"
+                        onclick="window.location.href='calendar.html'">
                         <span class="time-slot">09:00 AM - 10:00 AM</span>
                         <h4 class="class-title">Grade 10 - A</h4>
                         <div class="teacher-info">
@@ -229,7 +231,8 @@
                         </div>
                     </div>
                     <!-- Class 2 -->
-                    <div class="class-card" style="background: var(--warning);">
+                    <div class="class-card" style="background: var(--warning); cursor: pointer;"
+                        onclick="window.location.href='calendar.html'">
                         <span class="time-slot">11:15 AM - 12:15 PM</span>
                         <h4 class="class-title">Grade 10 - B</h4>
                         <div class="teacher-info">
@@ -246,7 +249,7 @@
                 </div>
                 <div class="widget-body">
                     <form class="form-group-mobile"
-                        onsubmit="event.preventDefault(); alert('Demo: Redirects to attendance marker sheet');">
+                        onsubmit="event.preventDefault(); window.location.href='academics.html';">
                         <label for="classSelect">Select Class</label>
                         <select id="classSelect" style="margin-bottom: 0.5rem;">
                             <option value="1">Grade 10 - A (09:00 AM)</option>
@@ -266,11 +269,11 @@
             <div class="dash-card notices-widget stagger-enter delay-900">
                 <div class="widget-header">
                     <h3>Student Messages</h3>
-                    <a href="#messages" class="view-all-link">Unread (5)</a>
+                    <a href="contact.html" class="view-all-link">Unread (5)</a>
                 </div>
                 <div class="list-container">
                     <div class="list-item notice-item border-left-info" style="cursor:pointer;"
-                        onclick="alert('Demo: Opens Chat Modal')">
+                        onclick="window.location.href='contact.html'">
                         <div class="item-content">
                             <span class="date-text" style="color:var(--text-dark); font-weight:600;">John D. <span
                                     style="font-weight:400; color:var(--text-muted);">(10A)</span></span>
@@ -282,7 +285,7 @@
                         </svg>
                     </div>
                     <div class="list-item notice-item border-left-info" style="cursor:pointer;"
-                        onclick="alert('Demo: Opens Chat Modal')">
+                        onclick="window.location.href='contact.html'">
                         <div class="item-content">
                             <span class="date-text" style="color:var(--text-dark); font-weight:600;">Sarah M. <span
                                     style="font-weight:400; color:var(--text-muted);">(10B)</span></span>
@@ -298,7 +301,7 @@
 
             <!-- Upload Study Material Shortcut -->
             <div class="dash-card material-widget stagger-enter delay-1000">
-                <div class="material-content">
+                <div class="material-content" style="cursor:pointer;" onclick="window.location.href='academics.html'">
                     <div class="icon-circle">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2">
@@ -312,7 +315,7 @@
                         <p>Share notes, slides, and syllabus.</p>
                     </div>
                 </div>
-                <button class="btn-action-outline">Select Files</button>
+                <button class="btn-action-outline" onclick="window.location.href='academics.html'">Select Files</button>
             </div>
 
         </div> <!-- End Dashboard Grid -->
@@ -321,7 +324,7 @@
 
     <!-- Floating Action Button (Add Assignment / Teacher Action) -->
     <button class="fab-doubt stagger-enter delay-1000" aria-label="Add Assignment"
-        onclick="alert('Demo: Opens Create Assignment Modal')">
+        onclick="window.location.href='academics.html'">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <line x1="12" y1="5" x2="12" y2="19" />
             <line x1="5" y1="12" x2="19" y2="12" />
@@ -336,7 +339,7 @@
             </svg>
             <span class="bottom-nav-text">Home</span>
         </a>
-        <a href="#dashboard" class="bottom-nav-item active">
+        <a href="#overview" class="bottom-nav-item active">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <rect x="3" y="3" width="7" height="7"></rect>
                 <rect x="14" y="3" width="7" height="7"></rect>
@@ -345,14 +348,14 @@
             </svg>
             <span class="bottom-nav-text">Dash</span>
         </a>
-        <a href="#students" class="bottom-nav-item">
+        <a href="student-life.html" class="bottom-nav-item">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
                 <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
                 <circle cx="9" cy="7" r="4" />
             </svg>
             <span class="bottom-nav-text">Students</span>
         </a>
-        <a href="#grades" class="bottom-nav-item">
+        <a href="results.html" class="bottom-nav-item">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
                 <circle cx="12" cy="12" r="10" />
                 <path d="M12 8v4" />
