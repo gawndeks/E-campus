@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facilities | eCampus International School</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&display=swap"
+        rel="stylesheet">
+    <!-- Core CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/animations.css">
+</head>
+
+<body>
+
+    <header class="site-header classic-header">
+        <div class="container nav-container">
+            <a href="index.html" class="logo-link">
+                <div class="logo-icon">eC</div>
+                <div class="logo-text">eCampus</div>
+            </a>
+
+            <button class="mobile-menu-btn" aria-label="Toggle Navigation">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+
+            <nav class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="academics.html" class="nav-link">Academics</a>
+                <a href="admissions.html" class="nav-link">Admissions</a>
+                <a href="facilities.html" class="nav-link">Facilities</a>
+                <a href="gallery.html" class="nav-link">Gallery</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+                
+                <div class="dropdown">
+                    <button class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+                        More
+                        <svg class="dropdown-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-left: 2px;">
+                            <path d="M6 9l6 6 6-6"/>
+                        </svg>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a href="alumni.html" class="dropdown-item">Alumni</a>
+                        <a href="careers.html" class="dropdown-item">Careers</a>
+                        <a href="faq.html" class="dropdown-item">FAQ</a>
+                        <a href="calendar.html" class="dropdown-item">Calendar</a>
+                    </div>
+                </div>
+
+                <a href="login.html" class="btn btn-primary"
+                    style="margin-left: 1rem; border-radius: 20px; padding: 0.5rem 1.5rem;">Login</a>
+            </nav>
+        </div>
+    </header>
+
+    <div style="background-color: var(--color-primary-dark); padding: 8rem 0 4rem; color: white; text-align: center;">
+        <div class="container animate-fade-in-up">
+            <h1 style="font-size: 3.5rem; color: white; margin-bottom: 1rem;">Campus Facilities</h1>
+            <p style="font-size: 1.125rem; color: #cbd5e1; max-width: 600px; margin: 0 auto;">State-of-the-art
+                infrastructure designed to foster holistic development and innovative learning.</p>
+        </div>
+    </div>
+
+    <section class="section">
+        <div class="container">
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                <!-- Smart Classrooms -->
+                <div style="background: white; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-md);"
+                    class="hover-card-up">
+                    <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&q=80&w=600"
+                        alt="Classroom" style="width: 100%; height: 200px; object-fit: cover;">
+                    <div style="padding: 2rem;">
+                        <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--color-primary);">Smart
+                            Classrooms</h3>
+                        <p style="color: var(--color-text-muted);">Spacious, well-ventilated classrooms equipped with
+                            interactive smart boards, reliable Wi-Fi, and ergonomic furniture to ensure a comfortable
+                            and engaging learning environment.</p>
+                    </div>
+                </div>
+
+                <!-- Library -->
+                <div style="background: white; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-md);"
+                    class="hover-card-up">
+                    <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&q=80&w=600"
+                        alt="Library" style="width: 100%; height: 200px; object-fit: cover;">
+                    <div style="padding: 2rem;">
+                        <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--color-primary);">Modern Library
+                        </h3>
+                        <p style="color: var(--color-text-muted);">A serene reading space housing over 20,000 volumes,
+                            international journals, and a digital section providing access to thousands of e-books and
+                            online academic resources.</p>
+                    </div>
+                </div>
+
+                <!-- Science & IT Labs -->
+                <div style="background: white; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-md);"
+                    class="hover-card-up">
+                    <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=600"
+                        alt="Laboratory" style="width: 100%; height: 200px; object-fit: cover;">
+                    <div style="padding: 2rem;">
+                        <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--color-primary);">Advanced
+                            Laboratories</h3>
+                        <p style="color: var(--color-text-muted);">Fully equipped Physics, Chemistry, Biology, and
+                            computer labs where students can conduct practical experiments and explore robotics and
+                            coding.</p>
+                    </div>
+                </div>
+
+                <!-- Sports Complex -->
+                <div style="background: white; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-md);"
+                    class="hover-card-up">
+                    <img src="https://images.unsplash.com/photo-1515523110800-9415d13b84a8?auto=format&fit=crop&q=80&w=600"
+                        alt="Sports Field" style="width: 100%; height: 200px; object-fit: cover;">
+                    <div style="padding: 2rem;">
+                        <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--color-primary);">Sports Complex
+                        </h3>
+                        <p style="color: var(--color-text-muted);">Extensive outdoor sports fields for football and
+                            cricket, alongside indoor courts for basketball, badminton, and table tennis to promote
+                            physical fitness.</p>
+                    </div>
+                </div>
+
+                <!-- Transport -->
+                <div style="background: white; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-md);"
+                    class="hover-card-up">
+                    <img src="https://images.unsplash.com/photo-1557223562-6c77ef161f5b?auto=format&fit=crop&q=80&w=600"
+                        alt="School Bus" style="width: 100%; height: 200px; object-fit: cover;">
+                    <div style="padding: 2rem;">
+                        <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--color-primary);">Transport Fleet
+                        </h3>
+                        <p style="color: var(--color-text-muted);">A fleet of highly maintained, GPS-enabled
+                            air-conditioned buses ensuring safe and comfortable transit for students commuting across
+                            the city.</p>
+                    </div>
+                </div>
+
+                <!-- Cafeteria -->
+                <div style="background: white; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-md);"
+                    class="hover-card-up">
+                    <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&q=80&w=600"
+                        alt="Cafeteria" style="width: 100%; height: 200px; object-fit: cover;">
+                    <div style="padding: 2rem;">
+                        <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--color-primary);">Hygienic
+                            Cafeteria</h3>
+                        <p style="color: var(--color-text-muted);">A spacious dining hall serving nutritious, balanced,
+                            and freshly prepared hot meals and snacks for students and staff under strict hygiene
+                            standards.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="logo-link" style="margin-bottom: 1.5rem;">
+                        <div class="logo-icon" style="background: var(--color-white); color: var(--color-primary);">eC
+                        </div>
+                        <div class="logo-text" style="color: var(--color-white);">eCampus</div>
+                    </div>
+                    <p class="footer-text" style="margin-bottom: 1.5rem;">Empowering Minds, Shaping Futures. An
+                        institution dedicated to holistic and modern education.</p>
+                </div>
+                <div>
+                    <h4 class="footer-title">Quick Links</h4>
+                    <div class="footer-links">
+                        <a href="about.html" class="footer-link">About Us</a>
+                        <a href="academics.html" class="footer-link">Academics</a>
+                        <a href="admissions.html" class="footer-link">Admissions</a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="footer-title">Resources</h4>
+                    <div class="footer-links">
+                        <a href="notices.html" class="footer-link">Notice Board</a>
+                        <a href="calendar.html" class="footer-link">School Calendar</a>
+                        <a href="careers.html" class="footer-link">Careers</a>
+                        <a href="faq.html" class="footer-link">FAQ</a>
+                        <a href="login.html" class="footer-link">Student Login</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 eCampus International School. All Rights Reserved. | <a href="privacy.html"
+                        style="color: #cbd5e1; text-decoration: none;">Privacy Policy</a> | <a href="terms.html"
+                        style="color: #cbd5e1; text-decoration: none;">Terms &amp; Conditions</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/animations.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Teacher Dashboard | eCampus</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/animations.css">
+    <link rel="stylesheet" href="assets/css/dashboard.css">
+</head>
+
+<body class="dashboard-body">
+
+    <!-- Desktop Sidebar (Hidden on Mobile) -->
+    <aside class="desktop-sidebar stagger-enter delay-100">
+        <div class="sidebar-brand">
+            <div class="logo-icon" style="background:var(--accent); color:var(--text-main);">eC</div>
+            <span class="sidebar-text">eCampus Staff</span>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="#overview" class="desktop-sidebar-link active">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                </svg>
+                <span class="sidebar-text">Dashboard</span>
+            </a>
+            <a href="#students" class="desktop-sidebar-link">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                    <circle cx="9" cy="7" r="4" />
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                </svg>
+                <span class="sidebar-text">My Students</span>
+            </a>
+            <a href="#attendance" class="desktop-sidebar-link">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                    <line x1="16" y1="2" x2="16" y2="6" />
+                    <line x1="8" y1="2" x2="8" y2="6" />
+                    <line x1="3" y1="10" x2="21" y2="10" />
+                    <path d="M8 14h.01" />
+                    <path d="M12 14h.01" />
+                    <path d="M16 14h.01" />
+                    <path d="M8 18h.01" />
+                    <path d="M12 18h.01" />
+                    <path d="M16 18h.01" />
+                </svg>
+                <span class="sidebar-text">Mark Attendance</span>
+            </a>
+            <a href="#assignments" class="desktop-sidebar-link">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                    <polyline points="14 2 14 8 20 8" />
+                    <line x1="16" y1="13" x2="8" y2="13" />
+                    <line x1="16" y1="17" x2="8" y2="17" />
+                    <polyline points="10 9 9 9 8 9" />
+                </svg>
+                <span class="sidebar-text">Assignments</span>
+            </a>
+            <a href="#study-material" class="desktop-sidebar-link">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+                </svg>
+                <span class="sidebar-text">Upload Materials</span>
+            </a>
+        </nav>
+        <div class="sidebar-footer">
+            <button class="action-btn-full btn-outline-action" onclick="window.location.href='index.html'">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                    <polyline points="16 17 21 12 16 7" />
+                    <line x1="21" y1="12" x2="9" y2="12" />
+                </svg>
+                <span class="sidebar-text">Logout</span>
+            </button>
+        </div>
+    </aside>
+
+    <!-- Header (Compact & Minimal) -->
+    <header class="dash-header stagger-enter delay-200">
+        <div class="header-left">
+            <div class="logo-icon desktop-hide" style="background:var(--accent); color:var(--text-main);">eC</div>
+            <h1 class="header-title">Teacher Portal</h1>
+        </div>
+        <div class="header-right">
+            <button class="notification-btn" aria-label="Notifications">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                    <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+                </svg>
+                <span class="notification-badge"></span>
+            </button>
+            <div class="user-profile-mini">
+                <div class="user-info desktop-hide-text">
+                    <span class="user-name">Ms. Smith</span>
+                    <span class="user-role">Mathematics</span>
+                </div>
+                <div class="user-avatar"
+                    style="background-image: url('https://ui-avatars.com/api/?name=Jane+Smith&background=dcfce7&color=166534');">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="dash-main">
+
+        <!-- Mobile Quick Shortcuts (Visible only on mobile/small tablets) -->
+        <div class="quick-shortcuts mobile-only stagger-enter delay-300">
+            <a href="#attendance" class="shortcut-pill">
+                <span class="pill-icon" style="background:#dcfce7; color:#16a34a;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                        <polyline points="14 2 14 8 20 8" />
+                        <polyline points="10 9 9 9 8 9" />
+                    </svg>
+                </span>
+                Attendance
+            </a>
+            <a href="#assignments" class="shortcut-pill">
+                <span class="pill-icon" style="background:#fef3c7; color:#f59e0b;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                        <polyline points="14 2 14 8 20 8" />
+                        <polyline points="10 9 9 9 8 9" />
+                    </svg>
+                </span>
+                Grade H/W
+            </a>
+            <a href="#doubts" class="shortcut-pill">
+                <span class="pill-icon" style="background:#e0f2fe; color:#0284c7;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path
+                            d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+                    </svg>
+                </span>
+                Doubts (5)
+            </a>
+        </div>
+
+        <!-- Dashboard Grid System -->
+        <div class="dashboard-grid">
+
+            <!-- Welcome / Profile Summary Card -->
+            <div class="dash-card profile-card stagger-enter delay-400"
+                style="background: linear-gradient(135deg, #1e293b, #0f172a);">
+                <div class="profile-card-content">
+                    <div>
+                        <h2>Welcome, Ms. Smith 👋</h2>
+                        <p>Senior Mathematics Faculty</p>
+                    </div>
+                    <span class="semester-badge" style="color:var(--text-main); background:var(--accent);">2 Classes
+                        Today</span>
+                </div>
+            </div>
+
+            <!-- Stats & Quick Overviews -->
+            <div class="dash-card stat-widget stagger-enter delay-500">
+                <div class="widget-header">
+                    <div class="widget-icon danger-bg" style="background:var(--danger-light); color:var(--danger);">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+                            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+                        </svg>
+                    </div>
+                    <h3>To Grade</h3>
+                </div>
+                <div class="widget-body">
+                    <div class="attendance-progress">
+                        <span class="progress-val">14 <span
+                                style="font-size: 1rem; color:var(--text-muted); font-weight: 500;">pending</span></span>
+                        <div class="progress-bar-bg">
+                            <div class="progress-bar-fill" style="width: 35%; background-color: var(--danger);"></div>
+                        </div>
+                        <span class="progress-text">Next: Grade 10 Algebra Test</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Total Students / Roster Summary -->
+            <div class="dash-card stat-widget stagger-enter delay-600">
+                <div class="widget-header">
+                    <div class="widget-icon primary-bg">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                            <circle cx="9" cy="7" r="4" />
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                        </svg>
+                    </div>
+                    <h3>My Roster</h3>
+                </div>
+                <div class="widget-body">
+                    <div class="fee-display">
+                        <span class="fee-amount" style="color:var(--text-dark);">48</span>
+                        <span class="fee-label">Total Active Students</span>
+                    </div>
+                    <button class="btn-action-small"
+                        style="background:var(--dash-bg); color:var(--primary); font-weight: 600;">View
+                        Directory</button>
+                </div>
+            </div>
+
+            <!-- Today's Classes / Timetable (Horizontal scroll on mobile) -->
+            <div class="dash-card timetable-widget stagger-enter delay-700">
+                <div class="widget-header">
+                    <h3>Today's Schedule</h3>
+                    <a href="#" class="view-all-link">Full Week</a>
+                </div>
+                <div class="timetable-scroll">
+                    <!-- Class 1 -->
+                    <div class="class-card math-theme">
+                        <span class="time-slot">09:00 AM - 10:00 AM</span>
+                        <h4 class="class-title">Grade 10 - A</h4>
+                        <div class="teacher-info">
+                            <span>Room 402 • Algebra II</span>
+                        </div>
+                    </div>
+                    <!-- Class 2 -->
+                    <div class="class-card" style="background: var(--warning);">
+                        <span class="time-slot">11:15 AM - 12:15 PM</span>
+                        <h4 class="class-title">Grade 10 - B</h4>
+                        <div class="teacher-info">
+                            <span>Room 405 • Geometry</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Attendance Form -->
+            <div class="dash-card assignments-widget stagger-enter delay-800">
+                <div class="widget-header" style="margin-bottom: 0.5rem;">
+                    <h3>Quick Attendance</h3>
+                </div>
+                <div class="widget-body">
+                    <form class="form-group-mobile"
+                        onsubmit="event.preventDefault(); alert('Demo: Redirects to attendance marker sheet');">
+                        <label for="classSelect">Select Class</label>
+                        <select id="classSelect" style="margin-bottom: 0.5rem;">
+                            <option value="1">Grade 10 - A (09:00 AM)</option>
+                            <option value="2">Grade 10 - B (11:15 AM)</option>
+                        </select>
+                        <label for="dateSelect">Date</label>
+                        <input type="date" id="dateSelect" value="2026-10-09">
+                        <button type="submit" class="action-btn-full btn-primary-action"
+                            style="margin-top: 1rem; min-height: 48px; border-radius: 8px;">
+                            Start Marking
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Doubts / Messages -->
+            <div class="dash-card notices-widget stagger-enter delay-900">
+                <div class="widget-header">
+                    <h3>Student Messages</h3>
+                    <a href="#messages" class="view-all-link">Unread (5)</a>
+                </div>
+                <div class="list-container">
+                    <div class="list-item notice-item border-left-info" style="cursor:pointer;"
+                        onclick="alert('Demo: Opens Chat Modal')">
+                        <div class="item-content">
+                            <span class="date-text" style="color:var(--text-dark); font-weight:600;">John D. <span
+                                    style="font-weight:400; color:var(--text-muted);">(10A)</span></span>
+                            <p>"I didn't quite understand step 3 in the algebra problem from last homework..."</p>
+                        </div>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)"
+                            stroke-width="2" style="margin-left:8px; flex-shrink:0;">
+                            <polyline points="9 18 15 12 9 6" />
+                        </svg>
+                    </div>
+                    <div class="list-item notice-item border-left-info" style="cursor:pointer;"
+                        onclick="alert('Demo: Opens Chat Modal')">
+                        <div class="item-content">
+                            <span class="date-text" style="color:var(--text-dark); font-weight:600;">Sarah M. <span
+                                    style="font-weight:400; color:var(--text-muted);">(10B)</span></span>
+                            <p>"When is the midterm project officially due?"</p>
+                        </div>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)"
+                            stroke-width="2" style="margin-left:8px; flex-shrink:0;">
+                            <polyline points="9 18 15 12 9 6" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Upload Study Material Shortcut -->
+            <div class="dash-card material-widget stagger-enter delay-1000">
+                <div class="material-content">
+                    <div class="icon-circle">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                            <polyline points="17 8 12 3 7 8" />
+                            <line x1="12" y1="3" x2="12" y2="15" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h3>Upload Material</h3>
+                        <p>Share notes, slides, and syllabus.</p>
+                    </div>
+                </div>
+                <button class="btn-action-outline">Select Files</button>
+            </div>
+
+        </div> <!-- End Dashboard Grid -->
+
+    </main>
+
+    <!-- Floating Action Button (Add Assignment / Teacher Action) -->
+    <button class="fab-doubt stagger-enter delay-1000" aria-label="Add Assignment"
+        onclick="alert('Demo: Opens Create Assignment Modal')">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="12" y1="5" x2="12" y2="19" />
+            <line x1="5" y1="12" x2="19" y2="12" />
+        </svg>
+    </button>
+
+    <!-- Bottom Navigation (Mobile Only) -->
+    <nav class="bottom-nav">
+        <a href="index.html" class="bottom-nav-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+            </svg>
+            <span class="bottom-nav-text">Home</span>
+        </a>
+        <a href="#dashboard" class="bottom-nav-item active">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="3" width="7" height="7"></rect>
+                <rect x="14" y="3" width="7" height="7"></rect>
+                <rect x="14" y="14" width="7" height="7"></rect>
+                <rect x="3" y="14" width="7" height="7"></rect>
+            </svg>
+            <span class="bottom-nav-text">Dash</span>
+        </a>
+        <a href="#students" class="bottom-nav-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+            </svg>
+            <span class="bottom-nav-text">Students</span>
+        </a>
+        <a href="#grades" class="bottom-nav-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <circle cx="12" cy="12" r="10" />
+                <path d="M12 8v4" />
+                <path d="M12 16h.01" />
+            </svg>
+            <span class="bottom-nav-text">Grades</span>
+        </a>
+    </nav>
+
+    <script src="assets/js/main.js"></script>
+    <script>
+        // Simple script to trigger stagger animations smoothly on load
+        document.addEventListener('DOMContentLoaded', () => {
+            const staggeredElements = document.querySelectorAll('.stagger-enter');
+            staggeredElements.forEach(el => {
+                setTimeout(() => {
+                    el.classList.add('fade-in-up-smooth');
+                }, 50); // slight delay to ensure CSS parses before class add
+            });
+        });
+    </script>
+</body>
+
+</html>

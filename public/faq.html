@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ | eCampus International School</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&display=swap"
+        rel="stylesheet">
+    <!-- Core CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/animations.css">
+    <style>
+        .faq-item {
+            margin-bottom: 1rem;
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+        }
+
+        .faq-question {
+            width: 100%;
+            text-align: left;
+            padding: 1.5rem;
+            background: white;
+            border: none;
+            font-weight: 600;
+            font-size: 1.125rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .faq-question:hover {
+            background: var(--color-secondary);
+        }
+
+        .faq-answer {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            background: white;
+            color: var(--color-text-muted);
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 0 1.5rem 1.5rem;
+            max-height: 500px;
+        }
+
+        .faq-icon {
+            transition: transform 0.3s;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="site-header classic-header">
+        <div class="container nav-container">
+            <a href="index.html" class="logo-link">
+                <div class="logo-icon">eC</div>
+                <div class="logo-text">eCampus</div>
+            </a>
+
+            <button class="mobile-menu-btn" aria-label="Toggle Navigation">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+
+            <nav class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="academics.html" class="nav-link">Academics</a>
+                <a href="admissions.html" class="nav-link">Admissions</a>
+                <a href="facilities.html" class="nav-link">Facilities</a>
+                <a href="gallery.html" class="nav-link">Gallery</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+                
+                <div class="dropdown">
+                    <button class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+                        More
+                        <svg class="dropdown-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-left: 2px;">
+                            <path d="M6 9l6 6 6-6"/>
+                        </svg>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a href="alumni.html" class="dropdown-item">Alumni</a>
+                        <a href="careers.html" class="dropdown-item">Careers</a>
+                        <a href="faq.html" class="dropdown-item">FAQ</a>
+                        <a href="calendar.html" class="dropdown-item">Calendar</a>
+                    </div>
+                </div>
+
+                <a href="login.html" class="btn btn-primary"
+                    style="margin-left: 1rem; border-radius: 20px; padding: 0.5rem 1.5rem;">Login</a>
+            </nav>
+        </div>
+    </header>
+
+    <div style="background-color: var(--color-primary-dark); padding: 8rem 0 4rem; color: white; text-align: center;">
+        <div class="container animate-fade-in-up">
+            <h1 style="font-size: 3.5rem; color: white; margin-bottom: 1rem;">Frequently Asked Questions</h1>
+            <p style="font-size: 1.125rem; color: #cbd5e1; max-width: 600px; margin: 0 auto;">Everything you need to
+                know about admissions, academics, and campus life.</p>
+        </div>
+    </div>
+
+    <section class="section">
+        <div class="container" style="max-width: 800px;">
+            <div class="faq-accordion">
+                <div class="faq-item">
+                    <button class="faq-question">
+                        What is the admission procedure?
+                        <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2">
+                            <path d="M6 9l6 6 6-6" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Our admission process starts with filling out the online enquiry form on the Admissions page.
+                            Following that, an interaction session is scheduled for the student and parents. Admission
+                            is granted based on the availability of seats and the student's performance.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        What curriculum does the school follow?
+                        <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2">
+                            <path d="M6 9l6 6 6-6" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>We follow a globally recognized standard curriculum that blends rigorous academics with
+                            practical, skill-based learning, preparing students for future educational and career goals.
+                        </p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Are transportation facilities available?
+                        <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2">
+                            <path d="M6 9l6 6 6-6" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Yes, we offer safe and GPS-enabled transportation services across major routes in the city.
+                            You can contact the transport desk during admission for specific route details.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        What is the student-teacher ratio?
+                        <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2">
+                            <path d="M6 9l6 6 6-6" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>We maintain an optimal student-teacher ratio of 20:1 to ensure that every student receives
+                            personalized attention and guidance from our faculty.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Do you offer extracurricular activities?
+                        <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2">
+                            <path d="M6 9l6 6 6-6" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Yes, we strongly believe in holistic development and offer a wide range of activities
+                            including football, basketball, arts, debate, robotics, and music.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div
+                style="text-align: center; margin-top: 3rem; padding: 2rem; background: var(--color-secondary); border-radius: var(--radius-md);">
+                <h3 style="margin-bottom: 1rem;">Still have questions?</h3>
+                <p style="color: var(--color-text-muted); margin-bottom: 1.5rem;">If you cannot find answer to your
+                    question in our FAQ, you can always contact us.</p>
+                <a href="contact.html" class="btn btn-primary">Contact Administration</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="logo-link" style="margin-bottom: 1.5rem;">
+                        <div class="logo-icon" style="background: var(--color-white); color: var(--color-primary);">eC
+                        </div>
+                        <div class="logo-text" style="color: var(--color-white);">eCampus</div>
+                    </div>
+                    <p class="footer-text" style="margin-bottom: 1.5rem;">Empowering Minds, Shaping Futures. An
+                        institution dedicated to holistic and modern education.</p>
+                </div>
+                <div>
+                    <h4 class="footer-title">Quick Links</h4>
+                    <div class="footer-links">
+                        <a href="about.html" class="footer-link">About Us</a>
+                        <a href="academics.html" class="footer-link">Academics</a>
+                        <a href="admissions.html" class="footer-link">Admissions</a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="footer-title">Resources</h4>
+                    <div class="footer-links">
+                        <a href="notices.html" class="footer-link">Notice Board</a>
+                        <a href="calendar.html" class="footer-link">School Calendar</a>
+                        <a href="careers.html" class="footer-link">Careers</a>
+                        <a href="faq.html" class="footer-link">FAQ</a>
+                        <a href="login.html" class="footer-link">Student Login</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 eCampus International School. All Rights Reserved. | <a href="privacy.html"
+                        style="color: #cbd5e1; text-decoration: none;">Privacy Policy</a> | <a href="terms.html"
+                        style="color: #cbd5e1; text-decoration: none;">Terms &amp; Conditions</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/animations.js"></script>
+    <script>
+        // Simple FAQ Accordion Script
+        document.querySelectorAll('.faq-question').forEach(button => {
+            button.addEventListener('click', () => {
+                const item = button.parentElement;
+
+                // Close other open items
+                document.querySelectorAll('.faq-item.active').forEach(openItem => {
+                    if (openItem !== item) {
+                        openItem.classList.remove('active');
+                    }
+                });
+
+                // Toggle current item
+                item.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+
+</html>

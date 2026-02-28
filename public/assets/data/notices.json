@@ -1,0 +1,42 @@
+[
+    {
+        "id": 1,
+        "title": "Terminal Exam Schedule for Grades 6-10",
+        "date": "2026-10-15",
+        "category": "Examination",
+        "description": "The date sheet for the upcoming terminal examinations has been released. Please download the attachment for the detailed timetable.",
+        "hasAttachment": true
+    },
+    {
+        "id": 2,
+        "title": "Annual Sports Meet 2026",
+        "date": "2026-10-10",
+        "category": "Event",
+        "description": "Join us for the Annual Sports Meet. Parents are cordially invited to encourage our young athletes.",
+        "hasAttachment": false
+    },
+    {
+        "id": 3,
+        "title": "Holiday Notice: National Day",
+        "date": "2026-10-02",
+        "category": "General",
+        "description": "School will remain closed on 2nd October on account of the National Holiday. Normal classes resume on 3rd October.",
+        "hasAttachment": false
+    },
+    {
+        "id": 4,
+        "title": "Science Fair Registration Open",
+        "date": "2026-09-28",
+        "category": "Event",
+        "description": "Registrations for the Inter-School Science Fair are now open for students of Grades 8-12. Submit your abstracts to the Science Department.",
+        "hasAttachment": true
+    },
+    {
+        "id": 5,
+        "title": "Parent-Teacher Meeting for Primary Section",
+        "date": "2026-09-20",
+        "category": "General",
+        "description": "A scheduled PTM will be held this Saturday. Timings will be shared individually via email.",
+        "hasAttachment": false
+    }
+]
