@@ -20,106 +20,166 @@
 <body>
 
     <!-- Header & Navigation -->
-    <header class="site-header classic-header">
-        <div class="container nav-container">
-            <a href="index.html" class="logo-link">
-                <div class="logo-icon">eC</div>
-                <div class="logo-text">eCampus</div>
+    <!-- Classic Site Header -->
+    <link rel="stylesheet" href="assets/css/classic-header.css">
+
+    <header class="classic-site-header" id="classic-header">
+        <div class="classic-header-container">
+            <!-- Logo -->
+            <a href="index.html" class="ch-logo">
+                <div class="ch-logo-square">eC</div>
+                <div class="ch-logo-text">eCampus</div>
             </a>
 
-            <button class="mobile-menu-btn" aria-label="Toggle Navigation">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-            </button>
+            <!-- Desktop Navigation -->
+            <nav class="ch-nav">
+                <ul class="ch-nav-list" id="ch-nav-dynamic">
+                    <!-- Javascript maps links based on Guest/Student/Teacher here -->
+                    <li class="ch-nav-item"><a href="index.html" class="ch-nav-link active">Home</a></li>
+                    <li class="ch-nav-item"><a href="about.html" class="ch-nav-link">About</a></li>
+                    <li class="ch-nav-item"><a href="academics.html" class="ch-nav-link">Academics</a></li>
+                    <li class="ch-nav-item"><a href="admissions.html" class="ch-nav-link">Admissions</a></li>
+                </ul>
+            </nav>
 
-            <nav class="nav-links">
-                <a href="index.html" class="nav-link">Home</a>
-                <a href="about.html" class="nav-link">About</a>
-                <a href="academics.html" class="nav-link">Academics</a>
-                <a href="admissions.html" class="nav-link">Admissions</a>
-                <a href="facilities.html" class="nav-link">Facilities</a>
-                <a href="gallery.html" class="nav-link">Gallery</a>
-                <a href="contact.html" class="nav-link">Contact</a>
+            <!-- Right Side Blocks -->
+            <div class="ch-right">
 
-                <div class="dropdown">
-                    <button class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false">
-                        More
-                        <svg class="dropdown-icon" width="16" height="16" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" style="margin-left: 2px;">
+                <!-- Guest View (Not Logged In) -->
+                <div id="ch-guest-view" style="display: none;">
+                    <a href="login.html" class="ch-btn-login">Login</a>
+                    <a href="admissions.html" class="ch-btn-register">Apply Now</a>
+                </div>
+
+                <!-- User View (Logged In) -->
+                <div id="ch-user-view" style="display: flex;">
+
+                    <!-- Chat Notification Badge -->
+                    <a href="#" class="ch-notif" aria-label="Chats">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path
+                                d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" />
+                        </svg>
+                        <span class="ch-badge" id="ch-chat-badge" style="display:none;">0</span>
+                    </a>
+
+                    <!-- Alert Notification Badge -->
+                    <a href="#" class="ch-notif" aria-label="Alerts">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0" />
+                        </svg>
+                        <span class="ch-badge" id="ch-notif-badge" style="display:none;">0</span>
+                    </a>
+
+                    <!-- Profile Dropdown -->
+                    <div class="ch-profile" id="ch-profile-btn">
+                        <img src="https://ui-avatars.com/api/?name=User&background=0F3A62&color=fff" alt="User Profile"
+                            class="ch-avatar" id="ch-avatar">
+                        <div class="ch-user-info" style="display: flex;">
+                            <span class="ch-user-name" id="ch-user-name">Loading...</span>
+                            <span class="ch-user-role" id="ch-user-role">Guest</span>
+                        </div>
+
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)"
+                            stroke-width="2">
                             <path d="M6 9l6 6 6-6" />
                         </svg>
-                    </button>
-                    <div class="dropdown-menu">
-                        <a href="alumni.html" class="dropdown-item">Alumni</a>
-                        <a href="careers.html" class="dropdown-item">Careers</a>
-                        <a href="faq.html" class="dropdown-item">FAQ</a>
-                        <a href="calendar.html" class="dropdown-item">Calendar</a>
+
+                        <!-- Dropdown List -->
+                        <div class="ch-dropdown-menu" id="ch-profile-menu">
+                            <ul class="ch-dropdown-list">
+                                <li><a href="#">My Profile</a></li>
+                                <li><a href="#">Account Settings</a></li>
+                                <li><a href="/logout" style="color: #D32F2F; font-weight: 600;">Logout</a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
 
-                <a href="login.html" class="btn btn-primary"
-                    style="margin-left: 1rem; border-radius: 20px; padding: 0.5rem 1.5rem;">Login</a>
-            </nav>
+                <!-- Mobile Hamburger -->
+                <button class="ch-hamburger">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
         </div>
     </header>
 
+    <script src="assets/js/classic-header.js"></script>
+
     <!-- Page Header -->
-    <div
-        style="background-color: var(--color-primary-dark); padding: 8rem 0 4rem; color: rgb(221, 180, 180); text-align: center;">
+    <div style="background-color: #0f3a62; padding: 6rem 1.5rem 4rem; text-align: center; color: white;">
         <div class="container animate-fade-in-up">
-            <h1 style="font-size: 3.5rem; color: white; margin-bottom: 1rem;">Privacy Policy</h1>
-            <p style="font-size: 1.125rem; color: #cbd5e1; max-width: 600px; margin: 0 auto;">How we handle and protect
-                your information.</p>
+            <h1
+                style="font-size: 3rem; font-weight: 800; font-family: 'Outfit', sans-serif; color: #E5A93C; margin-bottom: 1rem;">
+                Privacy Policy</h1>
+            <p style="font-size: 1.1rem; color: rgba(255, 255, 255, 0.9); max-width: 600px; margin: 0 auto;">How we
+                handle and protect your information.</p>
         </div>
     </div>
 
     <!-- Privacy Content -->
-    <section class="section">
-        <div class="container" style="max-width: 800px; margin: 0 auto; line-height: 1.8;">
-            <p><strong>Last Updated: October 2026</strong></p>
+    <section class="section" style="background-color: #f8fafc; padding: 4rem 1.5rem;">
+        <div class="container"
+            style="max-width: 800px; margin: 0 auto; background: white; padding: 3rem; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); line-height: 1.8; color: #334155;">
+            <p style="color: #64748b; font-weight: 600;"><strong>Last Updated: October 2026</strong></p>
 
-            <h2 style="margin-top: 2rem; margin-bottom: 1rem;">1. Introduction</h2>
+            <h2
+                style="font-family: 'Outfit', sans-serif; color: #0f3a62; font-size: 1.75rem; margin-top: 2rem; margin-bottom: 1rem; border-bottom: 2px solid #f1f5f9; padding-bottom: 0.5rem;">
+                1. Introduction</h2>
             <p>Welcome to eCampus International School. We respect your privacy and are committed to protecting your
                 personal data. This privacy policy will inform you as to how we look after your personal data when you
                 visit our website (regardless of where you visit it from) and tell you about your privacy rights and how
                 the law protects you.</p>
 
-            <h2 style="margin-top: 2rem; margin-bottom: 1rem;">2. The Data We Collect About You</h2>
+            <h2
+                style="font-family: 'Outfit', sans-serif; color: #0f3a62; font-size: 1.75rem; margin-top: 2.5rem; margin-bottom: 1rem; border-bottom: 2px solid #f1f5f9; padding-bottom: 0.5rem;">
+                2. The Data We Collect About You</h2>
             <p>We may collect, use, store and transfer different kinds of personal data about you which we have grouped
                 together follows:</p>
-            <ul style="margin-left: 1.5rem; margin-bottom: 1rem;">
-                <li><strong>Identity Data</strong> includes first name, last name, username or similar identifier.</li>
-                <li><strong>Contact Data</strong> includes billing address, delivery address, email address and
-                    telephone numbers.</li>
-                <li><strong>Technical Data</strong> includes internet protocol (IP) address, your login data, browser
-                    type and version, time zone setting and location, browser plug-in types and versions, operating
-                    system and platform and other technology on the devices you use to access this website.</li>
+            <ul style="margin-left: 1.5rem; margin-bottom: 1rem; line-height: 1.8;">
+                <li style="margin-bottom: 0.5rem;"><strong style="color: #0f3a62;">Identity Data</strong> includes first
+                    name, last name, username or similar identifier.</li>
+                <li style="margin-bottom: 0.5rem;"><strong style="color: #0f3a62;">Contact Data</strong> includes
+                    billing address, delivery address, email address and telephone numbers.</li>
+                <li><strong style="color: #0f3a62;">Technical Data</strong> includes internet protocol (IP) address,
+                    your login data, browser type and version, time zone setting and location, browser plug-in types and
+                    versions, operating system and platform and other technology on the devices you use to access this
+                    website.</li>
             </ul>
 
-            <h2 style="margin-top: 2rem; margin-bottom: 1rem;">3. How We Use Your Personal Data</h2>
+            <h2
+                style="font-family: 'Outfit', sans-serif; color: #0f3a62; font-size: 1.75rem; margin-top: 2.5rem; margin-bottom: 1rem; border-bottom: 2px solid #f1f5f9; padding-bottom: 0.5rem;">
+                3. How We Use Your Personal Data</h2>
             <p>We will only use your personal data when the law allows us to. Most commonly, we will use your personal
                 data in the following circumstances:</p>
             <ul style="margin-left: 1.5rem; margin-bottom: 1rem;">
-                <li>Where we need to perform the contract we are about to enter into or have entered into with you
-                    (e.g., student enrollment).</li>
-                <li>Where it is necessary for our legitimate interests (or those of a third party) and your interests
-                    and fundamental rights do not override those interests.</li>
+                <li style="margin-bottom: 0.5rem;">Where we need to perform the contract we are about to enter into or
+                    have entered into with you (e.g., student enrollment).</li>
+                <li style="margin-bottom: 0.5rem;">Where it is necessary for our legitimate interests (or those of a
+                    third party) and your interests and fundamental rights do not override those interests.</li>
                 <li>Where we need to comply with a legal or regulatory obligation.</li>
             </ul>
 
-            <h2 style="margin-top: 2rem; margin-bottom: 1rem;">4. Data Security</h2>
+            <h2
+                style="font-family: 'Outfit', sans-serif; color: #0f3a62; font-size: 1.75rem; margin-top: 2.5rem; margin-bottom: 1rem; border-bottom: 2px solid #f1f5f9; padding-bottom: 0.5rem;">
+                4. Data Security</h2>
             <p>We have put in place appropriate security measures to prevent your personal data from being accidentally
                 lost, used or accessed in an unauthorized way, altered or disclosed. In addition, we limit access to
                 your personal data to those employees, agents, contractors and other third parties who have a business
                 need to know.</p>
 
-            <h2 style="margin-top: 2rem; margin-bottom: 1rem;">5. Contact Us</h2>
+            <h2
+                style="font-family: 'Outfit', sans-serif; color: #0f3a62; font-size: 1.75rem; margin-top: 2.5rem; margin-bottom: 1rem; border-bottom: 2px solid #f1f5f9; padding-bottom: 0.5rem;">
+                5. Contact Us</h2>
             <p>If you have any questions about this privacy policy, including any requests to exercise your legal
                 rights, please contact us using the details below:</p>
-            <p>
-                Email: privacy@ecampus.edu<br>
-                Address: 123 Education Boulevard, Knowledge City, 10001
+            <p
+                style="background-color: #f1f5f9; padding: 1.5rem; border-radius: 8px; border-left: 5px solid #E5A93C; margin-top: 1.5rem;">
+                <strong style="color: #0f3a62;">Email:</strong> privacy@ecampus.edu<br>
+                <strong style="color: #0f3a62;">Address:</strong> Sector 62, Knowledge Park III, Noida, Uttar Pradesh
+                201301, India
             </p>
         </div>
     </section>
@@ -150,7 +210,6 @@
                     <div class="footer-links">
                         <a href="notices.html" class="footer-link">Notice Board</a>
                         <a href="calendar.html" class="footer-link">School Calendar</a>
-                        <a href="careers.html" class="footer-link">Careers</a>
                         <a href="faq.html" class="footer-link">FAQ</a>
                         <a href="login.html" class="footer-link">Student Login</a>
                     </div>

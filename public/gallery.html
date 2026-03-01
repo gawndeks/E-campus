@@ -4,423 +4,176 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Photo Gallery | eCampus International School</title>
-    <meta name="description"
-        content="View our vibrant campus life, events, and student activities in our photo gallery.">
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml"
-        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>">
+    <title>eCampus | Campus Gallery</title>
+    <!-- Core Google Fonts -->
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&display=swap"
         rel="stylesheet">
+    <!-- Core CSS Shared -->
     <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/animations.css">
-    <style>
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .gallery-item {
-            position: relative;
-            border-radius: var(--radius-md);
-            overflow: hidden;
-            aspect-ratio: 1;
-            cursor: pointer;
-            box-shadow: var(--shadow-md);
-            background-color: var(--color-primary-dark);
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.4s ease;
-        }
-
-        .gallery-item:hover img {
-            transform: scale(1.1);
-        }
-
-        .gallery-overlay {
-            position: absolute;
-            inset: 0;
-            background: rgba(15, 23, 42, 0.6);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .gallery-item:hover .gallery-overlay {
-            opacity: 1;
-        }
-
-        .gallery-icon {
-            color: white;
-            background: var(--color-primary);
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transform: translateY(20px);
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .gallery-item:hover .gallery-icon {
-            transform: translateY(0);
-        }
-
-        /* Lightbox Styles */
-        .lightbox {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.9);
-            z-index: 2000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease;
-        }
-
-        .lightbox.active {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        .lightbox-content {
-            position: relative;
-            max-width: 90%;
-            max-height: 90vh;
-        }
-
-        .lightbox-img {
-            max-width: 100%;
-            max-height: 90vh;
-            border-radius: var(--radius-md);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            transform: scale(0.95);
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .lightbox.active .lightbox-img {
-            transform: scale(1);
-        }
-
-        .lightbox-close {
-            position: absolute;
-            top: -40px;
-            right: 0;
-            color: white;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 0.5rem;
-        }
-
-        .lightbox-caption {
-            color: white;
-            text-align: center;
-            padding-top: 1rem;
-            font-size: 1.125rem;
-        }
-    </style>
+    <!-- Custom CSS for specific gallery structure -->
+    <link rel="stylesheet" href="assets/css/gallery.css">
 </head>
 
-<body>
+<body class="bg-light">
 
-    <header class="site-header classic-header">
-        <div class="container nav-container">
-            <a href="index.html" class="logo-link">
-                <div class="logo-icon">eC</div>
-                <div class="logo-text">eCampus</div>
+    <!-- Injection Point for the Global Classic Header -->
+    <!-- Classic Site Header -->
+    <link rel="stylesheet" href="assets/css/classic-header.css">
+    <header class="classic-site-header" id="classic-header">
+        <div class="classic-header-container">
+            <!-- Logo -->
+            <a href="index.html" class="ch-logo">
+                <div class="ch-logo-square">eC</div>
+                <div class="ch-logo-text">eCampus</div>
             </a>
-
-            <button class="mobile-menu-btn" aria-label="Toggle Navigation">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-            </button>
-
-            <nav class="nav-links">
-                <a href="index.html" class="nav-link">Home</a>
-                <a href="about.html" class="nav-link">About</a>
-                <a href="academics.html" class="nav-link">Academics</a>
-                <a href="admissions.html" class="nav-link">Admissions</a>
-                <a href="facilities.html" class="nav-link">Facilities</a>
-                <a href="gallery.html" class="nav-link">Gallery</a>
-                <a href="contact.html" class="nav-link">Contact</a>
-
-                <div class="dropdown">
-                    <button class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false">
-                        More
-                        <svg class="dropdown-icon" width="16" height="16" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" style="margin-left: 2px;">
+            <!-- Desktop Navigation -->
+            <nav class="ch-nav">
+                <ul class="ch-nav-list" id="ch-nav-dynamic">
+                    <!-- Javascript automatically mounts the right links based on Guest/Student/Teacher -->
+                </ul>
+            </nav>
+            <!-- Right Side Blocks -->
+            <div class="ch-right">
+                <div id="ch-guest-view" style="display: none;">
+                    <a href="login.html" class="ch-btn-login">Login</a>
+                    <a href="admissions.html" class="ch-btn-register">Apply Now</a>
+                </div>
+                <!-- User View (Logged In) -->
+                <div id="ch-user-view" style="display: none;">
+                    <!-- Chat Badge -->
+                    <a href="#" class="ch-notif" aria-label="Chats">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path
+                                d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" />
+                        </svg>
+                        <span class="ch-badge" id="ch-chat-badge" style="display:none;">0</span>
+                    </a>
+                    <!-- Alert Badge -->
+                    <a href="#" class="ch-notif" aria-label="Alerts">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0" />
+                        </svg>
+                        <span class="ch-badge" id="ch-notif-badge" style="display:none;">0</span>
+                    </a>
+                    <!-- Profile Trigger -->
+                    <div class="ch-profile" id="ch-profile-btn">
+                        <img src="https://ui-avatars.com/api/?name=User&background=0F3A62&color=fff" alt="User Profile"
+                            class="ch-avatar" id="ch-avatar">
+                        <div class="ch-user-info" style="display: flex;">
+                            <span class="ch-user-name" id="ch-user-name">Loading...</span>
+                            <span class="ch-user-role" id="ch-user-role">Guest</span>
+                        </div>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--ch-text-light)"
+                            stroke-width="2">
                             <path d="M6 9l6 6 6-6" />
                         </svg>
-                    </button>
-                    <div class="dropdown-menu">
-                        <a href="alumni.html" class="dropdown-item">Alumni</a>
-                        <a href="careers.html" class="dropdown-item">Careers</a>
-                        <a href="faq.html" class="dropdown-item">FAQ</a>
-                        <a href="calendar.html" class="dropdown-item">Calendar</a>
+                        <div class="ch-dropdown-menu" id="ch-profile-menu">
+                            <ul class="ch-dropdown-list">
+                                <li><a href="#">My Profile</a></li>
+                                <li><a href="#">Account Settings</a></li>
+                                <li><a href="/logout" style="color: #D32F2F; font-weight: 600;">Logout</a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-
-                <a href="login.html" class="btn btn-primary"
-                    style="margin-left: 1rem; border-radius: 20px; padding: 0.5rem 1.5rem;">Login</a>
-            </nav>
+                <!-- Mobile Hamburger -->
+                <button class="ch-hamburger">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
         </div>
     </header>
 
-    <div
-        style="background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%); padding: 8rem 0 4rem; color: white; text-align: center; position: relative; overflow: hidden;">
-        <div
-            style="position: absolute; inset: 0; opacity: 0.1; background-image: radial-gradient(#fff 1px, transparent 1px); background-size: 30px 30px;">
-        </div>
-        <div class="container reveal reveal-scale">
-            <h1
-                style="font-size: clamp(2.5rem, 5vw, 4rem); color: white; margin-bottom: 1rem; font-family: var(--font-heading); font-weight: 800;">
-                Campus Gallery</h1>
-            <p style="font-size: 1.15rem; color: rgba(255,255,255,0.9); max-width: 600px; margin: 0 auto;">Glimpses of
-                life,
-                learning, and extracurricular vibrance at eCampus.</p>
+    <!-- Page Header Hero -->
+    <div class="gallery-hero">
+        <div class="container gallery-hero-content">
+            <h1 class="gallery-headline">Campus Gallery</h1>
+            <p class="gallery-subheadline">A visual journey mapping life, learning, and success at eCampus.</p>
         </div>
     </div>
 
-    <section class="section">
-        <div class="container">
-            <!-- Add Image Frontend UI -->
-            <div class="card-modern reveal reveal-up"
-                style="margin-bottom: 3rem; padding: 2rem; border-top: 4px solid var(--accent);">
-                <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--primary-dark);">Add New Image (Demo)
-                </h3>
-                <p style="color: var(--text-muted); margin-bottom: 1.5rem; font-size: 0.95rem;">Upload an image
-                    instantly to the gallery grid using frontend Javascript.</p>
-                <form id="add-image-form" style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: flex-end;">
-                    <div class="form-group" style="flex: 1; min-width: 250px; margin-bottom: 0;">
-                        <label for="img-url" class="form-label">Image URL</label>
-                        <input type="url" id="img-url" class="form-control"
-                            placeholder="https://source.unsplash.com/random/800x600" required>
-                    </div>
-                    <div class="form-group" style="flex: 1; min-width: 250px; margin-bottom: 0;">
-                        <label for="img-caption" class="form-label">Caption</label>
-                        <input type="text" id="img-caption" class="form-control"
-                            placeholder="e.g. Students in the library" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary"
-                        style="min-width: 150px; margin-bottom: 0; min-height: 48px;">Add Image</button>
-                </form>
-            </div>
+    <!-- Gallery Primary Layout Layer -->
+    <section class="container" style="padding: 3rem 1.5rem 5rem;">
 
-            <div class="gallery-grid animate-fade-in-up delay-200" id="main-gallery-grid">
-                <!-- Gallery Item 1 -->
-                <div class="gallery-item" data-caption="Annual Science Fair Exhibition"
-                    data-src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&q=80&w=800">
-                    <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&q=80&w=400"
-                        alt="Students in class">
-                    <div class="gallery-overlay">
-                        <div class="gallery-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2">
-                                <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
-                            </svg></div>
-                    </div>
-                </div>
-                <!-- Gallery Item 2 -->
-                <div class="gallery-item" data-caption="Students collaborating in the library"
-                    data-src="assets/images/about_school.png">
-                    <!-- We use our generated image here as fallback/demo -->
-                    <img src="assets/images/about_school.png" alt="Library">
-                    <div class="gallery-overlay">
-                        <div class="gallery-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2">
-                                <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
-                            </svg></div>
-                    </div>
-                </div>
-                <!-- Gallery Item 3 -->
-                <div class="gallery-item" data-caption="Sports Day Highlights"
-                    data-src="https://images.unsplash.com/photo-1515523110800-9415d13b84a8?auto=format&fit=crop&q=80&w=800">
-                    <img src="https://images.unsplash.com/photo-1515523110800-9415d13b84a8?auto=format&fit=crop&q=80&w=400"
-                        alt="Sports Day">
-                    <div class="gallery-overlay">
-                        <div class="gallery-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2">
-                                <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
-                            </svg></div>
-                    </div>
-                </div>
-                <!-- Gallery Item 4 -->
-                <div class="gallery-item" data-caption="Beautiful Campus Architecture"
-                    data-src="assets/images/hero_bg.png">
-                    <img src="assets/images/hero_bg.png" alt="Campus">
-                    <div class="gallery-overlay">
-                        <div class="gallery-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2">
-                                <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
-                            </svg></div>
-                    </div>
-                </div>
-                <!-- Gallery Item 5 -->
-                <div class="gallery-item" data-caption="Cultural Fest Performances"
-                    data-src="https://images.unsplash.com/photo-1492538368677-f6e0afe31d90?auto=format&fit=crop&q=80&w=800">
-                    <img src="https://images.unsplash.com/photo-1492538368677-f6e0afe31d90?auto=format&fit=crop&q=80&w=400"
-                        alt="Auditorium">
-                    <div class="gallery-overlay">
-                        <div class="gallery-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2">
-                                <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
-                            </svg></div>
-                    </div>
-                </div>
-                <!-- Gallery Item 6 -->
-                <div class="gallery-item" data-caption="Chemistry Laboratory"
-                    data-src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=800">
-                    <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=400"
-                        alt="Laboratory">
-                    <div class="gallery-overlay">
-                        <div class="gallery-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2">
-                                <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
-                            </svg></div>
-                    </div>
-                </div>
-            </div>
+        <!-- Controls: Filters & Upload -->
+        <div class="gallery-controls">
+            <!-- Filter Nav -->
+            <ul class="gallery-filters" id="gallery-filters">
+                <li><button class="filter-btn active" data-filter="All">All</button></li>
+                <li><button class="filter-btn" data-filter="Events">Events</button></li>
+                <li><button class="filter-btn" data-filter="Campus">Campus</button></li>
+                <li><button class="filter-btn" data-filter="Sports">Sports</button></li>
+                <li><button class="filter-btn" data-filter="Classrooms">Classrooms</button></li>
+                <li><button class="filter-btn" data-filter="Cultural Activities">Cultural Activities</button></li>
+            </ul>
 
+            <!-- Dynamic Upload Wrapper -->
+            <div id="gallery-admin-controls" style="display:none;">
+                <button class="btn btn-primary" id="open-upload-modal">
+                    + Upload Photo
+                </button>
+            </div>
+        </div>
+
+        <!-- Render Target for Grid -->
+        <div class="gallery-grid" id="gallery-grid">
+            <!-- Javascript binds dynamic cards here instantly -->
+            <div style="grid-column: 1/-1; text-align: center; padding: 4rem; color: #64748b;">
+                Fetching vibrant moments...
+            </div>
         </div>
     </section>
 
-    <!-- Lightbox Markup -->
-    <div class="lightbox" id="gallery-lightbox">
-        <div class="lightbox-content">
-            <button class="lightbox-close" aria-label="Close Lightbox" id="lightbox-close-btn">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <line x1="18" y1="6" x2="6" y2="18" />
-                    <line x1="6" y1="6" x2="18" y2="18" />
-                </svg>
-            </button>
-            <img src="" alt="Expanded Image" class="lightbox-img" id="lightbox-img">
-            <div class="lightbox-caption" id="lightbox-caption"></div>
+    <!-- Upload Modal -->
+    <div class="gallery-modal-overlay" id="upload-modal-overlay">
+        <div class="gallery-modal-content">
+            <div class="gallery-modal-header">
+                <h3>Upload New Memory</h3>
+                <button id="close-upload-modal" class="gallery-modal-close">&times;</button>
+            </div>
+            <div class="gallery-modal-body">
+                <form id="gallery-upload-form">
+                    <div style="margin-bottom: 1rem;">
+                        <label>Photo Title</label>
+                        <input type="text" id="upload-title" class="form-control" required
+                            placeholder="Ex: Inter-School Debate finals">
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <label>Category</label>
+                        <select id="upload-category" class="form-control" required>
+                            <option value="Events">Events</option>
+                            <option value="Campus">Campus</option>
+                            <option value="Sports">Sports</option>
+                            <option value="Classrooms">Classrooms</option>
+                            <option value="Cultural Activities">Cultural Activities</option>
+                        </select>
+                    </div>
+                    <div style="margin-bottom: 1.5rem;">
+                        <label>Image File (JPEG/PNG)</label>
+                        <input type="file" id="upload-file" class="form-control" accept="image/*" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Post to Gallery</button>
+                </form>
+            </div>
         </div>
     </div>
 
-    <!-- Global Footer -->
-    <footer class="site-footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div>
-                    <div class="logo-link" style="margin-bottom: 1.5rem;">
-                        <div class="logo-icon" style="background: #fff; color: var(--primary);">eC
-                        </div>
-                        <div class="logo-text" style="color: #fff;">eCampus</div>
-                    </div>
-                    <p class="footer-text" style="margin-bottom: 1.5rem;">Empowering Minds, Shaping Futures. An
-                        institution dedicated to holistic and modern education.</p>
-                    <div class="social-icons">
-                        <a href="#" class="social-icon" aria-label="Facebook">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2">
-                                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
-                            </svg>
-                        </a>
-                        <a href="#" class="social-icon" aria-label="Twitter">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2">
-                                <path
-                                    d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z" />
-                            </svg>
-                        </a>
-                        <a href="#" class="social-icon" aria-label="Instagram">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2">
-                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
-                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
-                            </svg>
-                        </a>
-                    </div>
-                </div>
+    <!-- Lightbox Zoom Viewer -->
+    <div class="lightbox-overlay" id="lightbox">
+        <button class="lightbox-close" id="lightbox-close">&times;</button>
+        <img src="" alt="Fullscreen Gallery Image" id="lightbox-img" class="lightbox-img">
+        <div class="lightbox-caption" id="lightbox-caption">Title defaults here</div>
+    </div>
 
-                <div>
-                    <h4 class="footer-title">Quick Links</h4>
-                    <div class="footer-links">
-                        <a href="about.html" class="footer-link">About Us</a>
-                        <a href="academics.html" class="footer-link">Academics</a>
-                        <a href="admissions.html" class="footer-link">Admissions</a>
-                        <a href="results.html" class="footer-link">Results & Achievements</a>
-                        <a href="gallery.html" class="footer-link">Gallery</a>
-                    </div>
-                </div>
-
-                <div>
-                    <h4 class="footer-title">Resources</h4>
-                    <div class="footer-links">
-                        <a href="notices.html" class="footer-link">Notice Board</a>
-                        <a href="calendar.html" class="footer-link">School Calendar</a>
-                        <a href="careers.html" class="footer-link">Careers</a>
-                        <a href="faq.html" class="footer-link">FAQ</a>
-                        <a href="login.html" class="footer-link">Student Login</a>
-                        <a href="admin.html" class="footer-link">Admin Portal</a>
-                    </div>
-                </div>
-
-                <div>
-                    <h4 class="footer-title">Contact Us</h4>
-                    <div class="footer-links">
-                        <div
-                            style="display: flex; gap: 0.75rem; color: #cbd5e1; margin-bottom: 0.5rem; text-align: left;">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)"
-                                stroke-width="2" style="flex-shrink: 0;">
-                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                                <circle cx="12" cy="10" r="3" />
-                            </svg>
-                            <span>123 Education Boulevard,<br>Knowledge City, 10001</span>
-                        </div>
-                        <div
-                            style="display: flex; gap: 0.75rem; color: #cbd5e1; margin-bottom: 0.5rem; text-align: left;">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)"
-                                stroke-width="2">
-                                <path
-                                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-                            </svg>
-                            <span>+1 (555) 123-4567</span>
-                        </div>
-                        <div style="display: flex; gap: 0.75rem; color: #cbd5e1; text-align: left;">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)"
-                                stroke-width="2">
-                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-                                <polyline points="22,6 12,13 2,6" />
-                            </svg>
-                            <span>admissions@ecampus.edu</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="footer-bottom">
-                <p>&copy; 2026 eCampus International School. All Rights Reserved. | <a href="privacy.html"
-                        style="color: #cbd5e1; text-decoration: none;">Privacy Policy</a> | <a href="terms.html"
-                        style="color: #cbd5e1; text-decoration: none;">Terms &amp; Conditions</a></p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Global Back to Top & Scripts -->
-    <button id="back-to-top" aria-label="Back to top">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M18 15l-6-6-6 6" />
-        </svg>
-    </button>
-
-    <script src="assets/js/main.js"></script>
-    <script src="assets/js/animations.js"></script>
+    <!-- Root Javascript Dependencies -->
+    <!-- Loads core user session mappings for active navbar highlighting instantly -->
+    <script src="assets/js/classic-header.js"></script>
+    <!-- Isolated module specific to firing frontend UI gallery pulls & events -->
     <script src="assets/js/gallery.js"></script>
+
 </body>
 
 </html>

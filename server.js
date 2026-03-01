@@ -20,6 +20,14 @@ app.use('/public/uploads', express.static(path.join(__dirname, 'public/uploads')
 const apiRoutes = require('./routes/api');
 app.use('/api', apiRoutes);
 
+// ERP Admin Routes
+const adminRoutes = require('./routes/admin');
+app.use('/api/admin', adminRoutes);
+
+// Teacher Dashboard Routes
+const teacherRoutes = require('./routes/teacher');
+app.use('/api/teacher', teacherRoutes);
+
 // Test Database connection on startup
 db.getConnection()
     .then(connection => {

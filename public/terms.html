@@ -12,88 +12,131 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&display=swap"
         rel="stylesheet">
-    <!-- Core CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/animations.css">
+    <link rel="stylesheet" href="assets/css/terms-colors.css">
 </head>
 
 <body>
 
-    <!-- Header & Navigation -->
-    <header class="site-header classic-header">
-        <div class="container nav-container">
-            <a href="index.html" class="logo-link">
-                <div class="logo-icon">eC</div>
-                <div class="logo-text">eCampus</div>
+    <!-- Classic Site Header -->
+    <link rel="stylesheet" href="assets/css/classic-header.css">
+
+    <header class="classic-site-header" id="classic-header">
+        <div class="classic-header-container">
+            <!-- Logo -->
+            <a href="index.html" class="ch-logo">
+                <div class="ch-logo-square">eC</div>
+                <div class="ch-logo-text">eCampus</div>
             </a>
 
-            <button class="mobile-menu-btn" aria-label="Toggle Navigation">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-            </button>
+            <!-- Desktop Navigation -->
+            <nav class="ch-nav">
+                <ul class="ch-nav-list" id="ch-nav-dynamic">
+                    <!-- Javascript maps links based on Guest/Student/Teacher here -->
+                    <li class="ch-nav-item"><a href="index.html" class="ch-nav-link active">Home</a></li>
+                    <li class="ch-nav-item"><a href="about.html" class="ch-nav-link">About</a></li>
+                    <li class="ch-nav-item"><a href="academics.html" class="ch-nav-link">Academics</a></li>
+                    <li class="ch-nav-item"><a href="admissions.html" class="ch-nav-link">Admissions</a></li>
+                </ul>
+            </nav>
 
-            <nav class="nav-links">
-                <a href="index.html" class="nav-link">Home</a>
-                <a href="about.html" class="nav-link">About</a>
-                <a href="academics.html" class="nav-link">Academics</a>
-                <a href="admissions.html" class="nav-link">Admissions</a>
-                <a href="facilities.html" class="nav-link">Facilities</a>
-                <a href="gallery.html" class="nav-link">Gallery</a>
-                <a href="contact.html" class="nav-link">Contact</a>
+            <!-- Right Side Blocks -->
+            <div class="ch-right">
 
-                <div class="dropdown">
-                    <button class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false">
-                        More
-                        <svg class="dropdown-icon" width="16" height="16" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" style="margin-left: 2px;">
+                <!-- Guest View (Not Logged In) -->
+                <div id="ch-guest-view" style="display: none;">
+                    <a href="login.html" class="ch-btn-login">Login</a>
+                    <a href="admissions.html" class="ch-btn-register">Apply Now</a>
+                </div>
+
+                <!-- User View (Logged In) -->
+                <div id="ch-user-view" style="display: flex;">
+
+                    <!-- Chat Notification Badge -->
+                    <a href="#" class="ch-notif" aria-label="Chats">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path
+                                d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" />
+                        </svg>
+                        <span class="ch-badge" id="ch-chat-badge" style="display:none;">0</span>
+                    </a>
+
+                    <!-- Alert Notification Badge -->
+                    <a href="#" class="ch-notif" aria-label="Alerts">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0" />
+                        </svg>
+                        <span class="ch-badge" id="ch-notif-badge" style="display:none;">0</span>
+                    </a>
+
+                    <!-- Profile Dropdown -->
+                    <div class="ch-profile" id="ch-profile-btn">
+                        <img src="https://ui-avatars.com/api/?name=User&background=0F3A62&color=fff" alt="User Profile"
+                            class="ch-avatar" id="ch-avatar">
+                        <div class="ch-user-info" style="display: flex;">
+                            <span class="ch-user-name" id="ch-user-name">Loading...</span>
+                            <span class="ch-user-role" id="ch-user-role">Guest</span>
+                        </div>
+
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--ch-text-light)"
+                            stroke-width="2">
                             <path d="M6 9l6 6 6-6" />
                         </svg>
-                    </button>
-                    <div class="dropdown-menu">
-                        <a href="alumni.html" class="dropdown-item">Alumni</a>
-                        <a href="careers.html" class="dropdown-item">Careers</a>
-                        <a href="faq.html" class="dropdown-item">FAQ</a>
-                        <a href="calendar.html" class="dropdown-item">Calendar</a>
+
+                        <!-- Dropdown List -->
+                        <div class="ch-dropdown-menu" id="ch-profile-menu">
+                            <ul class="ch-dropdown-list">
+                                <li><a href="#">My Profile</a></li>
+                                <li><a href="#">Account Settings</a></li>
+                                <li><a href="/logout" style="color: #D32F2F; font-weight: 600;">Logout</a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
 
-                <a href="login.html" class="btn btn-primary"
-                    style="margin-left: 1rem; border-radius: 20px; padding: 0.5rem 1.5rem;">Login</a>
-            </nav>
+                <!-- Mobile Hamburger -->
+                <button class="ch-hamburger">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
         </div>
     </header>
 
+    <script src="assets/js/classic-header.js"></script>
+
     <!-- Page Header -->
-    <div
-        style="background-color: var(--color-primary-dark); padding: 8rem 0 4rem; color: rgb(64, 31, 90); text-align: center;">
+    <div class="terms-page-header">
         <div class="container animate-fade-in-up">
-            <h1 style="font-size: 3.5rem; color: white; margin-bottom: 1rem;">Terms &amp; Conditions</h1>
-            <p style="font-size: 1.125rem; color: #cbd5e1; max-width: 600px; margin: 0 auto;">Rules and regulations for
-                using our digital services.</p>
+            <h1>Terms &amp; Conditions</h1>
+            <p>Rules and regulations for using our digital services.</p>
         </div>
     </div>
 
     <!-- Terms Content -->
-    <section class="section">
-        <div class="container" style="max-width: 800px; margin: 0 auto; line-height: 1.8;">
-            <p><strong>Last Updated: October 2026</strong></p>
+    <section class="section terms-page-bg">
+        <div class="container section-card">
+            <p style="color: #6b7280; font-weight: 600;"><strong>Last Updated: October 2026</strong></p>
 
-            <h2 style="margin-top: 2rem; margin-bottom: 1rem;">1. Acceptance of Terms</h2>
-            <p>By accessing and using the eCampus International School website, you accept and agree to be bound by the
+            <h2 class="terms-content">1. Acceptance of Terms</h2>
+            <p class="terms-content">By accessing and using the eCampus International School website, you accept and
+                agree to be bound by the
                 terms and provisions of this agreement. In addition, when using these particular services, you shall be
                 subject to any posted guidelines or rules applicable to such services.</p>
 
-            <h2 style="margin-top: 2rem; margin-bottom: 1rem;">2. Description of Service</h2>
-            <p>eCampus International School provides users with access to a rich collection of resources, including
+            <h2 class="terms-content">2. Description of Service</h2>
+            <p class="terms-content">eCampus International School provides users with access to a rich collection of
+                resources, including
                 various communications tools, forums, and personalized administrative content. You understand and agree
                 that the Service is provided "AS-IS" and that eCampus International School assumes no responsibility for
                 the timeliness, deletion, misdelivery, or failure to store any user communications or personalization
                 settings.</p>
 
-            <h2 style="margin-top: 2rem; margin-bottom: 1rem;">3. User Conduct</h2>
-            <p>You agree not to use the Service to:</p>
-            <ul style="margin-left: 1.5rem; margin-bottom: 1rem;">
+            <h2 class="terms-content">3. User Conduct</h2>
+            <p class="terms-content">You agree not to use the Service to:</p>
+            <ul class="terms-content">
                 <li>Upload, post, email or otherwise transmit any Content that is unlawful, harmful, threatening,
                     abusive, harassing, defames, vulgar, obscene, libellous, invasive of another's privacy, hateful, or
                     racially, ethnically, or otherwise objectionable.</li>
@@ -103,16 +146,19 @@
                 <li>Interfere with or disrupt the Service or servers or networks connected to the Service.</li>
             </ul>
 
-            <h2 style="margin-top: 2rem; margin-bottom: 1rem;">4. Disclaimer of Warranties</h2>
-            <p>You expressly understand and agree that your use of the service is at your sole risk. The service is
+            <h2 class="terms-content">4. Disclaimer of Warranties</h2>
+            <p class="terms-content">You expressly understand and agree that your use of the service is at your sole
+                risk. The service is
                 provided on an "as is" and "as available" basis. eCampus International School expressly disclaims all
                 warranties of any kind, whether express or implied.</p>
 
-            <h2 style="margin-top: 2rem; margin-bottom: 1rem;">5. Contact Us</h2>
-            <p>If you have any questions about our Terms &amp; Conditions, please contact us:</p>
-            <p>
-                Email: legal@ecampus.edu<br>
-                Address: 123 Education Boulevard, Knowledge City, 10001
+            <h2 class="terms-content">5. Contact Us</h2>
+            <p class="terms-content">If you have any questions about our Terms &amp; Conditions, please contact us:</p>
+            <p class="terms-content"
+                style="background-color: #ffffff; padding: 1.5rem; border-radius: 8px; border-left: 5px solid #00b4a0; margin-top: 1.5rem;">
+                <strong>Email:</strong> info@ecampus.edu<br>
+                <strong>Phone / Mobile:</strong> +91 9632587410<br>
+                <strong>Address:</strong> Sector 62, Knowledge Park III, Noida, Uttar Pradesh 201301, India
             </p>
         </div>
     </section>
