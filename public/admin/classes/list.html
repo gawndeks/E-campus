@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classes List | eCampus Admin</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Admin CSS -->
+    <link rel="stylesheet" href="/admin/css/admin-style.css">
+</head>
+
+<body>
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Manage Classes</h3>
+            <div class="action-btns">
+                <button class="btn btn-primary" onclick="openModal('classModal')"><span>+</span> Create Class</button>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="admin-table" id="classesTable">
+                <thead>
+                    <tr>
+                        <th>Class Name</th>
+                        <th>Numeric Value</th>
+                        <th>Total Sections</th>
+                        <th>Capacity</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="classTbody">
+                    <tr>
+                        <td colspan="6" class="loader-container">
+                            <div class="spinner"></div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Modal for Create/Edit -->
+    <div class="modal-overlay" id="classModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Create/Edit Class</h3>
+                <button class="icon-btn modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="classForm" onsubmit="saveClass(event)">
+                    <div class="form-group">
+                        <label class="form-label">Class Name * (e.g. Class 10th)</label>
+                        <input type="text" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Numeric Value * (e.g. 10)</label>
+                        <input type="number" class="form-control" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline modal-close">Cancel</button>
+                <button type="submit" form="classForm" class="btn btn-primary" id="btnSaveCLass">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/admin/js/admin-core.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => { setTimeout(loadClasses, 300); });
+
+        function loadClasses() {
+            const data = [
+                { name: 'Class 10th', numeric: 10, sections: 3, capacity: 120, status: 'Active' },
+                { name: 'Class 9th', numeric: 9, sections: 2, capacity: 80, status: 'Active' },
+                { name: 'Class 11th', numeric: 11, sections: 1, capacity: 40, status: 'Active' }
+            ];
+
+            const tbody = document.getElementById('classTbody');
+            tbody.innerHTML = '';
+
+            data.forEach(c => {
+                const statusClass = c.status === 'Active' ? 'status-active' : 'status-inactive';
+                tbody.innerHTML += `
+                    <tr>
+                        <td style="font-weight: 500;">${c.name}</td>
+                        <td>${c.numeric}</td>
+                        <td>${c.sections} Sections</td>
+                        <td>${c.capacity}</td>
+                        <td><span class="status ${statusClass}">${c.status}</span></td>
+                        <td>
+                            <div class="action-btns">
+                                <button class="btn btn-sm btn-outline" style="color: var(--accent); border-color: var(--accent);">Edit</button>
+                                <button class="btn btn-sm btn-danger">Delete</button>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            });
+            window.showToast('Classes loaded');
+        }
+
+        async function saveClass(e) {
+            e.preventDefault();
+            document.getElementById('btnSaveCLass').textContent = 'Saving...';
+            setTimeout(() => {
+                window.showToast('Class saved via API!', 'success');
+                closeModal('classModal');
+                document.getElementById('btnSaveCLass').textContent = 'Save';
+            }, 600);
+        }
+    </script>
+</body>
+
+</html>

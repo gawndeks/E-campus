@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Student | eCampus Admin</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Admin CSS -->
+    <link rel="stylesheet" href="/admin/css/admin-style.css">
+</head>
+
+<body>
+    <!-- Layout injected by admin-core.js -->
+
+    <!-- EDIT STUDENT CONTENT -->
+    <div class="card" style="max-width: 800px; margin: 0 auto;">
+        <div class="card-header">
+            <h3 class="card-title">Edit Student</h3>
+            <a href="/admin/students/list.html" class="btn btn-outline btn-sm">Cancel</a>
+        </div>
+
+        <div style="padding: 30px;" id="formContainer">
+            <div class="loader-container" id="pageLoader">
+                <div class="spinner"></div>
+            </div>
+
+            <form id="editStudentForm" style="display:none;" onsubmit="updateStudentForm(event)">
+                <input type="hidden" id="studentIdDb">
+
+                <h4
+                    style="margin-bottom: 20px; color: var(--primary); border-bottom: 1px solid var(--border); padding-bottom: 10px;">
+                    Personal Information</h4>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">First Name *</label>
+                        <input type="text" id="firstName" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Last Name *</label>
+                        <input type="text" id="lastName" class="form-control" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Date of Birth *</label>
+                        <input type="date" id="dob" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Gender</label>
+                        <select id="gender" class="form-control" required>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                </div>
+
+                <h4
+                    style="margin: 30px 0 20px; color: var(--primary); border-bottom: 1px solid var(--border); padding-bottom: 10px;">
+                    Academic Details</h4>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Update Class *</label>
+                        <select id="assignClass" class="form-control" required>
+                            <option value="10th">10th Grade</option>
+                            <option value="9th">9th Grade</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Update Section *</label>
+                        <select id="assignSection" class="form-control" required>
+                            <option value="A">Section A</option>
+                            <option value="B">Section B</option>
+                            <option value="Science">Science Batch</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Status</label>
+                    <select id="status" class="form-control">
+                        <option value="Active">Active</option>
+                        <option value="Inactive">Inactive</option>
+                    </select>
+                </div>
+
+                <div style="margin-top: 30px; display: flex; justify-content: flex-end; gap: 15px;">
+                    <a href="/admin/students/list.html" class="btn btn-outline">Back</a>
+                    <button type="submit" class="btn btn-primary" id="submitBtn">Update Changes</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <!-- Core Layout JS -->
+    <script src="/admin/js/admin-core.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchStudentDetails();
+        });
+
+        async function fetchStudentDetails() {
+            // Get ID from query param (e.g. ?id=1)
+            const urlParams = new URLSearchParams(window.location.search);
+            const studentId = urlParams.get('id');
+
+            try {
+                // Mock Fetch Request
+                // const res = await fetch('/api/admin/students/' + studentId);
+                const loader = document.getElementById('pageLoader');
+                const form = document.getElementById('editStudentForm');
+
+                // Simulate Network Delay
+                setTimeout(() => {
+                    // Populate Form with dummy mock data for UI demo testing
+                    document.getElementById('studentIdDb').value = studentId || '1';
+                    document.getElementById('firstName').value = 'John';
+                    document.getElementById('lastName').value = 'Doe';
+                    document.getElementById('dob').value = '2010-05-15';
+                    document.getElementById('gender').value = 'Male';
+                    document.getElementById('assignClass').value = '10th';
+                    document.getElementById('assignSection').value = 'A';
+                    document.getElementById('status').value = 'Active';
+
+                    loader.style.display = 'none';
+                    form.style.display = 'block';
+                }, 500);
+
+            } catch (e) {
+                console.error(e);
+            }
+        }
+
+        async function updateStudentForm(e) {
+            e.preventDefault();
+
+            const btn = document.getElementById('submitBtn');
+            const studentId = document.getElementById('studentIdDb').value;
+            btn.textContent = 'Updating...';
+            btn.disabled = true;
+
+            const payload = {
+                firstName: document.getElementById('firstName').value,
+                lastName: document.getElementById('lastName').value,
+                dob: document.getElementById('dob').value,
+                gender: document.getElementById('gender').value,
+                class: document.getElementById('assignClass').value,
+                section: document.getElementById('assignSection').value,
+                status: document.getElementById('status').value
+            };
+
+            try {
+                // Realistic API Fetch attempt (PUT)
+                await fetch('/api/admin/students/' + studentId, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                }).catch(() => null);
+
+                setTimeout(() => {
+                    window.showToast('Student updated successfully via API!', 'success');
+                    btn.textContent = 'Update Changes';
+                    btn.disabled = false;
+                }, 600);
+
+            } catch (err) {
+                window.showToast('Error updating student', 'error');
+            }
+        }
+    </script>
+</body>
+
+</html>

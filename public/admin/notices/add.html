@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Notice | eCampus Admin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/admin/css/admin-style.css">
+</head>
+
+<body>
+    <div class="card" style="max-width: 800px; margin: 0 auto;">
+        <div class="card-header">
+            <h3 class="card-title">Compose Notice</h3>
+            <a href="/admin/notices/list.html" class="btn btn-outline btn-sm">Discard</a>
+        </div>
+
+        <div style="padding: 30px;">
+            <form id="addNoticeForm"
+                onsubmit="event.preventDefault(); window.showToast('Broadcast Sent!','success'); setTimeout(()=>window.location.href='/admin/notices/list.html',1000);">
+                <div class="form-group">
+                    <label class="form-label">Notice Title *</label>
+                    <input type="text" class="form-control" placeholder="e.g. Sports Day Announcement" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Target Audience *</label>
+                        <select class="form-control" required>
+                            <option value="All">All Users</option>
+                            <option value="Students">Students Only</option>
+                            <option value="Teachers">Teachers Only</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Publish Date *</label>
+                        <input type="date" id="pubDate" class="form-control" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Detailed Description</label>
+                    <textarea class="form-control" rows="6" placeholder="Write notice content here..."
+                        required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label style="display: flex; gap: 10px; align-items: center; cursor: pointer; font-weight: 500;">
+                        <input type="checkbox" checked> Publish immediately and set as Active
+                    </label>
+                </div>
+
+                <div style="margin-top: 30px; display: flex; justify-content: flex-end; gap: 15px;">
+                    <button type="submit" class="btn btn-primary" id="btnSubmit">Post Notice</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="/admin/js/admin-core.js"></script>
+    <script> document.getElementById('pubDate').valueAsDate = new Date(); </script>
+</body>
+
+</html>

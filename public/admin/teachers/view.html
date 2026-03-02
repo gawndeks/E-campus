@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Teacher | eCampus Admin</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Admin CSS -->
+    <link rel="stylesheet" href="/admin/css/admin-style.css">
+</head>
+
+<body>
+    <div class="card" style="max-width: 900px; margin: 0 auto;">
+        <div class="card-header">
+            <h3 class="card-title">Teacher Profile</h3>
+            <div class="action-btns">
+                <a href="/admin/teachers/list.html" class="btn btn-outline btn-sm">Back to List</a>
+                <a href="/admin/teachers/edit.html" class="btn btn-primary btn-sm">Edit Teacher</a>
+            </div>
+        </div>
+
+        <div style="padding: 30px;" id="profileContainer">
+            <div class="loader-container" id="pageLoader">
+                <div class="spinner"></div>
+            </div>
+
+            <div id="profileContent" style="display:none;">
+                <div
+                    style="display: flex; gap: 30px; align-items: center; margin-bottom: 40px; border-bottom: 1px solid var(--border); padding-bottom: 30px;">
+                    <img src="https://ui-avatars.com/api/?name=Alok+Sharma&background=00b4a0&color=fff&size=100"
+                        id="profileAvatar" style="border-radius: 12px; box-shadow: var(--shadow);">
+                    <div>
+                        <h2 id="viewName" style="color: var(--primary); margin-bottom: 5px;">Alok Sharma</h2>
+                        <div style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 15px;">
+                            ID: <strong style="color: var(--text-main);">TR-101</strong> &nbsp;|&nbsp;
+                            Dept: <strong style="color: var(--text-main);">Mathematics</strong>
+                        </div>
+                        <span class="status status-active">Active</span>
+                    </div>
+                </div>
+
+                <div class="grid-cards" style="grid-template-columns: 1fr 1fr;">
+                    <div style="background: var(--bg-main); padding: 20px; border-radius: var(--radius);">
+                        <h4
+                            style="color: var(--primary); margin-bottom: 15px; border-bottom: 1px solid var(--border); padding-bottom: 8px;">
+                            Classes & Workload</h4>
+                        <div style="display: grid; grid-template-columns: 100px 1fr; gap: 10px; font-size: 0.95rem;">
+                            <strong style="color: var(--text-muted);">Class Teacher:</strong> <span>10th - A</span>
+                            <strong style="color: var(--text-muted);">Subjects:</strong> <span>Maths (10th, 9th)</span>
+                            <strong style="color: var(--text-muted);">Hours/Week:</strong> <span>24 Hours</span>
+                        </div>
+                    </div>
+
+                    <div style="background: var(--bg-main); padding: 20px; border-radius: var(--radius);">
+                        <h4
+                            style="color: var(--primary); margin-bottom: 15px; border-bottom: 1px solid var(--border); padding-bottom: 8px;">
+                            Contact Details</h4>
+                        <div style="display: grid; grid-template-columns: 100px 1fr; gap: 10px; font-size: 0.95rem;">
+                            <strong style="color: var(--text-muted);">Email:</strong>
+                            <span>alok.sharma@ecampus.edu</span>
+                            <strong style="color: var(--text-muted);">Mobile:</strong> <span>+91 9876543210</span>
+                            <strong style="color: var(--text-muted);">Joined:</strong> <span>Jan 2024</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/admin/js/admin-core.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => { setTimeout(fetchProfile, 400); });
+        function fetchProfile() {
+            document.getElementById('pageLoader').style.display = 'none';
+            document.getElementById('profileContent').style.display = 'block';
+        }
+    </script>
+</body>
+
+</html>

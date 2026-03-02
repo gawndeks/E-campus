@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fee Structure | eCampus Admin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/admin/css/admin-style.css">
+</head>
+
+<body>
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Class Wise Fee Structure</h3>
+            <div class="action-btns">
+                <button class="btn btn-primary" onclick="window.showToast('Add Fee Modal Opened')"><span>+</span> Add
+                    Fee Type</button>
+            </div>
+        </div>
+
+        <div style="padding: 20px; border-bottom: 1px solid var(--border); display: flex; gap: 10px;">
+            <select class="form-control" style="max-width: 250px;">
+                <option value="">Filter by Class...</option>
+                <option value="10">Class 10th</option>
+            </select>
+        </div>
+
+        <div class="table-responsive">
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>Class</th>
+                        <th>Fee Type</th>
+                        <th>Amount (₹)</th>
+                        <th>Frequency</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="font-weight: 500;">Class 10th</td>
+                        <td>Tuition Fee</td>
+                        <td style="font-weight: 600;">₹4,500</td>
+                        <td>Monthly</td>
+                        <td><span class="status status-active">Active</span></td>
+                        <td>
+                            <div class="action-btns">
+                                <button class="btn btn-sm btn-outline">Edit</button>
+                                <button class="btn btn-sm btn-danger">Delete</button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="/admin/js/admin-core.js"></script>
+</body>
+
+</html>

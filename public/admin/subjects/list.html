@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subjects List | eCampus Admin</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Admin CSS -->
+    <link rel="stylesheet" href="/admin/css/admin-style.css">
+</head>
+
+<body>
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Manage Subjects</h3>
+            <div class="action-btns">
+                <button class="btn btn-primary" onclick="openModal('subjModal')"><span>+</span> Add Subject</button>
+            </div>
+        </div>
+
+        <div
+            style="padding: 20px; border-bottom: 1px solid var(--border); background: var(--bg-surface); display: flex; gap: 10px;">
+            <select id="classFilter" class="form-control" style="max-width: 250px;">
+                <option value="">Filter by Class...</option>
+                <option value="10">Class 10th</option>
+                <option value="9">Class 9th</option>
+            </select>
+            <input type="text" class="form-control" placeholder="Search subject..." style="max-width: 250px;">
+        </div>
+
+        <div class="table-responsive">
+            <table class="admin-table" id="subjTable">
+                <thead>
+                    <tr>
+                        <th>Subject Name</th>
+                        <th>Subject Code</th>
+                        <th>Mapped Class</th>
+                        <th>Assigned Teacher</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="subjTbody">
+                    <tr>
+                        <td colspan="6" class="loader-container">
+                            <div class="spinner"></div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Modal for Create/Edit -->
+    <div class="modal-overlay" id="subjModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add/Edit Subject</h3>
+                <button class="icon-btn modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="subjForm" onsubmit="saveSubject(event)">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Subject Name *</label>
+                            <input type="text" class="form-control" placeholder="e.g. Mathematics" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Subject Code *</label>
+                            <input type="text" class="form-control" placeholder="e.g. MAT-101" required>
+                        </div>
+                    </div>
+
+                    <h4
+                        style="margin: 20px 0; border-bottom: 1px solid var(--border); padding-bottom: 10px; color: var(--primary);">
+                        Mapping</h4>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Class Mapping *</label>
+                            <select class="form-control" required>
+                                <option value="">Select Class</option>
+                                <option value="10">10th Grade</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Assign Teacher</label>
+                            <select class="form-control">
+                                <option value="">Select Teacher</option>
+                                <option value="1">Alok Sharma</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline modal-close">Cancel</button>
+                <button type="submit" form="subjForm" class="btn btn-primary" id="btnSaveSubj">Save Subject</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/admin/js/admin-core.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => { setTimeout(loadSubjects, 300); });
+
+        function loadSubjects() {
+            const data = [
+                { name: 'Mathematics', code: 'MAT-101', class_name: '10th', teacher: 'Alok Sharma', status: 'Active' },
+                { name: 'Science', code: 'SCI-090', class_name: '9th', teacher: 'Priya Iyer', status: 'Active' },
+                { name: 'English', code: 'ENG-101', class_name: '10th', teacher: 'Ravi Verma', status: 'Active' }
+            ];
+
+            const tbody = document.getElementById('subjTbody');
+            tbody.innerHTML = '';
+
+            data.forEach(s => {
+                const statusClass = s.status === 'Active' ? 'status-active' : 'status-inactive';
+                tbody.innerHTML += `
+                    <tr>
+                        <td style="font-weight: 500;">${s.name}</td>
+                        <td style="font-family: monospace; font-weight: 600;">${s.code}</td>
+                        <td>Class ${s.class_name}</td>
+                        <td style="color: var(--primary); font-weight: 500;">${s.teacher || 'Not Assigned'}</td>
+                        <td><span class="status ${statusClass}">${s.status}</span></td>
+                        <td>
+                            <div class="action-btns">
+                                <button class="btn btn-sm btn-outline" style="color: var(--accent); border-color: var(--accent);">Edit</button>
+                                <button class="btn btn-sm btn-danger">Delete</button>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        async function saveSubject(e) {
+            e.preventDefault();
+            document.getElementById('btnSaveSubj').textContent = 'Saving...';
+            setTimeout(() => {
+                window.showToast('Subject saved via API!', 'success');
+                closeModal('subjModal');
+                document.getElementById('btnSaveSubj').textContent = 'Save Subject';
+            }, 600);
+        }
+    </script>
+</body>
+
+</html>

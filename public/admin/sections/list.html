@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sections List | eCampus Admin</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Admin CSS -->
+    <link rel="stylesheet" href="/admin/css/admin-style.css">
+</head>
+
+<body>
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Manage Sections</h3>
+            <div class="action-btns">
+                <button class="btn btn-primary" onclick="openModal('sectionModal')"><span>+</span> Create
+                    Section</button>
+            </div>
+        </div>
+
+        <div
+            style="padding: 20px; border-bottom: 1px solid var(--border); background: var(--bg-surface); display: flex; gap: 10px;">
+            <select id="classFilter" class="form-control" style="max-width: 250px;">
+                <option value="">Filter by Class...</option>
+                <option value="10">Class 10th</option>
+                <option value="9">Class 9th</option>
+            </select>
+        </div>
+
+        <div class="table-responsive">
+            <table class="admin-table" id="sectionsTable">
+                <thead>
+                    <tr>
+                        <th>Class</th>
+                        <th>Section Name</th>
+                        <th>Capacity</th>
+                        <th>Class Teacher</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="secTbody">
+                    <tr>
+                        <td colspan="6" class="loader-container">
+                            <div class="spinner"></div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Modal for Create/Edit -->
+    <div class="modal-overlay" id="sectionModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Create/Edit Section</h3>
+                <button class="icon-btn modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="secForm" onsubmit="saveSection(event)">
+                    <div class="form-group">
+                        <label class="form-label">Map to Class *</label>
+                        <select class="form-control" required>
+                            <option value="">Select Class</option>
+                            <option value="10">10th Grade</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Section Name * (e.g. A, B, Science)</label>
+                        <input type="text" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Assign Class Teacher</label>
+                        <select class="form-control">
+                            <option value="">Select Teacher</option>
+                            <option value="1">Alok Sharma</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline modal-close">Cancel</button>
+                <button type="submit" form="secForm" class="btn btn-primary" id="btnSaveSec">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/admin/js/admin-core.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => { setTimeout(loadSections, 300); });
+
+        function loadSections() {
+            const data = [
+                { class_name: '10th', name: 'A', capacity: '40', teacher: 'Alok Sharma', status: 'Active' },
+                { class_name: '10th', name: 'B', capacity: '40', teacher: 'Priya Iyer', status: 'Active' },
+                { class_name: '9th', name: 'A', capacity: '40', teacher: 'Ravi Verma', status: 'Active' }
+            ];
+
+            const tbody = document.getElementById('secTbody');
+            tbody.innerHTML = '';
+
+            data.forEach(s => {
+                const statusClass = s.status === 'Active' ? 'status-active' : 'status-inactive';
+                tbody.innerHTML += `
+                    <tr>
+                        <td style="font-weight: 500;">Class ${s.class_name}</td>
+                        <td>Section ${s.name}</td>
+                        <td>${s.capacity}</td>
+                        <td style="color: var(--primary); font-weight: 500;">${s.teacher || 'Not Assigned'}</td>
+                        <td><span class="status ${statusClass}">${s.status}</span></td>
+                        <td>
+                            <div class="action-btns">
+                                <button class="btn btn-sm btn-outline" style="color: var(--accent); border-color: var(--accent);">Edit</button>
+                                <button class="btn btn-sm btn-danger">Delete</button>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        async function saveSection(e) {
+            e.preventDefault();
+            document.getElementById('btnSaveSec').textContent = 'Saving...';
+            setTimeout(() => {
+                window.showToast('Section saved via API!', 'success');
+                closeModal('sectionModal');
+                document.getElementById('btnSaveSec').textContent = 'Save';
+            }, 600);
+        }
+    </script>
+</body>
+
+</html>

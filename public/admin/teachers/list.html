@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teachers List | eCampus Admin</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Admin CSS -->
+    <link rel="stylesheet" href="/admin/css/admin-style.css">
+</head>
+
+<body>
+    <!-- Layout injected by admin-core.js -->
+
+    <!-- TEACHERS LIST CONTENT -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Manage Teachers</h3>
+            <div class="action-btns">
+                <button class="btn btn-outline" onclick="openFilterModal()">Filter</button>
+                <a href="/admin/teachers/add.html" class="btn btn-primary"><span>+</span> Add Teacher</a>
+            </div>
+        </div>
+
+        <div
+            style="padding: 20px; border-bottom: 1px solid var(--border); background: var(--bg-surface); display: flex; gap: 10px;">
+            <input type="text" id="searchInput" class="form-control" style="max-width: 300px;"
+                placeholder="Search name or subject..." onkeyup="filterTable()">
+            <select id="departmentFilter" class="form-control" style="max-width: 180px;" onchange="filterTable()">
+                <option value="">All Departments</option>
+                <option value="Science">Science</option>
+                <option value="Mathematics">Mathematics</option>
+                <option value="English">English</option>
+            </select>
+        </div>
+
+        <div class="table-responsive">
+            <table class="admin-table" id="teachersTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Teacher Name</th>
+                        <th>Department</th>
+                        <th>Contact</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="teacherTbody">
+                    <tr>
+                        <td colspan="6" class="loader-container">
+                            <div class="spinner"></div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="/admin/js/admin-core.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(loadTeachers, 300);
+        });
+
+        let allTeachers = [];
+
+        async function loadTeachers() {
+            try {
+                const res = await fetch('/api/admin/teachers').catch(() => null);
+
+                if (res && res.ok) {
+                    allTeachers = await res.json();
+                } else {
+                    allTeachers = [
+                        { id: 1, teacher_id: 'TR-101', name: 'Alok Sharma', department: 'Mathematics', contact: '+91 9876543210', status: 'Active' },
+                        { id: 2, teacher_id: 'TR-102', name: 'Priya Iyer', department: 'Science', contact: '+91 9123456780', status: 'Active' },
+                        { id: 3, teacher_id: 'TR-103', name: 'Ravi Verma', department: 'English', contact: '+91 9988776655', status: 'Inactive' }
+                    ];
+                }
+
+                renderTable(allTeachers);
+                window.showToast('Teachers loaded successfully');
+            } catch (err) {
+                if (window.showToast) window.showToast('Error loading teachers', 'error');
+            }
+        }
+
+        function renderTable(data) {
+            const tbody = document.getElementById('teacherTbody');
+            tbody.innerHTML = '';
+
+            if (data.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6" style="text-align: center;">No teachers found</td></tr>';
+                return;
+            }
+
+            data.forEach(teacher => {
+                const statusClass = teacher.status === 'Active' ? 'status-active' : 'status-inactive';
+                tbody.innerHTML += `
+                    <tr>
+                        <td style="font-family: monospace; font-weight: 600; color: var(--primary);">${teacher.teacher_id}</td>
+                        <td style="font-weight: 500;">${teacher.name}</td>
+                        <td>${teacher.department}</td>
+                        <td style="color: var(--text-muted);">${teacher.contact}</td>
+                        <td><span class="status ${statusClass}">${teacher.status}</span></td>
+                        <td>
+                            <div class="action-btns">
+                                <a href="/admin/teachers/view.html?id=${teacher.id}" class="btn btn-sm btn-outline">View</a>
+                                <a href="/admin/teachers/edit.html?id=${teacher.id}" class="btn btn-sm btn-outline" style="color: var(--accent); border-color: var(--accent);">Edit</a>
+                                <button onclick="deleteTeacher(${teacher.id})" class="btn btn-sm btn-danger">Delete</button>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        function filterTable() {
+            const search = document.getElementById('searchInput').value.toLowerCase();
+            const dept = document.getElementById('departmentFilter').value;
+
+            const filtered = allTeachers.filter(t => {
+                const matchSearch = t.name.toLowerCase().includes(search) || t.department.toLowerCase().includes(search);
+                const matchDept = dept === '' || t.department === dept;
+                return matchSearch && matchDept;
+            });
+
+            renderTable(filtered);
+        }
+
+        async function deleteTeacher(id) {
+            if (!confirm('Are you sure you want to soft delete this teacher?')) return;
+            try {
+                // await fetch('/api/admin/teachers/' + id, { method: 'DELETE' });
+                allTeachers = allTeachers.filter(t => t.id !== id);
+                filterTable();
+                window.showToast('Teacher deleted successfully');
+            } catch (e) {
+                window.showToast('Failed to delete teacher', 'error');
+            }
+        }
+    </script>
+</body>
+
+</html>

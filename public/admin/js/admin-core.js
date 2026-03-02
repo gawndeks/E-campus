@@ -7,26 +7,24 @@ function initAdminLayout() {
     const layoutHTML = `
         <nav class="admin-sidebar" id="adminSidebar">
             <div class="sidebar-header">
-                <div class="logo">eC</div>
+                <div class="logo"><i class="fas fa-graduation-cap"></i></div>
                 <h2 class="brand-text">eCampus</h2>
             </div>
             <div class="sidebar-scroll">
                 <ul class="sidebar-menu">
-                    <li><a href="/admin/index.html" class="menu-item" data-path="/admin/index.html"><span class="icon">📊</span><span class="text">Dashboard</span></a></li>
-                    <li><a href="/admin/students/list.html" class="menu-item" data-path="/admin/students"><span class="icon">🎓</span><span class="text">Students</span></a></li>
-                    <li><a href="/admin/teachers/list.html" class="menu-item" data-path="/admin/teachers"><span class="icon">👨‍🏫</span><span class="text">Teachers</span></a></li>
-                    <li><a href="/admin/classes/list.html" class="menu-item" data-path="/admin/classes"><span class="icon">🏫</span><span class="text">Classes</span></a></li>
-                    <li><a href="/admin/sections/list.html" class="menu-item" data-path="/admin/sections"><span class="icon">📁</span><span class="text">Sections</span></a></li>
-                    <li><a href="/admin/subjects/list.html" class="menu-item" data-path="/admin/subjects"><span class="icon">📚</span><span class="text">Subjects</span></a></li>
-                    <li><a href="/admin/attendance/students.html" class="menu-item" data-path="/admin/attendance"><span class="icon">📅</span><span class="text">Attendance</span></a></li>
-                    <li><a href="/admin/fees/structure.html" class="menu-item" data-path="/admin/fees"><span class="icon">💰</span><span class="text">Fees</span></a></li>
-                    <li><a href="/admin/exams/list.html" class="menu-item" data-path="/admin/exams"><span class="icon">📝</span><span class="text">Exams</span></a></li>
-                    <li><a href="/admin/results/entry.html" class="menu-item" data-path="/admin/results"><span class="icon">🏆</span><span class="text">Results</span></a></li>
-                    <li><a href="/admin/timetable/class.html" class="menu-item" data-path="/admin/timetable"><span class="icon">⏰</span><span class="text">Timetable</span></a></li>
-                    <li><a href="/admin/notices/list.html" class="menu-item" data-path="/admin/notices"><span class="icon">📢</span><span class="text">Notices</span></a></li>
-                    <li><a href="/admin/users/list.html" class="menu-item" data-path="/admin/users"><span class="icon">🛡️</span><span class="text">Admin Users</span></a></li>
-                    <li><a href="/admin/cms/pages.html" class="menu-item" data-path="/admin/cms"><span class="icon">🌐</span><span class="text">Website CMS</span></a></li>
-                    <li><a href="/admin/profile.html" class="menu-item" data-path="/admin/profile"><span class="icon">⚙️</span><span class="text">Profile</span></a></li>
+                    <li><a href="/admin/index.html" class="menu-item" data-path="/admin/index.html"><span class="icon"><i class="fas fa-chart-pie"></i></span><span class="text">Dashboard</span></a></li>
+                    <li><a href="/admin/students/list.html" class="menu-item" data-path="/admin/students"><span class="icon"><i class="fas fa-user-graduate"></i></span><span class="text">Manage Students</span></a></li>
+                    <li><a href="/admin/teachers/list.html" class="menu-item" data-path="/admin/teachers"><span class="icon"><i class="fas fa-chalkboard-teacher"></i></span><span class="text">Manage Teachers</span></a></li>
+                    <li><a href="/admin/classes/list.html" class="menu-item" data-path="/admin/classes"><span class="icon"><i class="fas fa-school"></i></span><span class="text">Manage Classes</span></a></li>
+                    <li><a href="/admin/subjects/list.html" class="menu-item" data-path="/admin/subjects"><span class="icon"><i class="fas fa-book-open"></i></span><span class="text">Manage Courses</span></a></li>
+                    <li><a href="/admin/attendance/students.html" class="menu-item" data-path="/admin/attendance"><span class="icon"><i class="fas fa-calendar-check"></i></span><span class="text">Attendance</span></a></li>
+                    <li><a href="/admin/fees/structure.html" class="menu-item" data-path="/admin/fees"><span class="icon"><i class="fas fa-money-check-alt"></i></span><span class="text">Fees Management</span></a></li>
+                    <li><a href="/admin/exams/list.html" class="menu-item" data-path="/admin/exams"><span class="icon"><i class="fas fa-file-alt"></i></span><span class="text">Exams & Results</span></a></li>
+                    <li><a href="/admin/notices/list.html" class="menu-item" data-path="/admin/notices"><span class="icon"><i class="fas fa-bullhorn"></i></span><span class="text">Notices</span></a></li>
+                    <li><a href="/admin/users/list.html" class="menu-item" data-path="/admin/users"><span class="icon"><i class="fas fa-user-shield"></i></span><span class="text">Admin Users</span></a></li>
+                    <li><a href="/admin/cms/pages.html" class="menu-item" data-path="/admin/cms"><span class="icon"><i class="fas fa-globe"></i></span><span class="text">Website CMS</span></a></li>
+                    <li><a href="/admin/profile.html" class="menu-item" data-path="/admin/profile"><span class="icon"><i class="fas fa-cog"></i></span><span class="text">Settings</span></a></li>
+                    <li><a href="/admin/login.html" class="menu-item text-danger" onclick="localStorage.removeItem('token');" style="margin-top: 20px;"><span class="icon"><i class="fas fa-sign-out-alt"></i></span><span class="text">Logout</span></a></li>
                 </ul>
             </div>
         </nav>
@@ -34,20 +32,27 @@ function initAdminLayout() {
             <header class="admin-header">
                 <div class="header-left">
                     <button id="sidebarToggle" class="icon-btn" aria-label="Toggle Sidebar">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+                        <i class="fas fa-bars"></i>
                     </button>
                     <h1 id="pageTitle" class="page-title">Loading...</h1>
                 </div>
+                
+                <div class="header-center search-container" style="flex: 1; max-width: 400px; margin: 0 20px; position: relative; display: none;">
+                    <i class="fas fa-search" style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: var(--text-muted);"></i>
+                    <input type="text" placeholder="Search students, staff or classes..." style="width: 100%; padding: 10px 15px 10px 40px; border-radius: 20px; border: 1px solid var(--border); background: var(--bg-main); color: var(--text-main); outline: none;">
+                </div>
+
                 <div class="header-right">
-                    <button class="icon-btn theme-toggle" id="themeToggle" aria-label="Toggle Dark Mode">🌙</button>
+                    <span id="currentDateDisplay" style="color: var(--text-muted); font-size: 0.9rem; font-weight: 500; font-family: 'Poppins', sans-serif; display: none;"></span>
+                    <button class="icon-btn theme-toggle" id="themeToggle" aria-label="Toggle Dark Mode"><i class="fas fa-moon"></i></button>
                     <div class="header-notif">
                         <button class="icon-btn" aria-label="Notifications">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                            <i class="fas fa-bell"></i>
                         </button>
-                        <span class="badge">0</span>
+                        <span class="badge">3</span>
                     </div>
                     <div class="header-profile">
-                        <img src="https://ui-avatars.com/api/?name=Admin&background=0f4c81&color=fff" alt="Profile" class="h-avatar">
+                        <img src="https://ui-avatars.com/api/?name=Admin&background=1e3a8a&color=fff" alt="Profile" class="h-avatar">
                         <div class="profile-info">
                             <span class="user-name">Super Admin</span>
                         </div>
@@ -65,6 +70,17 @@ function initAdminLayout() {
     const originalContent = document.body.innerHTML;
     document.body.innerHTML = layoutHTML;
     document.getElementById('adminContent').innerHTML = originalContent;
+
+    // Show dynamic date
+    const dateSpan = document.getElementById('currentDateDisplay');
+    if (dateSpan) {
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        dateSpan.textContent = new Date().toLocaleDateString('en-US', options);
+        if (window.innerWidth > 768) {
+            dateSpan.style.display = 'block';
+            document.querySelector('.search-container').style.display = 'block';
+        }
+    }
 
     setupLayoutInteractions();
 }

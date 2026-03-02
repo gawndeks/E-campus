@@ -1,28 +1,30 @@
 /* Admin Core Styles */
 :root {
-    --primary: #0f4c81;
-    --primary-dark: #083358;
-    --accent: #00b4a0;
-    --bg-main: #f4f8fb;
+    --primary: #1e3a8a;
+    --primary-dark: #172554;
+    --accent: #7c3aed;
+    --bg-main: #f3f4f6;
     --bg-surface: #ffffff;
-    --text-main: #1f2933;
+    --text-main: #1f2937;
     --text-muted: #6b7280;
-    --border: #e2e8f0;
+    --border: #e5e7eb;
     --sidebar-width: 260px;
     --sidebar-collapsed: 70px;
     --header-height: 70px;
     --danger: #ef4444;
     --success: #10b981;
-    --radius: 8px;
+    --warning: #f59e0b;
+    --info: #3b82f6;
+    --radius: 12px;
     --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
 body.dark-mode {
-    --bg-main: #0f172a;
-    --bg-surface: #1e293b;
-    --text-main: #f8fafc;
-    --text-muted: #94a3b8;
-    --border: #334155;
+    --bg-main: #111827;
+    --bg-surface: #1f2937;
+    --text-main: #f9fafb;
+    --text-muted: #9ca3af;
+    --border: #374151;
 }
 
 * {
@@ -555,4 +557,212 @@ body {
 
 .toast-error {
     border-left-color: var(--danger);
+}
+
+/* =========================================
+   ✅ ADMIN CSS ANIMATIONS & EFFECTS
+   ========================================= */
+
+/* 1. Page Content Intro Fade */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.admin-content {
+    animation: fadeInUp 0.4s ease-out forwards;
+}
+
+/* 2. Enhanced Card Interactions (Hover 3D effect) */
+.card,
+.stat-card {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;
+}
+
+.card:hover,
+.stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 20px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+}
+
+.dark-mode .card:hover,
+.dark-mode .stat-card:hover {
+    box-shadow: 0 12px 20px -5px rgba(0, 0, 0, 0.4);
+}
+
+/* 3. Staggered Row Animation for Tables */
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.admin-table tbody tr {
+    animation: slideInRight 0.3s ease-out forwards;
+    opacity: 0;
+}
+
+/* Delay for staggered visual rendering */
+.admin-table tbody tr:nth-child(1) {
+    animation-delay: 0.05s;
+}
+
+.admin-table tbody tr:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.admin-table tbody tr:nth-child(3) {
+    animation-delay: 0.15s;
+}
+
+.admin-table tbody tr:nth-child(4) {
+    animation-delay: 0.2s;
+}
+
+.admin-table tbody tr:nth-child(5) {
+    animation-delay: 0.25s;
+}
+
+.admin-table tbody tr:nth-child(6) {
+    animation-delay: 0.3s;
+}
+
+.admin-table tbody tr:nth-child(7) {
+    animation-delay: 0.35s;
+}
+
+.admin-table tbody tr:nth-child(8) {
+    animation-delay: 0.4s;
+}
+
+.admin-table tbody tr:nth-child(n+9) {
+    animation-delay: 0.45s;
+}
+
+/* 4. Realistic Button Clicks & Pulse */
+.btn {
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1), transform 0.1s !important;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn:active {
+    transform: scale(0.95);
+}
+
+/* Ripple Effect on Buttons */
+.btn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s ease-out, height 0.3s ease-out;
+}
+
+.btn:active::after {
+    width: 200px;
+    height: 200px;
+    opacity: 0;
+    transition: 0s;
+}
+
+/* 5. Smooth Input Focus */
+.form-control {
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(15, 76, 129, 0.1);
+}
+
+/* 6. High-end Modal Pop-in Animation */
+@keyframes modalPopIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.9) translateY(20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.modal-overlay.active .modal-content {
+    animation: modalPopIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+/* 7. Animated SVG/CSS Stat Icons */
+.stat-card:hover .stat-icon {
+    animation: iconBounce 0.5s ease;
+    background: var(--primary);
+    color: white;
+}
+
+@keyframes iconBounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+/* 8. Pulsing Active Indicator */
+@keyframes pulseDot {
+    0% {
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4);
+    }
+
+    70% {
+        box-shadow: 0 0 0 6px rgba(16, 185, 129, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+    }
+}
+
+/* Sidebar glowing orb on hover */
+.menu-item {
+    position: relative;
+    z-index: 1;
+}
+
+.menu-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.5s ease;
+    z-index: -1;
+}
+
+.menu-item:hover::before {
+    left: 100%;
 }

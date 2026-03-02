@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Student | eCampus Admin</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Admin CSS -->
+    <link rel="stylesheet" href="/admin/css/admin-style.css">
+</head>
+
+<body>
+    <!-- Layout injected by admin-core.js -->
+
+    <!-- VIEW STUDENT CONTENT -->
+    <div class="card" style="max-width: 900px; margin: 0 auto;">
+        <div class="card-header">
+            <h3 class="card-title">Student Profile</h3>
+            <div class="action-btns">
+                <a href="/admin/students/list.html" class="btn btn-outline btn-sm">Back to List</a>
+                <a href="#" id="editLink" class="btn btn-primary btn-sm">Edit Student</a>
+            </div>
+        </div>
+
+        <div style="padding: 30px;" id="profileContainer">
+            <div class="loader-container" id="pageLoader">
+                <div class="spinner"></div>
+            </div>
+
+            <div id="profileContent" style="display:none;">
+                <!-- Header Card / Profile Intro -->
+                <div
+                    style="display: flex; gap: 30px; align-items: center; margin-bottom: 40px; border-bottom: 1px solid var(--border); padding-bottom: 30px;">
+                    <img src="https://ui-avatars.com/api/?name=St&background=0f4c81&color=fff&size=100"
+                        id="profileAvatar" alt="Avatar" style="border-radius: 12px; box-shadow: var(--shadow);">
+                    <div>
+                        <h2 id="viewName" style="color: var(--primary); margin-bottom: 5px;">Loading...</h2>
+                        <div style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 15px;">
+                            ID: <strong id="viewId" style="color: var(--text-main);">...</strong> &nbsp;|&nbsp;
+                            Class: <strong id="viewClass" style="color: var(--text-main);">...</strong>
+                        </div>
+                        <span id="viewStatus" class="status status-active">...</span>
+                    </div>
+                </div>
+
+                <div class="grid-cards" style="grid-template-columns: 1fr 1fr;">
+                    <!-- Academic Details -->
+                    <div style="background: var(--bg-main); padding: 20px; border-radius: var(--radius);">
+                        <h4
+                            style="color: var(--primary); margin-bottom: 15px; border-bottom: 1px solid var(--border); padding-bottom: 8px;">
+                            Academic Info</h4>
+                        <div style="display: grid; grid-template-columns: 100px 1fr; gap: 10px; font-size: 0.95rem;">
+                            <strong style="color: var(--text-muted);">Class:</strong> <span id="infoClass">...</span>
+                            <strong style="color: var(--text-muted);">Section:</strong> <span
+                                id="infoSection">...</span>
+                            <strong style="color: var(--text-muted);">Joined:</strong> <span>August 2026</span>
+                            <strong style="color: var(--text-muted);">Roll No:</strong> <span>24</span>
+                        </div>
+                    </div>
+
+                    <!-- Personal Details -->
+                    <div style="background: var(--bg-main); padding: 20px; border-radius: var(--radius);">
+                        <h4
+                            style="color: var(--primary); margin-bottom: 15px; border-bottom: 1px solid var(--border); padding-bottom: 8px;">
+                            Personal Info</h4>
+                        <div style="display: grid; grid-template-columns: 100px 1fr; gap: 10px; font-size: 0.95rem;">
+                            <strong style="color: var(--text-muted);">DOB:</strong> <span id="infoDob">...</span>
+                            <strong style="color: var(--text-muted);">Gender:</strong> <span id="infoGender">...</span>
+                            <strong style="color: var(--text-muted);">Guardian:</strong> <span
+                                id="infoGuardian">...</span>
+                            <strong style="color: var(--text-muted);">Contact:</strong> <span
+                                id="infoContact">...</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Address -->
+                <div
+                    style="background: var(--bg-main); padding: 20px; border-radius: var(--radius); margin-bottom: 30px;">
+                    <h4
+                        style="color: var(--primary); margin-bottom: 15px; border-bottom: 1px solid var(--border); padding-bottom: 8px;">
+                        Address</h4>
+                    <p id="infoAddress" style="color: var(--text-main); line-height: 1.6;">...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Core Layout JS -->
+    <script src="/admin/js/admin-core.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchStudentProfile();
+        });
+
+        async function fetchStudentProfile() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const studentId = urlParams.get('id');
+
+            // Set edit link target using param
+            document.getElementById('editLink').href = `/admin/students/edit.html?id=${studentId}`;
+
+            try {
+                // Mock API call to get student by ID
+                // const res = await fetch(`/api/admin/students/${studentId}`);
+
+                // Demo simulated delay & data populate
+                setTimeout(() => {
+                    document.getElementById('profileLoader');
+
+                    document.getElementById('viewName').textContent = 'John Doe';
+                    document.getElementById('viewId').textContent = 'ST2026-101';
+                    document.getElementById('viewClass').textContent = '10th - A';
+                    document.getElementById('viewStatus').textContent = 'Active';
+                    document.getElementById('viewStatus').className = 'status status-active';
+
+                    document.getElementById('infoClass').textContent = '10th Grade';
+                    document.getElementById('infoSection').textContent = 'A';
+                    document.getElementById('infoDob').textContent = '15 May 2010';
+                    document.getElementById('infoGender').textContent = 'Male';
+                    document.getElementById('infoGuardian').textContent = 'Robert Doe (Father)';
+                    document.getElementById('infoContact').textContent = '+91 9876543210';
+                    document.getElementById('infoAddress').textContent = '123 Pine Street, New Delhi, India - 110001';
+
+                    document.getElementById('profileAvatar').src = `https://ui-avatars.com/api/?name=John+Doe&background=0f4c81&color=fff&size=100`;
+
+                    document.getElementById('pageLoader').style.display = 'none';
+                    document.getElementById('profileContent').style.display = 'block';
+                }, 400);
+
+            } catch (e) {
+                console.error(e);
+            }
+        }
+    </script>
+</body>
+
+</html>

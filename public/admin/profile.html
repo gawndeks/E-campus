@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Profile | eCampus Setup</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/admin/css/admin-style.css">
+</head>
+
+<body>
+    <div class="card" style="max-width: 800px; margin: 0 auto;">
+        <div class="card-header">
+            <h3 class="card-title">My Application Profile</h3>
+        </div>
+
+        <div style="padding: 30px;">
+            <div style="display: flex; gap: 30px; align-items: center; margin-bottom: 40px;">
+                <img src="https://ui-avatars.com/api/?name=Admin&background=0f4c81&color=fff&size=100"
+                    style="border-radius: 50%; box-shadow: var(--shadow);">
+                <div>
+                    <h2 style="color: var(--primary); margin-bottom: 5px;">Super Admin</h2>
+                    <div style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 5px;">founder@ecampus.edu
+                    </div>
+                    <span class="status" style="background:var(--primary); color:#fff; font-size:0.7rem;">Owner
+                        Access</span>
+                </div>
+            </div>
+
+            <form onsubmit="event.preventDefault(); window.showToast('Profile parameters saved!','success');">
+
+                <h4
+                    style="margin-bottom: 20px; color: var(--primary); border-bottom: 1px solid var(--border); padding-bottom: 10px;">
+                    Security Control</h4>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Current Login Email</label>
+                        <input type="text" class="form-control" value="founder@ecampus.edu" disabled>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">New Password</label>
+                        <input type="password" class="form-control" placeholder="Minimum 8 characters">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Confirm Password</label>
+                        <input type="password" class="form-control" placeholder="Retype password">
+                    </div>
+                </div>
+
+                <div style="margin-top: 30px; display: flex; justify-content: flex-end; gap: 15px;">
+                    <button type="submit" class="btn btn-primary">Save Profile Configuration</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="/admin/js/admin-core.js"></script>
+</body>
+
+</html>

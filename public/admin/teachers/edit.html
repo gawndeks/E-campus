@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Teacher | eCampus Admin</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Admin CSS -->
+    <link rel="stylesheet" href="/admin/css/admin-style.css">
+</head>
+
+<body>
+    <div class="card" style="max-width: 800px; margin: 0 auto;">
+        <div class="card-header">
+            <h3 class="card-title">Edit Teacher</h3>
+            <a href="/admin/teachers/list.html" class="btn btn-outline btn-sm">Cancel</a>
+        </div>
+
+        <div style="padding: 30px;">
+            <div class="loader-container" id="pageLoader">
+                <div class="spinner"></div>
+            </div>
+            <form id="editTeacherForm" onsubmit="updateTeacher(event)" style="display:none;">
+                <input type="hidden" id="teacherId">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Full Name *</label>
+                        <input type="text" id="fullName" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Contact Number *</label>
+                        <input type="tel" id="contact" class="form-control" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Department *</label>
+                        <select id="department" class="form-control" required>
+                            <option value="Mathematics">Mathematics</option>
+                            <option value="Science">Science</option>
+                            <option value="English">English</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Status</label>
+                        <select id="status" class="form-control">
+                            <option value="Active">Active</option>
+                            <option value="Inactive">Inactive</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div style="margin-top: 30px; display: flex; justify-content: flex-end; gap: 15px;">
+                    <button type="submit" class="btn btn-primary" id="btnSubmit">Update Details</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="/admin/js/admin-core.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => { setTimeout(fetchTeacherData, 400); });
+
+        function fetchTeacherData() {
+            // Mock load
+            document.getElementById('fullName').value = 'Alok Sharma';
+            document.getElementById('contact').value = '+91 9876543210';
+            document.getElementById('department').value = 'Mathematics';
+
+            document.getElementById('pageLoader').style.display = 'none';
+            document.getElementById('editTeacherForm').style.display = 'block';
+        }
+
+        async function updateTeacher(e) {
+            e.preventDefault();
+            const btn = document.getElementById('btnSubmit'); btn.disabled = true;
+            // await fetch('/api/admin/teachers/1', { method: 'PUT', ... });
+            setTimeout(() => {
+                window.showToast('Teacher updated!');
+                btn.disabled = false;
+            }, 600);
+        }
+    </script>
+</body>
+
+</html>

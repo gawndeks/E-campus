@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publish Results | eCampus Admin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/admin/css/admin-style.css">
+</head>
+
+<body>
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Publish Report Cards</h3>
+        </div>
+
+        <div
+            style="padding: 20px; border-bottom: 1px solid var(--border); background: var(--bg-surface); display: flex; flex-wrap: wrap; gap: 15px; align-items: flex-end;">
+            <div class="form-group" style="margin: 0; min-width: 200px;">
+                <label class="form-label" style="font-size: 0.8rem; margin-bottom: 5px;">Select Exam Definition</label>
+                <select class="form-control">
+                    <option value="">Choose Exam</option>
+                    <option value="HY26" selected>Half Yearly Examination 2026</option>
+                </select>
+            </div>
+            <div class="form-group" style="margin: 0;">
+                <label class="form-label" style="font-size: 0.8rem; margin-bottom: 5px;">Target Class</label>
+                <select class="form-control" style="width: auto;">
+                    <option value="10">Class 10th</option>
+                </select>
+            </div>
+            <button class="btn btn-outline" onclick="window.showToast('Validation Started')">Validate Draft</button>
+        </div>
+
+        <div class="table-responsive">
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th style="width: 80px;">Roll No</th>
+                        <th>Student Name</th>
+                        <th>Overall Grade</th>
+                        <th>Pass/Fail</th>
+                        <th>Final Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="font-weight: 600;">1</td>
+                        <td style="font-weight: 500;">John Doe</td>
+                        <td>A (85%)</td>
+                        <td><span class="status status-active" style="background:#dcfce7; color:#166534;">Pass</span>
+                        </td>
+                        <td><button class="btn btn-sm btn-primary" onclick="window.showToast('Published!')">Publish
+                                Now</button></td>
+                    </tr>
+                    <tr>
+                        <td colspan="5" style="text-align: right;">
+                            <button class="btn btn-accent"
+                                onclick="window.showToast('Bulk Publish Successful!', 'success')"
+                                style="margin-top: 15px;">Publish Report Cards Globally</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="/admin/js/admin-core.js"></script>
+</body>
+
+</html>

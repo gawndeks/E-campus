@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Teacher | eCampus Admin</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Admin CSS -->
+    <link rel="stylesheet" href="/admin/css/admin-style.css">
+</head>
+
+<body>
+    <div class="card" style="max-width: 800px; margin: 0 auto;">
+        <div class="card-header">
+            <h3 class="card-title">Add New Teacher</h3>
+            <a href="/admin/teachers/list.html" class="btn btn-outline btn-sm">Back to List</a>
+        </div>
+
+        <div style="padding: 30px;">
+            <form id="addTeacherForm" onsubmit="submitTeacher(event)">
+                <h4
+                    style="margin-bottom: 20px; color: var(--primary); border-bottom: 1px solid var(--border); padding-bottom: 10px;">
+                    Personal Details</h4>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Full Name *</label>
+                        <input type="text" id="fullName" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Contact Number *</label>
+                        <input type="tel" id="contact" class="form-control" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Email Address *</label>
+                        <input type="email" id="email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Gender</label>
+                        <select id="gender" class="form-control">
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </div>
+                </div>
+
+                <h4
+                    style="margin: 30px 0 20px; color: var(--primary); border-bottom: 1px solid var(--border); padding-bottom: 10px;">
+                    Academic Profile</h4>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Department *</label>
+                        <select id="department" class="form-control" required>
+                            <option value="">Select Department</option>
+                            <option value="Mathematics">Mathematics</option>
+                            <option value="Science">Science</option>
+                            <option value="English">English</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Qualification *</label>
+                        <input type="text" id="qualification" class="form-control" placeholder="e.g. M.Sc, B.Ed"
+                            required>
+                    </div>
+                </div>
+
+                <div style="margin-top: 30px; display: flex; justify-content: flex-end; gap: 15px;">
+                    <button type="reset" class="btn btn-outline">Reset</button>
+                    <button type="submit" class="btn btn-primary" id="btnSubmit">Save Teacher</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="/admin/js/admin-core.js"></script>
+    <script>
+        async function submitTeacher(e) {
+            e.preventDefault();
+            const btn = document.getElementById('btnSubmit');
+            btn.disabled = true; btn.textContent = 'Saving...';
+            try {
+                // await fetch('/api/admin/teachers', { method: 'POST', body: JSON.stringify({...}) });
+                setTimeout(() => {
+                    window.showToast('Teacher added successfully!');
+                    setTimeout(() => window.location.href = '/admin/teachers/list.html', 1000);
+                }, 800);
+            } catch (err) {
+                window.showToast('Error saving teacher', 'error');
+                btn.disabled = false; btn.textContent = 'Save Teacher';
+            }
+        }
+    </script>
+</body>
+
+</html>

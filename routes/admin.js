@@ -70,16 +70,30 @@ router.get('/dashboard/stats', protect, async (req, res) => {
         const [[{ total_teachers }]] = await erpDb.execute("SELECT COUNT(*) as total_teachers FROM teachers WHERE status = 1 AND deleted_at IS NULL");
         const [[{ total_classes }]] = await erpDb.execute("SELECT COUNT(*) as total_classes FROM classes WHERE status = 1 AND deleted_at IS NULL");
 
-        // Mock fees for now to show dashboard structure
+        // Fees
+        const [[{ total_fees }]] = await erpDb.execute("SELECT SUM(amount_paid) as total_fees FROM fee_payments");
+        const fees_collected = total_fees || 0; // fallback to 0 if null
+
+        // Recent admissions
+        const [recent_admissions] = await erpDb.execute(`
+            SELECT s.id, s.admission_no, s.name, c.name as class_name, DATE_FORMAT(s.created_at, '%Y-%m-%d') as date, 
+            CASE WHEN s.status = 1 THEN 'Active' ELSE 'Inactive' END as status
+            FROM students s
+            LEFT JOIN classes c ON s.class_id = c.id
+            WHERE s.deleted_at IS NULL
+            ORDER BY s.id DESC LIMIT 5
+        `);
+
         res.json({
             success: true,
             stats: {
                 total_students,
                 total_teachers,
                 total_classes,
-                fees_collected: 45000,
-                pending_fees: 12000
-            }
+                fees_collected,
+                pending_fees: 12000 // You can calculate this if standard fees are defined
+            },
+            recent: recent_admissions
         });
     } catch (err) { handleDbError(err, res); }
 });

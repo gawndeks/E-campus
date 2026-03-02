@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fee Payments | eCampus Admin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/admin/css/admin-style.css">
+</head>
+
+<body>
+    <div class="grid-cards" style="grid-template-columns: repeat(3, 1fr);">
+        <div class="stat-card" style="padding: 15px;">
+            <div class="stat-info">
+                <h3>Total Collected</h3>
+                <p style="color: var(--success); font-size: 1.4rem;">₹1,45,000</p>
+            </div>
+        </div>
+        <div class="stat-card" style="padding: 15px;">
+            <div class="stat-info">
+                <h3>Pending Dues</h3>
+                <p style="color: var(--danger); font-size: 1.4rem;">₹35,000</p>
+            </div>
+        </div>
+        <div class="stat-card" style="padding: 15px;">
+            <div class="stat-info">
+                <h3>Total Students Pending</h3>
+                <p style="font-size: 1.4rem;">14</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Fee Transactions / Collections</h3>
+            <button class="btn btn-primary" onclick="window.showToast('Opened Collect Manual Fee')">Collect
+                Cash/Cheque</button>
+        </div>
+
+        <div style="padding: 20px; border-bottom: 1px solid var(--border); display: flex; gap: 10px;">
+            <input type="text" class="form-control" placeholder="Search by Student ID or Receipt No..."
+                style="max-width: 300px;">
+            <select class="form-control" style="max-width: 150px;">
+                <option value="">Status...</option>
+                <option value="Paid">Paid</option>
+                <option value="Pending">Pending</option>
+            </select>
+        </div>
+
+        <div class="table-responsive">
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>Receipt No</th>
+                        <th>Student</th>
+                        <th>Fee Type</th>
+                        <th>Amount</th>
+                        <th>Payment Mode</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="font-family: monospace; font-weight: 600;">#FEE-9021</td>
+                        <td>John Doe<br><small style="color: var(--text-muted);">Class 10 - A</small></td>
+                        <td>Tuition Fee (Oct)</td>
+                        <td style="font-weight: 500;">₹4,500</td>
+                        <td><span class="status"
+                                style="background: rgba(15,76,129,0.1); color: var(--primary);">Online</span></td>
+                        <td><span class="status status-active">Paid</span></td>
+                        <td><button class="btn btn-sm btn-outline">Print Receipt</button></td>
+                    </tr>
+                    <tr>
+                        <td style="font-family: monospace; font-weight: 600;">#FEE-9022</td>
+                        <td>Alia Khan<br><small style="color: var(--text-muted);">Class 10 - Sci</small></td>
+                        <td>Tuition Fee (Oct)</td>
+                        <td style="font-weight: 500;">₹4,500</td>
+                        <td><span class="status" style="background: #e2e8f0; color: #475569;">Cash</span></td>
+                        <td><span class="status status-inactive">Pending</span></td>
+                        <td><button class="btn btn-sm btn-primary">Mark Paid</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="/admin/js/admin-core.js"></script>
+</body>
+
+</html>

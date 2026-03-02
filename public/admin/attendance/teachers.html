@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Attendance | eCampus Admin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/admin/css/admin-style.css">
+</head>
+
+<body>
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Teacher Staff Attendance</h3>
+            <div class="action-btns">
+                <button class="btn btn-primary" onclick="window.showToast('All Staff Marked Present')">Mark All
+                    Present</button>
+                <button class="btn btn-accent" onclick="window.showToast('Staff Attendance Saved successfully!')">Save
+                    Attendance</button>
+            </div>
+        </div>
+
+        <div
+            style="padding: 20px; border-bottom: 1px solid var(--border); display: flex; gap: 15px; align-items: center;">
+            <input type="date" id="attDate" class="form-control" style="width: auto;">
+            <select class="form-control" style="max-width: 200px;">
+                <option value="">All Departments</option>
+                <option value="Science">Science</option>
+                <option value="Maths">Maths</option>
+            </select>
+            <button class="btn btn-outline">Load Staff</button>
+            <button class="btn btn-outline" style="margin-left: auto;">View Leave Requests</button>
+        </div>
+
+        <div class="table-responsive">
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>Teacher ID</th>
+                        <th>Name</th>
+                        <th>Department</th>
+                        <th>Status</th>
+                        <th>Remarks</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="font-family: monospace; font-weight: 600;">TR-101</td>
+                        <td style="font-weight: 500;">Alok Sharma</td>
+                        <td>Mathematics</td>
+                        <td>
+                            <div style="display: flex; gap: 10px;">
+                                <label style="display: flex; gap: 5px; color: var(--success);"><input type="radio"
+                                        name="att_t1" checked> P</label>
+                                <label style="display: flex; gap: 5px; color: var(--danger);"><input type="radio"
+                                        name="att_t1"> A</label>
+                                <label style="display: flex; gap: 5px; color: #f59e0b;"><input type="radio"
+                                        name="att_t1"> L</label>
+                            </div>
+                        </td>
+                        <td><input type="text" class="form-control form-control-sm" placeholder="-"></td>
+                    </tr>
+                    <tr>
+                        <td style="font-family: monospace; font-weight: 600;">TR-102</td>
+                        <td style="font-weight: 500;">Priya Iyer</td>
+                        <td>Science</td>
+                        <td>
+                            <div style="display: flex; gap: 10px;">
+                                <label style="display: flex; gap: 5px; color: var(--success);"><input type="radio"
+                                        name="att_t2"> P</label>
+                                <label style="display: flex; gap: 5px; color: var(--danger);"><input type="radio"
+                                        name="att_t2"> A</label>
+                                <label style="display: flex; gap: 5px; color: #f59e0b;"><input type="radio"
+                                        name="att_t2" checked> L</label>
+                            </div>
+                        </td>
+                        <td><input type="text" class="form-control form-control-sm" value="Sick Leave Approved"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="/admin/js/admin-core.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('attDate').valueAsDate = new Date();
+        });
+    </script>
+</body>
+
+</html>

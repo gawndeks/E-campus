@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assign Fees | eCampus Admin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/admin/css/admin-style.css">
+</head>
+
+<body>
+    <div class="card" style="max-width: 800px; margin: 0 auto;">
+        <div class="card-header">
+            <h3 class="card-title">Assign Fee to Student(s)</h3>
+        </div>
+        <div style="padding: 30px;">
+            <form onsubmit="event.preventDefault(); window.showToast('Fees Assigned successfully!','success');">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Select Class *</label>
+                        <select class="form-control" required>
+                            <option value="">Choose...</option>
+                            <option value="10">Class 10th</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Select Fee Type *</label>
+                        <select class="form-control" required>
+                            <option value="">Choose...</option>
+                            <option value="tution">Tuition Fee (Monthly)</option>
+                            <option value="exam">Exam Fee (Yearly)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <h4
+                    style="margin: 20px 0; border-bottom: 1px solid var(--border); padding-bottom: 10px; color: var(--primary);">
+                    Applicable Students</h4>
+
+                <div class="form-group"
+                    style="background: var(--bg-main); padding: 15px; border-radius: var(--radius);">
+                    <label style="display: flex; gap: 10px; align-items: center; cursor: pointer; font-weight: 500;">
+                        <input type="radio" name="target" value="all" checked> Assign to all students in Class 10th
+                    </label>
+                    <hr style="border: none; border-top: 1px solid var(--border); margin: 15px 0;">
+                    <label style="display: flex; gap: 10px; align-items: center; cursor: pointer; font-weight: 500;">
+                        <input type="radio" name="target" value="specific"> Assign to specific student (Search details
+                        below)
+                    </label>
+                </div>
+
+                <div style="margin-top: 30px; display: flex; justify-content: flex-end; gap: 15px;">
+                    <button type="submit" class="btn btn-primary">Assign Fee</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="/admin/js/admin-core.js"></script>
+</body>
+
+</html>

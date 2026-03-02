@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Attendance | eCampus Admin</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Admin CSS -->
+    <link rel="stylesheet" href="/admin/css/admin-style.css">
+</head>
+
+<body>
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Student Attendance Register</h3>
+            <div class="action-btns">
+                <button class="btn btn-primary" onclick="markAllPresent()">Mark All Present</button>
+                <button class="btn btn-accent" onclick="saveAttendance()">Save Attendance</button>
+            </div>
+        </div>
+
+        <div
+            style="padding: 20px; border-bottom: 1px solid var(--border); background: var(--bg-surface); display: flex; flex-wrap: wrap; gap: 15px; align-items: flex-end;">
+            <div class="form-group" style="margin: 0;">
+                <label class="form-label" style="font-size: 0.8rem; margin-bottom: 5px;">Date</label>
+                <input type="date" id="attDate" class="form-control" style="width: auto;">
+            </div>
+            <div class="form-group" style="margin: 0;">
+                <label class="form-label" style="font-size: 0.8rem; margin-bottom: 5px;">Class</label>
+                <select id="classFilter" class="form-control" style="width: auto;">
+                    <option value="">Select Class</option>
+                    <option value="10">Class 10th</option>
+                </select>
+            </div>
+            <div class="form-group" style="margin: 0;">
+                <label class="form-label" style="font-size: 0.8rem; margin-bottom: 5px;">Section</label>
+                <select id="secFilter" class="form-control" style="width: auto;">
+                    <option value="">Select Section</option>
+                    <option value="A">A</option>
+                </select>
+            </div>
+            <button class="btn btn-primary" onclick="loadAttendanceList()">Load Students</button>
+            <button class="btn btn-outline" style="margin-left: auto;">View Monthly Report</button>
+        </div>
+
+        <div class="table-responsive">
+            <table class="admin-table" id="attTable">
+                <thead>
+                    <tr>
+                        <th style="width: 80px;">Roll No</th>
+                        <th>Student Name</th>
+                        <th>Student ID</th>
+                        <th>Status</th>
+                        <th>Remarks (Leave/Late)</th>
+                    </tr>
+                </thead>
+                <tbody id="attTbody">
+                    <tr>
+                        <td colspan="5" style="text-align: center; color: var(--text-muted); padding: 40px;">Please
+                            select class, section and date to load students.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="/admin/js/admin-core.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('attDate').valueAsDate = new Date();
+        });
+
+        function loadAttendanceList() {
+            const tbody = document.getElementById('attTbody');
+            tbody.innerHTML = '<tr><td colspan="5" class="loader-container"><div class="spinner"></div></td></tr>';
+
+            setTimeout(() => {
+                const data = [
+                    { roll: 1, name: 'John Doe', id: 'ST2026-101' },
+                    { roll: 2, name: 'Jane Smith', id: 'ST2026-102' },
+                    { roll: 3, name: 'Alia Khan', id: 'ST2026-103' }
+                ];
+
+                tbody.innerHTML = '';
+
+                data.forEach(s => {
+                    tbody.innerHTML += `
+                        <tr class="attendance-row">
+                            <td style="font-weight: 600;">${s.roll}</td>
+                            <td style="font-weight: 500;">${s.name}</td>
+                            <td style="font-family: monospace; color: var(--text-muted);">${s.id}</td>
+                            <td>
+                                <div style="display: flex; gap: 10px;">
+                                    <label style="display: flex; align-items: center; gap: 5px; cursor: pointer; color: var(--success); font-weight: 500;">
+                                        <input type="radio" name="att_${s.id}" value="Present" checked> P
+                                    </label>
+                                    <label style="display: flex; align-items: center; gap: 5px; cursor: pointer; color: var(--danger); font-weight: 500;">
+                                        <input type="radio" name="att_${s.id}" value="Absent"> A
+                                    </label>
+                                    <label style="display: flex; align-items: center; gap: 5px; cursor: pointer; color: #f59e0b; font-weight: 500;">
+                                        <input type="radio" name="att_${s.id}" value="Leave"> L
+                                    </label>
+                                </div>
+                            </td>
+                            <td><input type="text" class="form-control" style="padding: 5px 10px; font-size: 0.85rem;" placeholder="Optional remarks"></td>
+                        </tr>
+                    `;
+                });
+                window.showToast('Student list loaded');
+            }, 500);
+        }
+
+        function markAllPresent() {
+            const radios = document.querySelectorAll('input[type="radio"][value="Present"]');
+            radios.forEach(r => r.checked = true);
+            window.showToast('All marked as Present');
+        }
+
+        async function saveAttendance() {
+            // Simulated API save
+            window.showToast('Attendance successfully recorded!', 'success');
+        }
+    </script>
+</body>
+
+</html>

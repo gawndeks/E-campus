@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notices | eCampus Admin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/admin/css/admin-style.css">
+</head>
+
+<body>
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Manage Operations Announcements</h3>
+            <div class="action-btns">
+                <a href="/admin/notices/add.html" class="btn btn-primary"><span>+</span> Broadcast Notice</a>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Date Posted</th>
+                        <th>Target Audience</th>
+                        <th>Visibility Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="font-weight: 500;">Holiday Announcement</td>
+                        <td>25 Feb 2026</td>
+                        <td><span class="status status-active" style="background:#e0f2fe; color:#0369a1;">All</span>
+                        </td>
+                        <td><span class="status status-active">Active</span></td>
+                        <td>
+                            <div class="action-btns">
+                                <button class="btn btn-sm btn-outline">Edit</button>
+                                <button class="btn btn-sm btn-danger">Halt</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 500;">Staff Meeting Notice</td>
+                        <td>20 Feb 2026</td>
+                        <td><span class="status" style="background:#fef3c7; color:#b45309;">Teachers Only</span></td>
+                        <td><span class="status status-inactive">Inactive</span></td>
+                        <td>
+                            <div class="action-btns">
+                                <button class="btn btn-sm btn-outline">Edit</button>
+                                <button class="btn btn-sm btn-danger">Delete</button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="/admin/js/admin-core.js"></script>
+</body>
+
+</html>

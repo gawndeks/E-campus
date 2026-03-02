@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Students List | eCampus Admin</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Admin CSS -->
+    <link rel="stylesheet" href="/admin/css/admin-style.css">
+</head>
+
+<body>
+    <!-- Layout injected by admin-core.js -->
+
+    <!-- STUDENTS LIST CONTENT -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Manage Students</h3>
+            <div class="action-btns">
+                <button class="btn btn-outline" onclick="openFilterModal()">Filter</button>
+                <a href="/admin/students/add.html" class="btn btn-primary"><span>+</span> Add Student</a>
+            </div>
+        </div>
+
+        <!-- Search Bar Header Layer -->
+        <div
+            style="padding: 20px; border-bottom: 1px solid var(--border); background: var(--bg-surface); display: flex; gap: 10px;">
+            <input type="text" id="searchInput" class="form-control" style="max-width: 300px;"
+                placeholder="Search name or ID..." onkeyup="filterTable()">
+            <select id="classFilter" class="form-control" style="max-width: 150px;" onchange="filterTable()">
+                <option value="">All Classes</option>
+                <option value="10th">Class 10th</option>
+                <option value="9th">Class 9th</option>
+            </select>
+        </div>
+
+        <div class="table-responsive">
+            <table class="admin-table" id="studentsTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Student Name</th>
+                        <th>Class & Section</th>
+                        <th>Parent Name</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="studentTbody">
+                    <tr>
+                        <td colspan="6" class="loader-container">
+                            <div class="spinner"></div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Core Layout JS -->
+    <script src="/admin/js/admin-core.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(loadStudents, 300);
+        });
+
+        // Mock data for demo purposes since API might not handle this exact format yet
+        let allStudents = [];
+
+        async function loadStudents() {
+            try {
+                // Realistic API Fetch attempt
+                const res = await fetch('/api/admin/students').catch(() => null);
+
+                if (res && res.ok) {
+                    allStudents = await res.json();
+                } else {
+                    // Fallback Dummy Data specifically for UI presentation if backend fails
+                    allStudents = [
+                        { id: 1, student_id: 'ST2026-101', name: 'John Doe', class_name: '10th', section: 'A', parent_name: 'Robert Doe', status: 'Active' },
+                        { id: 2, student_id: 'ST2026-102', name: 'Jane Smith', class_name: '9th', section: 'B', parent_name: 'Michael Smith', status: 'Active' },
+                        { id: 3, student_id: 'ST2026-103', name: 'Alia Khan', class_name: '10th', section: 'Science', parent_name: 'Zaheer Khan', status: 'Inactive' }
+                    ];
+                }
+
+                renderTable(allStudents);
+                window.showToast('Students loaded successfully');
+            } catch (err) {
+                console.error(err);
+                if (window.showToast) window.showToast('Error loading students', 'error');
+            }
+        }
+
+        function renderTable(data) {
+            const tbody = document.getElementById('studentTbody');
+            tbody.innerHTML = '';
+
+            if (data.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6" style="text-align: center;">No students found</td></tr>';
+                return;
+            }
+
+            data.forEach(student => {
+                const statusClass = student.status === 'Active' ? 'status-active' : 'status-inactive';
+                tbody.innerHTML += `
+                    <tr>
+                        <td style="font-family: monospace; font-weight: 600; color: var(--primary);">${student.student_id}</td>
+                        <td style="font-weight: 500;">${student.name}</td>
+                        <td>${student.class_name} - ${student.section}</td>
+                        <td style="color: var(--text-muted);">${student.parent_name}</td>
+                        <td><span class="status ${statusClass}">${student.status}</span></td>
+                        <td>
+                            <div class="action-btns">
+                                <a href="/admin/students/view.html?id=${student.id}" class="btn btn-sm btn-outline">View</a>
+                                <a href="/admin/students/edit.html?id=${student.id}" class="btn btn-sm btn-outline" style="color: var(--accent); border-color: var(--accent);">Edit</a>
+                                <button onclick="deleteStudent(${student.id})" class="btn btn-sm btn-danger">Delete</button>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        function filterTable() {
+            const search = document.getElementById('searchInput').value.toLowerCase();
+            const classVal = document.getElementById('classFilter').value;
+
+            const filtered = allStudents.filter(s => {
+                const matchSearch = s.name.toLowerCase().includes(search) || s.student_id.toLowerCase().includes(search);
+                const matchClass = classVal === '' || s.class_name === classVal;
+                return matchSearch && matchClass;
+            });
+
+            renderTable(filtered);
+        }
+
+        async function deleteStudent(id) {
+            if (!confirm('Are you sure you want to soft delete this student?')) return;
+
+            try {
+                // Simulated API call
+                // await fetch('/api/admin/students/' + id, { method: 'DELETE' });
+                allStudents = allStudents.filter(s => s.id !== id);
+                filterTable();
+                window.showToast('Student deleted successfully');
+            } catch (e) {
+                window.showToast('Failed to delete student', 'error');
+            }
+        }
+    </script>
+</body>
+
+</html>

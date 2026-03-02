@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website CMS Controls | eCampus Admin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/admin/css/admin-style.css">
+</head>
+
+<body>
+    <div class="grid-cards" style="grid-template-columns: repeat(3, 1fr);">
+        <div class="stat-card">
+            <div class="stat-info">
+                <h3 style="color: var(--primary);">Landing Page</h3>
+                <p style="font-size:1.2rem; margin-top:10px;"><a href="#"
+                        style="color:var(--accent); text-decoration:none;">Edit Hero / Banner Slider</a></p>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-info">
+                <h3 style="color: var(--primary);">Header & Nav</h3>
+                <p style="font-size:1.2rem; margin-top:10px;"><a href="/admin/cms/header-menu.html"
+                        style="color:var(--accent); text-decoration:none;">Manage Menu Links</a></p>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-info">
+                <h3 style="color: var(--primary);">Contact Info</h3>
+                <p style="font-size:1.2rem; margin-top:10px;"><a href="#"
+                        style="color:var(--accent); text-decoration:none;">Update Phones / Emails</a></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Manage Public Pages Content</h3>
+        </div>
+
+        <div class="table-responsive">
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>Page Target</th>
+                        <th>Path Route</th>
+                        <th>Live Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="font-weight: 500;">Home / Index</td>
+                        <td style="font-family: monospace;">/index.html</td>
+                        <td><span class="status status-active">Published</span></td>
+                        <td><button class="btn btn-sm btn-outline"
+                                style="color:var(--accent); border-color:var(--accent);">Edit Page Engine</button></td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 500;">About Us Story</td>
+                        <td style="font-family: monospace;">/about.html</td>
+                        <td><span class="status status-active">Published</span></td>
+                        <td><button class="btn btn-sm btn-outline"
+                                style="color:var(--accent); border-color:var(--accent);">Edit Page Engine</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="/admin/js/admin-core.js"></script>
+</body>
+
+</html>
